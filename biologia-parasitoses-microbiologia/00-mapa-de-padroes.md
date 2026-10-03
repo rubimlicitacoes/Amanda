@@ -98,3 +98,4 @@ Observações da análise:
 |---|---|---|
 | Lista 1 | P1, P2, P3, P7, P9, P10, P11, P12, P19, P21, P22, P25, P31, P33, P36 | 33 |
 | Lista 2 | P4, P5, P6, P8, P13, P14, P15, P16, P18, P20, P23, P24, P26, P27, P28 | 18 |
+| Lista 3 (final) | P17, P29, P30, P32, P34, P35, P37, P38, P39, P40, P41, P42, P43, P44, P45, P46, P47, P48 | **0 (48/48 concluídos)** |

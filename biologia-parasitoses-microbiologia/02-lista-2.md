@@ -694,4 +694,4 @@ A eficácia seletiva da penicilina é explicada pelo fato de
 
 Padrões restantes: P17, P29, P30, P32, P34, P35, P37, P38, P39, P40, P41, P42, P43, P44, P45, P46, P47, P48.
 
-Ritmo previsto: Lista 3 (15 padrões) → restam 3. Lista 4 (3 padrões finais + revisão integrada) → restam 0.
+Próxima: Lista 3 (final), com os 18 padrões restantes → restam 0.

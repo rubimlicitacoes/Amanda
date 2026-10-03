@@ -725,4 +725,4 @@ A transformação observada resulta da
 
 Padrões restantes: P4, P5, P6, P8, P13, P14, P15, P16, P17, P18, P20, P23, P24, P26, P27, P28, P29, P30, P32, P34, P35, P37, P38, P39, P40, P41, P42, P43, P44, P45, P46, P47, P48.
 
-Ritmo previsto: Lista 2 (15 padrões) → restam 18. Lista 3 (15 padrões) → restam 3. Lista 4 (3 padrões finais + revisão integrada) → restam 0.
+Ritmo: Lista 2 (15 padrões) → restam 18. Lista 3 final (18 padrões) → restam 0.
