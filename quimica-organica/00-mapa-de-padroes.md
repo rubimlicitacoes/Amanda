@@ -105,3 +105,4 @@ Observações da análise:
 | Lista 3 | P11, P14, P16, P17, P18, P19, P20, P21, P22, P24 | 24 |
 | Lista 4 | P2, P3, P4, P5, P25, P35, P37, P38, P39, P40 | 14 |
 | Lista 5 | P41, P42, P43, P44, P45, P46, P47, P48, P49, P50 | 4 |
+| Lista 6 (final) | P51, P52, P53, P54 + 6 questões de revisão integrada | **0 (54/54 concluídos)** |
