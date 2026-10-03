@@ -93,4 +93,5 @@ Observações da análise:
 | Lista | Padrões cobertos | Restantes |
 |---|---|---|
 | Lista 1 | P1, P4, P6, P11, P14, P16, P19, P22, P30, P42 | 35 |
-| Lista 2 | P2, P3, P5, P7, P15, P18, P20, P21, P23, P27 | **25** |
+| Lista 2 | P2, P3, P5, P7, P15, P18, P20, P21, P23, P27 | 25 |
+| Lista 3 | P8, P9, P10, P12, P13, P17, P24, P26, P28, P29 | **15** |
