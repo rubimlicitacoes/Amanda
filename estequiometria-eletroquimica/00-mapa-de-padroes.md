@@ -143,4 +143,8 @@ Observações da análise:
 
 | Lista | Padrões cobertos | Restantes |
 |---|---|---|
-| Lista 1 | P1, P3, P6, P7, P8, P9, P12, P13, P14, P16, P18, P39, P42, P43, P44 | **48** |
+| Lista 1 | P1, P3, P6, P7, P8, P9, P12, P13, P14, P16, P18, P39, P42, P43, P44 | 48 |
+| Lista 2 | P2, P4, P5, P10, P11, P15, P17, P19, P20, P21, P22, P23, P24, P25, P26 | 33 |
+| Lista 3 | P27, P28, P29, P30, P31, P32, P33, P34, P35, P36, P37, P38, P40, P41, P53 | 18 |
+| Lista 4 | P45, P46, P47, P48, P49, P50, P51, P52, P54, P55, P56, P57, P58, P59, P60 | 3 |
+| Lista 5 (final) | P61, P62, P63 + 12 questões de revisão integrada | **0 (63/63 concluídos)** |
