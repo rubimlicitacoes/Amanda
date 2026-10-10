@@ -112,5 +112,5 @@ Use esta tabela para revisar: se errar uma dessas questões, volte ao padrão in
 
 | Lista | Padrões cobertos | Restantes |
 |---|---|---|
-| Lista 1 (refeita) | N1 a N15 | **9** |
-| Lista 2 (final) | N16 a N24 | 0 |
+| Lista 1 (refeita) | N1 a N15 | 9 |
+| Lista 2 (final) | N16 a N24 + 6 questões de revisão integrada | **0 (24/24 concluídos)** |
