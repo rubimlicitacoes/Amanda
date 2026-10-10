@@ -5,7 +5,7 @@ import {
   ChevronLeft, Clock, BookOpen, PenTool, Brain, Trophy, Lock, Play, Pause, RotateCcw,
   Sparkles, ArrowUp, ArrowDown, Minus, Crosshair, Layers, Shield, Star, Info, Trash2,
   CheckCircle2, Circle, Hourglass, Gauge, Swords, Compass, Volume2, VolumeX,
-  ListChecks, ArrowRightLeft, Scissors, Search
+  ListChecks, ArrowRightLeft, Scissors, Search, GraduationCap
 } from "lucide-react";
 import {
   LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
@@ -636,7 +636,7 @@ const ESTADO_INICIAL = {
   questoesDia: {},   // { "YYYY-MM-DD": { feitas, corrigidas } } — contador do Trilho A
   gateHist: {},      // { "YYYY-MM-DD-semana": true } — semanas em que o gate já liberou
   jogo: { golpesDados: {}, ultimaVisita: null },
-  padroesEnem: {},    // { [questaoId]: { r, ok, em, t } } — respostas da aba Padrões do ENEM
+  padroesEnem: {},    // { [questaoId]: "Cc261013" } — respostas da aba Padrões do ENEM (ver lerRegistro)
   rotulosLivres: [], // nomes de conteúdo fora da base — só anotação, não entra em ranking/fila/cobertura // { [blocoId]: estadoJáCelebrado } — só celebração, nunca fonte de verdade
   nivelQuestoes: 0,  // índice em VOLUMES — sobe pelo gate semanal
 };
@@ -4700,7 +4700,7 @@ function validarEstado(o) {
     },
     nivelQuestoes: Number.isFinite(+o.nivelQuestoes) ? Math.max(0, Math.min(6, +o.nivelQuestoes)) : 0,
     padroesEnem: Object.fromEntries(
-      Object.entries(mapa("padroesEnem")).filter(([, v]) => v && typeof v === "object" && (typeof v.r === "string" || v.visto === true))
+      Object.entries(mapa("padroesEnem")).filter(([, v]) => lerRegistro(v))
     ),
     missoesManuais: Object.fromEntries(
       Object.entries(mapa("missoesManuais"))
@@ -4785,13 +4785,13 @@ function mesclarEstados(base, extra) {
     prioridades: [...new Set([...(base.prioridades || []), ...(extra.prioridades || [])])],
     nivelQuestoes: Math.max(base.nivelQuestoes || 0, extra.nivelQuestoes || 0),
     padroesEnem: (() => {
-      /* por questão, vale a resposta mais recente; as tentativas somam o maior histórico */
+      /* por questão: resposta vence "só vi o gabarito"; entre duas, vale a mais recente com o maior nº de tentativas */
       const r = { ...(extra.padroesEnem || {}) };
       Object.entries(base.padroesEnem || {}).forEach(([id, v]) => {
-        const o = r[id];
-        if (!o) { r[id] = v; return; }
-        if (!!v.r !== !!o.r) { r[id] = v.r ? v : o; return; }
-        r[id] = (v.em || "") >= (o.em || "") ? { ...v, t: Math.max(v.t || 0, o.t || 0) } : o;
+        const a = lerRegistro(v), b = lerRegistro(r[id]);
+        if (!a || !b) { if (a) r[id] = v; return; }
+        if (!!a.r !== !!b.r) { r[id] = a.r ? v : r[id]; return; }
+        r[id] = a.em >= b.em ? gravarRegistro({ ...a, t: Math.max(a.t, b.t) }) : gravarRegistro({ ...b, t: Math.max(a.t, b.t) });
       });
       return r;
     })(),
@@ -5599,22 +5599,56 @@ const BannerConflito = ({ conflito, onResolver }) => {
 /* ======================== TELA: PADRÕES DO ENEM ===========================
    Banco de questões dos chats de padrões: um tópico por chat, com o mapa de
    padrões, as listas ensinadas pelo Claude e os dados do ENEM 2020–2025.
-   O conteúdo vem de padroes-enem.json (gerado por padroes-enem/scripts/
+   O conteúdo vem de padroes-enem.js (gerado por padroes-enem/scripts/
    build_data.py) e só é baixado quando a aba abre, como o pdfjs.js.
-   O progresso fica em estado.padroesEnem e sincroniza com o resto do app:
-   { [questaoId]: { r: "C", ok: true, em: "YYYY-MM-DD", t: tentativas } } */
+   O progresso fica em estado.padroesEnem e sincroniza com o resto do app
+   (formato em lerRegistro). */
 
 let CACHE_PADROES = null;
 function carregarPadroes() {
+  if (window.__PADROES_ENEM) return Promise.resolve(window.__PADROES_ENEM);
   if (!CACHE_PADROES) {
-    CACHE_PADROES = fetch("padroes-enem.json?v=" + VERSAO_APP)
-      .then((r) => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
-      .catch((e) => { CACHE_PADROES = null; throw e; });
+    /* <script> e não fetch: funciona também com o app aberto direto dos arquivos */
+    CACHE_PADROES = new Promise((ok, erro) => {
+      const tag = document.createElement("script");
+      tag.src = "padroes-enem.js?v=" + VERSAO_APP;
+      tag.onload = () => (window.__PADROES_ENEM ? ok(window.__PADROES_ENEM) : erro(new Error("padroes-enem.js carregou mas não trouxe os dados")));
+      tag.onerror = () => {
+        tag.remove();
+        CACHE_PADROES = null;
+        erro(new Error("Não consegui carregar padroes-enem.js — confirme que o arquivo está na pasta publicada"));
+      };
+      document.head.appendChild(tag);
+    });
   }
   return CACHE_PADROES;
 }
 
 const LETRAS = ["A", "B", "C", "D", "E"];
+
+/* Progresso compacto, porque o estado inteiro vai para a nuvem a cada alteração
+   e o salvamento de emergência (keepalive) aceita no máximo ~60 KB.
+   Cada questão vira uma string: letra marcada (ou "-"), situação, data AAMMDD e,
+   se houver mais de uma tentativa, ".n". Ex.: "Cc261013", "Be261014.2", "-v261013".
+   Situação: c acertou · e errou · v só viu o gabarito · g/h acertou/errou depois de ver o gabarito. */
+function lerRegistro(s) {
+  const m = /^([A-E-])([cevgh])(\d{2})(\d{2})(\d{2})(?:\.(\d+))?$/.exec(typeof s === "string" ? s : "");
+  if (!m) return null;
+  const em = `20${m[3]}-${m[4]}-${m[5]}`;
+  if (m[2] === "v") return { visto: true, em, t: 0 };
+  return { r: m[1], ok: m[2] === "c" || m[2] === "g", gab: m[2] === "g" || m[2] === "h", em, t: +(m[6] || 1) };
+}
+function gravarRegistro(x) {
+  const d = String(x.em || "").replace(/-/g, "").slice(2);
+  if (!x.r) return `-v${d}`;
+  const sit = x.gab ? (x.ok ? "g" : "h") : x.ok ? "c" : "e";
+  return `${x.r}${sit}${d}${x.t > 1 ? "." + x.t : ""}`;
+}
+function registros(estado) {
+  const o = {};
+  Object.entries(estado.padroesEnem || {}).forEach(([k, v]) => { const x = lerRegistro(v); if (x) o[k] = x; });
+  return o;
+}
 const POS_KEY = "reinos-padroes-pos";
 const lerPos = () => { try { return JSON.parse(window.localStorage.getItem(POS_KEY) || "null"); } catch (e) { return null; } };
 const gravarPos = (p) => { try { window.localStorage.setItem(POS_KEY, JSON.stringify(p)); } catch (e) { /* sem armazenamento local */ } };
@@ -5756,10 +5790,8 @@ details.pe-det[open] .pe-seta { transform: rotate(90deg); }
 /* ------------------------------- cálculos -------------------------------- */
 const questoesDoTopico = (t) => t.listas.flatMap((L) => L.questoes.map((q) => ({ ...q, listaId: L.id })));
 
-/* Um registro por questão em estado.padroesEnem:
-   respondida      → { r: "C", ok, em, t }
-   só viu gabarito → { visto: true, em, t: 0 }
-   respondeu depois de ver o gabarito → { r, ok, em, t, gab: true } (não conta no acerto)
+/* reg vem de registros(): por questão, { r, ok, em, t, gab } ou { visto, em }.
+   Respostas dadas depois de ver o gabarito (gab) não contam no acerto.
    Um padrão está "feito" quando alguma questão dele foi respondida ou teve o gabarito visto. */
 function progressoTopico(t, reg) {
   let tot = 0, resp = 0, ok = 0, feitas = 0;
@@ -5817,6 +5849,8 @@ function origemDaQuestao(q, mapa) {
 const corMateria = (sig) => (REINOS[sig] ? REINOS[sig].cor : T.primary);
 const softMateria = (sig) => (REINOS[sig] ? REINOS[sig].soft : T.primarySoft);
 const fmtData = (iso) => { const [, m, d] = iso.split("-"); return `${d}/${m}`; };
+/* Faixa do Plano CN: "1–24" vira "padrões 1–24"; "14 padrões" e "20 para ler" ficam como estão. */
+const fmtFaixa = (f) => (/^\d+\s*[–-]\s*\d+$/.test(String(f).trim()) ? `padrões ${f}` : String(f));
 
 /* ------------------------------- tela raiz -------------------------------- */
 function TelaPadroes({ ctx }) {
@@ -5843,7 +5877,7 @@ function TelaPadroes({ ctx }) {
       <Card className="p-2">
         <PadroesCSS />
         <Empty icon={AlertTriangle} titulo="Não consegui abrir o banco de padrões"
-          txt={`O arquivo padroes-enem.json precisa estar na mesma pasta publicada do app (junto do app.js). Detalhe: ${erro}`}
+          txt={`O arquivo padroes-enem.js precisa estar na mesma pasta do app (junto do app.js). Detalhe: ${erro}`}
           acao={<Btn icon={RefreshCw} onClick={() => setTentativa((n) => n + 1)}>Tentar de novo</Btn>} />
       </Card>
     );
@@ -5872,7 +5906,7 @@ function TelaPadroes({ ctx }) {
 /* ------------------------------ 1. tópicos -------------------------------- */
 function PadroesInicio({ dados, ctx, setVista }) {
   const { estado, hoje } = ctx;
-  const reg = estado.padroesEnem || {};
+  const reg = registros(estado);
   const [mat, setMat] = useState("todas");
   const [busca, setBusca] = useState("");
 
@@ -5911,7 +5945,7 @@ function PadroesInicio({ dados, ctx, setVista }) {
               return (
                 <button key={t.id} onClick={() => setVista({ tipo: "topico", topicoId: t.id })} className="pe-chip" style={{ display: "inline-flex", gap: 6, alignItems: "center" }}>
                   <span className="mono" style={{ color: corMateria(t.materia), fontWeight: 700 }}>{t.titulo.split(" · ")[0]}</span>
-                  <span style={{ color: T.ink50, fontWeight: 500 }}>padrões {a.faixa} · {dados.modos[a.modo] || a.modo}</span>
+                  <span style={{ color: T.ink50, fontWeight: 500 }}>{fmtFaixa(a.faixa)} · {dados.modos[a.modo] || a.modo}</span>
                 </button>
               );
             })}
@@ -5991,7 +6025,7 @@ function Secao({ titulo, sub, children, aberta = true }) {
 
 function PadroesTopico({ dados, t, ctx, setVista }) {
   const { estado, hoje } = ctx;
-  const reg = estado.padroesEnem || {};
+  const reg = registros(estado);
   const p = progressoTopico(t, reg);
   const cor = corMateria(t.materia);
   const [codigo, nome] = t.titulo.split(" · ");
@@ -6160,7 +6194,7 @@ function PadroesTopico({ dados, t, ctx, setVista }) {
                   background: ehHoje ? T.primarySoft : T.paper, border: `1px solid ${ehHoje ? T.primary : "transparent"}`, opacity: passado ? 0.6 : 1,
                 }}>
                   <span style={{ fontWeight: 650, minWidth: 92 }}>{a.dia}</span>
-                  <span className="mono" style={{ color: T.ink70 }}>padrões {a.faixa}</span>
+                  <span className="mono" style={{ color: T.ink70 }}>{fmtFaixa(a.faixa)}</span>
                   <Pill cor={a.modo === "L" ? T.ink50 : a.modo === "O" ? T.amber : T.primary}>{dados.modos[a.modo] || a.modo}</Pill>
                   {ehHoje && <Pill cor={T.primaryDeep}>hoje</Pill>}
                   {a.nome && <span style={{ color: T.ink50, fontSize: 12 }}>{a.nome}</span>}
@@ -6214,7 +6248,7 @@ function PadroesTopico({ dados, t, ctx, setVista }) {
 
 /* ------------------------------ 3. listas --------------------------------- */
 function PadroesListas({ t, ctx, setVista }) {
-  const reg = ctx.estado.padroesEnem || {};
+  const reg = registros(ctx.estado);
   const cor = corMateria(t.materia);
   const grupos = [];
   t.listas.forEach((L) => {
@@ -6257,7 +6291,7 @@ function PadroesListas({ t, ctx, setVista }) {
 /* ------------------------------ 4. questões ------------------------------- */
 function PadroesLista({ dados, t, ctx, vista, setVista }) {
   const { estado, aplicar, hoje, toast } = ctx;
-  const reg = estado.padroesEnem || {};
+  const reg = registros(estado);
   const mapa = useMemo(() => Object.fromEntries(t.padroes.map((p) => [p.cod, p])), [t]);
   const [gabAberto, setGabAberto] = useState(() => { try { return window.localStorage.getItem("reinos-padroes-gab") === "1"; } catch (e) { return false; } });
   const trocarGab = (v) => { setGabAberto(v); try { window.localStorage.setItem("reinos-padroes-gab", v ? "1" : "0"); } catch (e) { /* sem armazenamento local */ } };
@@ -6291,9 +6325,9 @@ function PadroesLista({ dados, t, ctx, vista, setVista }) {
     const ant = reg[q.id];
     aplicar((e) => {
       const r = { ...(e.padroesEnem || {}) };
-      const antes = r[q.id];
-      const viuAntes = !!(antes && (antes.gab || (antes.visto && !antes.r)));
-      r[q.id] = { r: letra, ok, em: hoje, t: (antes?.t || 0) + 1, ...(viuAntes ? { gab: true } : {}) };
+      const antes = lerRegistro(r[q.id]);
+      const viuAntes = !!(antes && (antes.gab || antes.visto));
+      r[q.id] = gravarRegistro({ r: letra, ok, em: hoje, t: (antes?.t || 0) + 1, gab: viuAntes });
       return { ...e, padroesEnem: r, xp: e.xp + (antes?.r ? 0 : ok && !viuAntes ? 3 : 1) };
     });
     if (!ant?.r) {
@@ -6306,7 +6340,7 @@ function PadroesLista({ dados, t, ctx, vista, setVista }) {
     if (reg[q.id]) return;
     aplicar((e) => {
       const r = { ...(e.padroesEnem || {}) };
-      if (!r[q.id]) r[q.id] = { visto: true, em: hoje, t: 0 };
+      if (!lerRegistro(r[q.id])) r[q.id] = gravarRegistro({ em: hoje });
       return { ...e, padroesEnem: r };
     });
     avisarFim();
@@ -6592,7 +6626,7 @@ function ModalErroPadrao({ aberto, onClose, q, t, padroesQ, ctx }) {
 const NAV = [
   { k: "home", l: "Início", I: Home },
   { k: "reinos", l: "Reinos", I: MapIcon },
-  { k: "padroes", l: "Padrões do ENEM", c: "Padrões", I: Layers },
+  { k: "padroes", l: "Padrões do ENEM", c: "Padrões", I: GraduationCap },
   { k: "desempenho", l: "Desempenho", I: BarChart3 },
   { k: "evolucao", l: "Evolução", I: TrendingUp },
   { k: "simulados", l: "Simulados", I: ClipboardList },

@@ -4,7 +4,7 @@
 Entrada:  padroes-enem/fontes/<tópico>/*.md   (mapas e listas em markdown, como saíram dos chats)
           padroes-enem/fontes/fis-15/06-write-conteudo.py (listas extras A e B de Cinemática)
           padroes-enem/fontes/_enem/*.json        (dados dos Mapas de Física/Química/Biologia e do Plano CN)
-Saída:    app/dist/padroes-enem.json              (carregado pelo app sob demanda)
+Saída:    app/dist/padroes-enem.js                (carregado pelo app sob demanda, como o pdfjs.js)
           padroes-enem/relatorio.txt              (contagens e avisos de conferência)
 
 Uso: python3 padroes-enem/scripts/build_data.py
@@ -18,33 +18,34 @@ from datetime import date
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 FONTES = os.path.join(RAIZ, "padroes-enem", "fontes")
-SAIDA = os.path.join(RAIZ, "app", "dist", "padroes-enem.json")
+SAIDA = os.path.join(RAIZ, "app", "dist", "padroes-enem.js")
 RELATORIO = os.path.join(RAIZ, "padroes-enem", "relatorio.txt")
 
 # Um tópico por chat "OKA - …". O título é o nome do chat sem "OKA -" e sem a numeração.
 # grupos: pastas de fontes (um chat pode ter gerado duas pastas, como BIO 4 + BIO 11 + BIO 12).
 # plano: código usado no Plano de Padrões CN; mods: módulos do ranking (Mapas de Física/Química/Biologia).
+# k: chave curta do tópico no progresso salvo do app. Nunca mude a k de um tópico existente.
 TOPICOS = [
-    dict(id="fis-15", mat="FIS", titulo="FIS 15 · Cinemática", mods=[15], plano=["15"], grupos=[("fis-15", None)]),
-    dict(id="fis-10-9", mat="FIS", titulo="FIS 10 + FIS 9 · Acústica e ondas", mods=[10, 9], plano=["10+9"], grupos=[("fis-10-9", None)]),
-    dict(id="fis-8-7-6", mat="FIS", titulo="FIS 8 + FIS 7 + FIS 6 · Espectro e física moderna e Óptica geométrica", mods=[8, 7, 6], plano=["8+7+6"], grupos=[("fis-8-7-6", None)]),
-    dict(id="fis-3-2", mat="FIS", titulo="FIS 3 + FIS 2 · Circuitos e potência elétrica", mods=[3, 2], plano=["3+2"], grupos=[("fis-3-2", None)]),
-    dict(id="fis-17", mat="FIS", titulo="FIS 17 · Dinâmica", mods=[17], plano=["17"], grupos=[("fis-17", None)]),
-    dict(id="fis-11", mat="FIS", titulo="FIS 11 · Termologia", mods=[11], plano=["11"], grupos=[("fis-11", None)]),
-    dict(id="qui-9-10", mat="QUI", titulo="QUI 9 + QUI 10 · Ácido-base e reações com ácido", mods=[9, 10], plano=["9+10"], grupos=[("qui-9-10", None)]),
-    dict(id="qui-14", mat="QUI", titulo="QUI 14 · Equilíbrio Químico", mods=[14], plano=["14"], grupos=[("qui-14", None)]),
-    dict(id="qui-5-6", mat="QUI", titulo="QUI 5 + QUI 6 · Polaridade e Sistemas e misturas", mods=[5, 6], plano=["5+6"], grupos=[("qui-5-6", None)]),
-    dict(id="qui-17-20", mat="QUI", titulo="QUI 17 + QUI 20 · Funções e reações orgânicas", mods=[17, 20], plano=["17+20"], grupos=[("qui-17-20", None)]),
-    dict(id="qui-12-15-16", mat="QUI", titulo="QUÍM 12 + 15 + 16 · Eletroquímica e Estequiometria", mods=[12, 15, 16], plano=["12+15+16"], grupos=[("qui-12-15-16", None)]),
-    dict(id="qui-23-geo", mat="QUI", titulo="QUÍM 23 + GEO · Impactos Ambientais", mods=[23], plano=["23 + GEO"], grupos=[("qui-23-geo", None)]),
-    dict(id="bio-25-26-22-23", mat="BIO", titulo="BIO 25 + BIO 26 + BIO 22 + BIO 23 · Genética", mods=[25, 26, 22, 23], plano=["25+26+22+23"], grupos=[("bio-25-26-22-23", None)]),
-    dict(id="bio-5-8", mat="BIO", titulo="BIO 5 + BIO 8 · Energia Celular, Enzimas e vitaminas e Citologia", mods=[5, 8], plano=["5+8"], grupos=[("bio-5-8", None)]),
-    dict(id="bio-10-15", mat="BIO", titulo="BIO 10 e BIO 15 · Parasitoses e doenças endêmicas e Bactérias, fungos e biorremediação", mods=[10, 15], plano=["10+15"], grupos=[("bio-10-15", None)]),
-    dict(id="bio-24-21", mat="BIO", titulo="BIO 24 + BIO 21 · Biotecnologia e DNA", mods=[24, 21], plano=["24+21"], grupos=[("bio-24-21", None)]),
-    dict(id="bio-3", mat="BIO", titulo="BIO 3 · Evolução", mods=[3], plano=["3"], grupos=[("bio-3", None)]),
-    dict(id="bio-17-20", mat="BIO", titulo="BIO 17 + BIO 20 · Hormônios, digestão, nervos e músculos", mods=[17, 20], plano=["17+20"], grupos=[("bio-17-20", None)]),
-    dict(id="bio-4-11-12", mat="BIO", titulo="BIO 4 + BIO 11 + BIO 12 · Impacto Ambiental e Botânica", mods=[4, 11, 12], plano=["4+11+12"],
-         grupos=[("bio-4", "Impacto ambiental (BIO 4)"), ("bio-11-12", "Botânica (BIO 11 e 12)")]),
+    dict(id="fis-15", k="f15", mat="FIS", titulo="FIS 15 · Cinemática", mods=[15], plano=["15"], grupos=[("fis-15", None)]),
+    dict(id="fis-10-9", k="f109", mat="FIS", titulo="FIS 10 + FIS 9 · Acústica e ondas", mods=[10, 9], plano=["10+9"], grupos=[("fis-10-9", None)]),
+    dict(id="fis-8-7-6", k="f876", mat="FIS", titulo="FIS 8 + FIS 7 + FIS 6 · Espectro e física moderna e Óptica geométrica", mods=[8, 7, 6], plano=["8+7+6"], grupos=[("fis-8-7-6", None)]),
+    dict(id="fis-3-2", k="f32", mat="FIS", titulo="FIS 3 + FIS 2 · Circuitos e potência elétrica", mods=[3, 2], plano=["3+2"], grupos=[("fis-3-2", None)]),
+    dict(id="fis-17", k="f17", mat="FIS", titulo="FIS 17 · Dinâmica", mods=[17], plano=["17"], grupos=[("fis-17", None)]),
+    dict(id="fis-11", k="f11", mat="FIS", titulo="FIS 11 · Termologia", mods=[11], plano=["11"], grupos=[("fis-11", None)]),
+    dict(id="qui-9-10", k="q910", mat="QUI", titulo="QUI 9 + QUI 10 · Ácido-base e reações com ácido", mods=[9, 10], plano=["9+10"], grupos=[("qui-9-10", None)]),
+    dict(id="qui-14", k="q14", mat="QUI", titulo="QUI 14 · Equilíbrio Químico", mods=[14], plano=["14"], grupos=[("qui-14", None)]),
+    dict(id="qui-5-6", k="q56", mat="QUI", titulo="QUI 5 + QUI 6 · Polaridade e Sistemas e misturas", mods=[5, 6], plano=["5+6"], grupos=[("qui-5-6", None)]),
+    dict(id="qui-17-20", k="q1720", mat="QUI", titulo="QUI 17 + QUI 20 · Funções e reações orgânicas", mods=[17, 20], plano=["17+20"], grupos=[("qui-17-20", None)]),
+    dict(id="qui-12-15-16", k="q121516", mat="QUI", titulo="QUÍM 12 + 15 + 16 · Eletroquímica e Estequiometria", mods=[12, 15, 16], plano=["12+15+16"], grupos=[("qui-12-15-16", None)]),
+    dict(id="qui-23-geo", k="q23g", mat="QUI", titulo="QUÍM 23 + GEO · Impactos Ambientais", mods=[23], plano=["23 + GEO"], grupos=[("qui-23-geo", None)]),
+    dict(id="bio-25-26-22-23", k="b25", mat="BIO", titulo="BIO 25 + BIO 26 + BIO 22 + BIO 23 · Genética", mods=[25, 26, 22, 23], plano=["25+26+22+23"], grupos=[("bio-25-26-22-23", None)]),
+    dict(id="bio-5-8", k="b58", mat="BIO", titulo="BIO 5 + BIO 8 · Energia Celular, Enzimas e vitaminas e Citologia", mods=[5, 8], plano=["5+8"], grupos=[("bio-5-8", None)]),
+    dict(id="bio-10-15", k="b1015", mat="BIO", titulo="BIO 10 e BIO 15 · Parasitoses e doenças endêmicas e Bactérias, fungos e biorremediação", mods=[10, 15], plano=["10+15"], grupos=[("bio-10-15", None)]),
+    dict(id="bio-24-21", k="b2421", mat="BIO", titulo="BIO 24 + BIO 21 · Biotecnologia e DNA", mods=[24, 21], plano=["24+21"], grupos=[("bio-24-21", None)]),
+    dict(id="bio-3", k="b3", mat="BIO", titulo="BIO 3 · Evolução", mods=[3], plano=["3"], grupos=[("bio-3", None)]),
+    dict(id="bio-17-20", k="b1720", mat="BIO", titulo="BIO 17 + BIO 20 · Hormônios, digestão, nervos e músculos", mods=[17, 20], plano=["17+20"], grupos=[("bio-17-20", None)]),
+    dict(id="bio-4-11-12", k="b41112", mat="BIO", titulo="BIO 4 + BIO 11 + BIO 12 · Impacto Ambiental e Botânica", mods=[4, 11, 12], plano=["4+11+12"],
+         grupos=[("bio-4", "Impacto ambiental (BIO 4)"), ("bio-11-12", "Botânica (BIO 11 e 12)")], prefixos={"Impacto ambiental (BIO 4)": "i", "Botânica (BIO 11 e 12)": "b"}),
 ]
 
 MATERIAS = {
@@ -229,19 +230,33 @@ def separa_alternativas(md):
     cit = [l for l in linhas if l.strip()]
     if cit and sum(1 for l in cit if l.lstrip().startswith(">")) >= max(3, len(cit) // 2):
         linhas = [re.sub(r"^\s*>\s?", "", l) for l in linhas]
-    # 1) uma alternativa por linha
-    pos = []
-    esperado = "a"
+    # 1) uma alternativa por linha, fora de blocos de código. Vale a última sequência a)…e):
+    #    rótulos anteriores, como "(A) experimento" ou estruturas a)…e) desenhadas, não contam.
+    sequencias, pos, esperado, cerca = [], [], "a", False
     for i, ln in enumerate(linhas):
+        if ln.strip().startswith("```"):
+            cerca = not cerca
+            continue
+        if cerca:
+            continue
         m = RE_ALT_LINHA.match(ln)
-        if m and m.group(1).lower() == esperado:
+        if not m:
+            continue
+        letra = m.group(1).lower()
+        if letra == "a":
             # caso "a) I. b) II. c) III." numa linha só
-            if esperado == "a" and re.search(r"\s\(?b\)\s", m.group(2)):
-                break
+            if re.search(r"\s\(?b\)\s", m.group(2)):
+                continue
+            if pos:
+                sequencias.append(pos)
+            pos, esperado = [i], "b"
+        elif pos and letra == esperado:
             pos.append(i)
             esperado = chr(ord(esperado) + 1)
-            if esperado > "e":
-                break
+    if pos:
+        sequencias.append(pos)
+    completas = [s_ for s_ in sequencias if len(s_) == 5] or [s_ for s_ in sequencias if len(s_) >= 4]
+    pos = completas[-1] if completas else []
     if len(pos) >= 4:
         alts = []
         for k, i in enumerate(pos):
@@ -256,7 +271,24 @@ def separa_alternativas(md):
         if depois:
             stem = stem + "\n\n" + depois
         return stem, [limpa_alt(a) for a in alts]
-    # 2) alternativas na mesma linha: "a) primeira. b) segunda. c) ..."
+    # 2) alternativas como linhas de uma tabela: "| (a) | 120 | 160 |" (a linha certa pode vir em negrito)
+    linhas_t = [i for i, l in enumerate(linhas) if l.lstrip().startswith("|")]
+    rotulo = lambda l: re.fullmatch(r"\(?([a-e])\)?", limpa_md(celulas(l)[0]).lower()) if l.lstrip().startswith("|") else None
+    alt_rows = [i for i in linhas_t if rotulo(linhas[i])]
+    if len(alt_rows) >= 4 and [rotulo(linhas[i]).group(1) for i in alt_rows] == list("abcde")[: len(alt_rows)]:
+        ini = alt_rows[0]
+        while ini > 0 and linhas[ini - 1].lstrip().startswith("|"):
+            ini -= 1
+        fim = alt_rows[-1] + 1
+        cab = celulas(linhas[ini]) if ini < alt_rows[0] else []
+        alts = []
+        for i in alt_rows:
+            cel = [limpa_md(c) for c in celulas(linhas[i])][1:]
+            nomes = [limpa_md(c) for c in cab[1:]] if cab else [""] * len(cel)
+            alts.append("; ".join(f"{n}: {c}" if n else c for n, c in zip(nomes, cel)))
+        stem = "\n".join(linhas[:ini] + linhas[fim:]).strip()
+        return stem, alts
+    # 3) alternativas na mesma linha: "a) primeira. b) segunda. c) ..."
     texto = "\n".join(linhas)
     m = re.search(r"(?:^|\n|\s)\(?a\)\s", texto)
     if m:
@@ -296,7 +328,7 @@ def le_questoes(linhas, codigos_validos):
                 cur["fim"] = i
                 blocos.append(cur)
             cur = {"n": n, "ini": i, "nivel": nivel, "fim": None}
-        elif cur and n is None and nivel <= cur["nivel"] and classifica(txt) is None:
+        elif cur and n is None and (nivel < cur["nivel"] or (nivel == cur["nivel"] and classifica(txt) is None)):
             cur["fim"] = i
             blocos.append(cur)
             cur = None
@@ -377,6 +409,12 @@ def monta_questao(linhas, b, validos):
                     pre, enun = "", st
                 achadas = alts
                 break
+    if not enun and guia:
+        partes = re.split(r"\n\s*\n", guia)
+        for j, parte in enumerate(partes):
+            if re.match(r"^\s*>?\s*\*\*Quest[aã]o\s*\d+", parte):
+                guia, enun = "\n\n".join(partes[:j]).strip(), "\n\n".join(partes[j:]).strip()
+                break
     if achadas:
         stem, alts = enun, achadas
     else:
@@ -449,6 +487,25 @@ def gabaritos_tabela(linhas, validos):
                 cods = codigos_em(r[i_p], validos) if i_p is not None else []
                 res[(limpa_md(r[k])[:1] if not limpa_md(r[k])[:1].isdigit() else "") + m.group(1)] = (
                     g.group(1), cods, r[i_r] if i_r is not None else "")
+    return res
+
+
+def comentarios_gabarito(md):
+    """Gabarito comentado de simulado: "**Q1 (D), padrão P26: …**" seguido das explicações → {n: markdown}."""
+    res, atual, buf = {}, None, []
+    for ln in md.split("\n"):
+        m = re.match(r"^\*\*Q(\d+)\s*\(([A-E])\)[^*]*\*\*\s*$", ln.strip())
+        if m or re.match(r"^#{1,6}\s", ln) or ln.strip() == "---":
+            if atual is not None:
+                res[atual] = "\n".join(buf).strip()
+            atual, buf = (int(m.group(1)), [ln.strip()]) if m else (None, [])
+            if m:
+                buf = ["**" + re.sub(r"^\*\*|\*\*$", "", ln.strip()) + "**"]
+            continue
+        if atual is not None:
+            buf.append(ln)
+    if atual is not None:
+        res[atual] = "\n".join(buf).strip()
     return res
 
 
@@ -592,6 +649,10 @@ def monta_topico(cfg, enem, plano):
                 q["padroes"] = q["padroes"] or g[1]
                 if not q["resolucao"] and g[2]:
                     q["resolucao"] = g[2]
+        comentarios = comentarios_gabarito(pos)
+        for q in qs:
+            if not q["resolucao"] and comentarios.get(q["n"]):
+                q["resolucao"] = comentarios[q["n"]]
         simulado = primeiro_h1(linhas).lower().startswith("simulado")
         sim_qs, resto = simulado_negrito(pos, validos)
         cont_grupo[rotulo] = cont_grupo.get(rotulo, 0) + (0 if simulado else 1)
@@ -612,15 +673,23 @@ def monta_topico(cfg, enem, plano):
             L["grupo"] = ""
             listas.append(L)
 
-    # numeração, ids e conferências
+    # numeração, ids e conferências. O id da questão é a chave do progresso salvo no app:
+    # "<tópico>.<lista>.<número>", com a lista identificada pelo nome (Lista 2 → 2, Simulado → s, Lista A → A),
+    # para não mudar quando uma lista nova entrar no tópico.
     sigla = cfg["id"].upper().replace("-", "")
     total_q = 0
+    vistos_l = set()
     for li, L in enumerate(listas, 1):
-        L["id"] = f"{cfg['id']}-l{li}"
+        m = re.match(r"Lista (\w+)$", L["titulo"])
+        lk = (cfg.get("prefixos", {}).get(L["grupo"], "") + (m.group(1) if m else "s"))
+        while lk in vistos_l:
+            lk += "x"
+        vistos_l.add(lk)
+        L["id"] = f"{cfg['k']}.{lk}"
         cods = []
         for q in L["questoes"]:
             total_q += 1
-            q["id"] = f"{cfg['id']}-l{li}-q{q['n']}"
+            q["id"] = f"{cfg['k']}.{lk}.{q['n']}"
             q["codigo"] = f"{sigla}·L{li}·{q['n']:02d}"
             for c in q["padroes"]:
                 if c not in cods:
@@ -697,8 +766,10 @@ def main():
         "topicos": topicos,
     }
     os.makedirs(os.path.dirname(SAIDA), exist_ok=True)
+    # JSON dentro de um script: o app carrega com <script>, que funciona até abrindo os arquivos direto.
+    corpo = json.dumps(saida, ensure_ascii=False, separators=(",", ":")).replace("\u2028", "\\u2028").replace("\u2029", "\\u2029")
     with open(SAIDA, "w", encoding="utf-8") as f:
-        json.dump(saida, f, ensure_ascii=False, separators=(",", ":"))
+        f.write("window.__PADROES_ENEM=" + corpo + ";\n")
     linhas = []
     for t in topicos:
         nq = sum(len(L["questoes"]) for L in t["listas"])

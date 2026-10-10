@@ -18,5 +18,4 @@ bio-3              padrões= 38  listas= 3  questões= 45  agenda=4
 bio-17-20          padrões= 47  listas= 4  questões= 60  agenda=3
 bio-4-11-12        padrões= 55  listas= 5  questões= 62  agenda=2
 
-AVISOS (1):
-bio-17-20 Lista 3 Q15: alternativas não encontradas
+AVISOS (0):

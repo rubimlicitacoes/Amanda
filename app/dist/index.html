@@ -22,6 +22,8 @@
 </style>
 <script>
   window.addEventListener('error', function(e){
+    /* falha ao baixar um arquivo (pdfjs.js, padroes-enem.js) não é erro de inicialização: a própria tela avisa */
+    if (!(e instanceof ErrorEvent)) return;
     var d=document.getElementById('diag'); if(!d) return;
     d.style.display='block';
     d.innerHTML='<strong>Erro ao iniciar</strong><pre>'+
