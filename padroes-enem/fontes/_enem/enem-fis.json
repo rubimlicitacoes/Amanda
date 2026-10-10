@@ -1,0 +1,1196 @@
+{
+ "prefix": "FIS",
+ "key": "fisica-enem-estudo",
+ "h1": "O que o ENEM cobrou de Física de 2020 a 2025",
+ "intro": "Cada questão de Física das 6 provas foi classificada nos módulos FIS 1–20 do seu ranking. Uma questão pode contar em dois módulos.",
+ "stats": [
+  [
+   "93",
+   "questões de Física em 6 provas"
+  ],
+  [
+   "~15",
+   "questões de Física por prova"
+  ],
+  [
+   "6–7",
+   "por prova exigem cálculo",
+   1
+  ],
+  [
+   "1 em 6",
+   "questões de Física é de circuitos (FIS 3)"
+  ]
+ ],
+ "heatNote": "Questões de Física em contexto biológico (cones e bastonetes, eletrocardiograma) ficaram no mapa de Biologia. Como uma questão pode contar em dois módulos, a soma da coluna Total passa de 93.",
+ "mods": {
+  "1": "Eletricidade",
+  "2": "Potencial Elétrico",
+  "3": "Eletrodinâmica Básica",
+  "4": "Eletrodinâmica Avançada",
+  "5": "Eletromagnetismo",
+  "6": "Óptica Básica",
+  "7": "Fenômenos Ópticos",
+  "8": "Óptica Avançada",
+  "9": "Ondulatória Básica",
+  "10": "Ondulatória Avançada e Acústica",
+  "11": "Termologia",
+  "12": "Dilatação e Escalas",
+  "13": "Energia, Potência e Termodinâmica",
+  "14": "Estudo dos Gases",
+  "15": "Cinemática",
+  "16": "Quantidade de Movimento",
+  "17": "Dinâmica",
+  "18": "Gravitação",
+  "19": "Molas e Estática",
+  "20": "Hidrostática"
+ },
+ "up": [
+  [
+   "FIS 6 Óptica Básica",
+   "de 2 para 5 questões: laser e comprimento de onda, raios X, fosforescência e fotoluminescência."
+  ],
+  [
+   "FIS 10 Ondulatória Avançada e Acústica",
+   "de 3 para 5. Nível sonoro em decibel em 2024 e 2025, Doppler em 2024."
+  ],
+  [
+   "FIS 8 Óptica Avançada",
+   "nova: espelhos côncavos (2024) e pupila e retina (2025)."
+  ],
+  [
+   "FIS 9 e FIS 17",
+   "leve alta, de 3 para 4 cada. Dinâmica caiu em 5 anos seguidos."
+  ]
+ ],
+ "down": [
+  [
+   "FIS 18 Gravitação",
+   "de 3 para 0. Nada desde 2022."
+  ],
+  [
+   "FIS 2 Potencial Elétrico",
+   "de 4 para 1. O pico de 3 questões foi só em 2022."
+  ],
+  [
+   "FIS 3 Eletrodinâmica Básica",
+   "de 10 para 6, mas ainda cai todo ano e teve 3 questões em 2025."
+  ],
+  [
+   "FIS 11 Termologia",
+   "de 8 para 6. Continua todo ano, com só 1 questão em 2025."
+  ]
+ ],
+ "ctx": [
+  [
+   "Tecnologia de casa",
+   "fogão por indução (2023 e 2025), chuveiro, cafeteira, régua com fusível."
+  ],
+  [
+   "Energia solar",
+   "usina e placa solar em 2022 (2 questões) e placas fotovoltaicas em 2025."
+  ],
+  [
+   "Segurança no carro",
+   "barreira de pneus (2022) e crumple zone (2024)."
+  ],
+  [
+   "Ilha de calor",
+   "em 2021 e 2022."
+  ],
+  [
+   "Tirinhas",
+   "Garfield (2020), Calvin (2021 e 2024), Cebolinha (2023), Laerte (2024), Mônica (2025)."
+  ],
+  [
+   "Lançamento horizontal",
+   "em 2020 e 2022, quase a mesma situação."
+  ]
+ ],
+ "rank": [
+  [
+   1,
+   3,
+   1,
+   "16 aparições, todo ano, 3 em 2025."
+  ],
+  [
+   2,
+   11,
+   2,
+   "14 aparições, todo ano."
+  ],
+  [
+   3,
+   15,
+   3,
+   "11 aparições, todo ano. Vetores em 2024 e 2025."
+  ],
+  [
+   4,
+   10,
+   5,
+   "8 aparições e subindo: decibel em 2024 e 2025."
+  ],
+  [
+   5,
+   6,
+   4,
+   "O que mais cresceu: de 2 para 5."
+  ],
+  [
+   6,
+   17,
+   9,
+   "7 aparições, 5 anos seguidos.",
+   1
+  ],
+  [
+   7,
+   9,
+   8,
+   "7 aparições; 3 só em 2023."
+  ],
+  [
+   8,
+   13,
+   6,
+   "6 aparições, quase sempre junto de calor ou colisão."
+  ],
+  [
+   9,
+   5,
+   7,
+   "5 de 6 anos; fogão por indução caiu 2 vezes."
+  ],
+  [
+   10,
+   4,
+   18,
+   "5 de 6 anos e estava quase no fim.",
+   1
+  ],
+  [
+   11,
+   2,
+   10,
+   "Pico em 2022 (3 questões), depois só 1."
+  ],
+  [
+   12,
+   14,
+   14,
+   "2020 e 2023."
+  ],
+  [
+   13,
+   19,
+   12,
+   "3 de 6 anos: escala, unidades, centro de massa."
+  ],
+  [
+   14,
+   8,
+   19,
+   "Nova: 2024 e 2025.",
+   1
+  ],
+  [
+   15,
+   20,
+   17,
+   "2020 e 2025, sempre conta curta."
+  ],
+  [
+   16,
+   1,
+   13,
+   "Eletrização e carga, em 2020 e 2025."
+  ],
+  [
+   17,
+   16,
+   11,
+   "Só 2022 e 2024.",
+   1
+  ],
+  [
+   18,
+   18,
+   16,
+   "Nada desde 2022."
+  ],
+  [
+   19,
+   7,
+   15,
+   "Só como apoio: refração e difração."
+  ],
+  [
+   20,
+   12,
+   20,
+   "Dilatação em 2021 e termorresistor em 2025."
+  ]
+ ],
+ "steps": [
+  [
+   "f1",
+   "FIS 15 · Cinemática",
+   "11 aparições, todo ano. É o seu ponto fraco: 67% em 12 questões."
+  ],
+  [
+   "f2",
+   "FIS 10 + FIS 9 · Acústica e ondas",
+   "15 aparições juntas, decibel em 2024 e 2025. Os dois estão como não vistos."
+  ],
+  [
+   "f3",
+   "FIS 6 · Espectro e física moderna",
+   "O que mais cresceu e está como não visto."
+  ],
+  [
+   "f4",
+   "FIS 3 + FIS 2 · Circuitos e potência elétrica",
+   "21 aparições juntas. Você está com 86% em FIS 3 e nunca viu FIS 2."
+  ],
+  [
+   "f5",
+   "FIS 17 · Dinâmica",
+   "5 anos seguidos. Seus 100% vêm de só 1 questão."
+  ],
+  [
+   "f6",
+   "FIS 5 + FIS 4 · Indução e campo elétrico",
+   "10 aparições juntas; fogão por indução caiu 2 vezes."
+  ],
+  [
+   "f7",
+   "FIS 8 + FIS 7 · Óptica geométrica",
+   "Nova em 2024 e 2025: espelhos e olho humano. Nunca vista."
+  ],
+  [
+   "f8",
+   "FIS 13 + FIS 16 · Energia, rendimento e colisões",
+   "Eficiência, ciclo Otto, impulso."
+  ],
+  [
+   "f9",
+   "FIS 20 + FIS 19 · Pressão, escala e centro de massa (1 a 2 horas)",
+   "Contas curtas que valem ponto. Nunca vistos."
+  ],
+  [
+   "f10",
+   "Manutenção · FIS 11 Termologia",
+   "87% em 31 questões. Revise calor latente e os 3 processos de transferência.",
+   1
+  ]
+ ],
+ "prevIntro": "Espere cerca de 15 questões de Física, sendo 6 a 7 com cálculo.",
+ "odds": [
+  [
+   3,
+   "Chance alta",
+   "Caíram em 5 ou 6 dos 6 anos.",
+   [
+    [
+     "Circuitos elétricos, 2 a 3 questões",
+     "Ohm, associação, gerador real, LED, fusível"
+    ],
+    [
+     "Calor",
+     "condução, convecção, irradiação; Q = mcΔT; calor latente"
+    ],
+    [
+     "Cinemática com vetores",
+     "lançamentos, composição de velocidades, velocidade média"
+    ],
+    [
+     "Acústica",
+     "decibel, Doppler, harmônicos, ressonância"
+    ],
+    [
+     "Espectro e física moderna",
+     "fótons, luminescência, raios X, infravermelho"
+    ],
+    [
+     "Dinâmica",
+     "atrito, plano inclinado, polias, diagrama de forças"
+    ],
+    [
+     "Ondas",
+     "v = λf, eco, interferência, intensidade"
+    ]
+   ]
+  ],
+  [
+   2,
+   "Chance média",
+   "Caíram em 4 ou 5 dos 6 anos, ou estão subindo.",
+   [
+    [
+     "Indução eletromagnética",
+     "gerador, fogão por indução"
+    ],
+    [
+     "Campo elétrico e blindagem",
+     ""
+    ],
+    [
+     "Energia, potência e rendimento",
+     "ciclo Otto, eficiência"
+    ],
+    [
+     "Potência elétrica e consumo",
+     "kWh, choque, painel solar"
+    ],
+    [
+     "Óptica geométrica",
+     "espelhos, lentes, olho"
+    ]
+   ]
+  ],
+  [
+   1,
+   "Chance baixa",
+   "Caíram 2 ou 3 vezes.",
+   [
+    [
+     "Gases ideais e transformações",
+     ""
+    ],
+    [
+     "Pressão e hidrostática",
+     ""
+    ],
+    [
+     "Escala, unidades e centro de massa",
+     ""
+    ],
+    [
+     "Eletrização",
+     ""
+    ],
+    [
+     "Impulso e colisões",
+     ""
+    ],
+    [
+     "Gravitação e estações do ano",
+     "nada desde 2022"
+    ]
+   ]
+  ],
+  [
+   0,
+   "Muito improvável",
+   "Nenhuma questão direta em 6 anos.",
+   [
+    [
+     "Conversão entre escalas termométricas",
+     ""
+    ],
+    [
+     "Câmara escura, sombra e eclipse",
+     ""
+    ],
+    [
+     "Cálculo com leis de Kepler ou gravitação universal",
+     ""
+    ]
+   ]
+  ]
+ ],
+ "tagName": "cálculo",
+ "tagShort": "cálculo",
+ "tagLabel": "Só questões com cálculo",
+ "limits": "<b>Limites desta análise.</b> Usei uma prova por ano, da 1ª aplicação, e a classificação das questões foi feita por mim. Questões interdisciplinares contam no módulo principal e, quando faz sentido, também num segundo módulo. Ficaram de fora as que são mais de Química ou Biologia mesmo tocando em Física. Com só 6 provas, a previsão indica onde vale investir o estudo, não garante o que vai cair.",
+ "years": {
+  "2020": [
+   [
+    92,
+    "Panela de pressão: abaixar o fogo",
+    [
+     11,
+     14
+    ],
+    0
+   ],
+   [
+    94,
+    "Fone com cancelamento de ruído",
+    [
+     10,
+     9
+    ],
+    0
+   ],
+   [
+    96,
+    "Divisor de tensão com resistores",
+    [
+     3
+    ],
+    1
+   ],
+   [
+    101,
+    "Aquário sem aquecedor por 1 h",
+    [
+     11,
+     13
+    ],
+    1
+   ],
+   [
+    106,
+    "Amperímetro e corrente de fuga",
+    [
+     1,
+     3
+    ],
+    1
+   ],
+   [
+    108,
+    "Trajetória da bolinha que sai da mesa",
+    [
+     15
+    ],
+    0
+   ],
+   [
+    109,
+    "Cavidade como tubo sonoro fechado",
+    [
+     10
+    ],
+    1
+   ],
+   [
+    112,
+    "Carro como gaiola de Faraday",
+    [
+     3,
+     4
+    ],
+    0
+   ],
+   [
+    122,
+    "Semáforos sincronizados (MUV)",
+    [
+     15
+    ],
+    1
+   ],
+   [
+    125,
+    "Eletrização do gato na calça",
+    [
+     1
+    ],
+    0
+   ],
+   [
+    130,
+    "Gerador: aumento da tensão induzida",
+    [
+     5
+    ],
+    0
+   ],
+   [
+    131,
+    "Herschel e o infravermelho",
+    [
+     6
+    ],
+    0
+   ],
+   [
+    133,
+    "Geladeira perto de fontes de calor",
+    [
+     14,
+     11
+    ],
+    0
+   ],
+   [
+    134,
+    "Descompressão do mergulhador",
+    [
+     20
+    ],
+    1
+   ],
+   [
+    135,
+    "Torre Eiffel em escala 1:100",
+    [
+     19,
+     20
+    ],
+    1
+   ]
+  ],
+  "2021": [
+   [
+    93,
+    "Alcoolômetro e dilatação",
+    [
+     12
+    ],
+    0
+   ],
+   [
+    96,
+    "Tempo de recarga do carro elétrico",
+    [
+     2
+    ],
+    1
+   ],
+   [
+    104,
+    "Potência: álcool × gasolina",
+    [
+     13,
+     15
+    ],
+    0
+   ],
+   [
+    105,
+    "Interruptores three-way",
+    [
+     3
+    ],
+    0
+   ],
+   [
+    107,
+    "Umidade dificulta a evaporação do suor",
+    [
+     11
+    ],
+    0
+   ],
+   [
+    111,
+    "Ilha de calor: irradiação e convecção",
+    [
+     11
+    ],
+    0
+   ],
+   [
+    112,
+    "Queda dos corpos e resistência do ar",
+    [
+     17
+    ],
+    0
+   ],
+   [
+    115,
+    "Carotenos e cores complementares",
+    [
+     6
+    ],
+    0
+   ],
+   [
+    116,
+    "Cordel e densidade dos planetas",
+    [
+     18
+    ],
+    0
+   ],
+   [
+    117,
+    "Lei de Ohm em fios finíssimos",
+    [
+     3
+    ],
+    1
+   ],
+   [
+    121,
+    "Força magnética em cargas opostas",
+    [
+     5
+    ],
+    0
+   ],
+   [
+    126,
+    "Panelas: condução de calor",
+    [
+     11
+    ],
+    1
+   ],
+   [
+    127,
+    "Pilhas de laboratório como circuito",
+    [
+     3
+    ],
+    0
+   ],
+   [
+    128,
+    "Bang! Bang!: lançamento oblíquo",
+    [
+     15
+    ],
+    1
+   ],
+   [
+    134,
+    "Sino dos ventos: frequência e velocidade",
+    [
+     10,
+     9
+    ],
+    0
+   ]
+  ],
+  "2022": [
+   [
+    92,
+    "Som na água e no ar: distância da geleira",
+    [
+     9
+    ],
+    1
+   ],
+   [
+    93,
+    "Luz engarrafada: refração",
+    [
+     7
+    ],
+    0
+   ],
+   [
+    98,
+    "Rotas pela analogia com a lei de Ohm",
+    [
+     3
+    ],
+    1
+   ],
+   [
+    102,
+    "Sol trocado por buraco negro",
+    [
+     18
+    ],
+    0
+   ],
+   [
+    105,
+    "Pilha invertida na lanterna",
+    [
+     3
+    ],
+    1
+   ],
+   [
+    108,
+    "Ducha: escolha do disjuntor",
+    [
+     3,
+     2,
+     11
+    ],
+    1
+   ],
+   [
+    111,
+    "Corda do balanço: tração no MCU",
+    [
+     17,
+     15
+    ],
+    1
+   ],
+   [
+    114,
+    "Concreto × água: calor específico",
+    [
+     11
+    ],
+    1
+   ],
+   [
+    117,
+    "Placa solar e inclinação da Terra",
+    [
+     18
+    ],
+    0
+   ],
+   [
+    121,
+    "Barreira de pneus × blocos",
+    [
+     16,
+     13
+    ],
+    0
+   ],
+   [
+    123,
+    "Forças na muleta no ângulo crítico",
+    [
+     17
+    ],
+    0
+   ],
+   [
+    125,
+    "Jato da mangueira: lançamento horizontal",
+    [
+     15
+    ],
+    1
+   ],
+   [
+    128,
+    "Choque com duas baterias de 12 V",
+    [
+     2,
+     3
+    ],
+    1
+   ],
+   [
+    131,
+    "Experimento de Oersted",
+    [
+     5
+    ],
+    0
+   ],
+   [
+    134,
+    "Área do parque solar",
+    [
+     2,
+     4
+    ],
+    1
+   ]
+  ],
+  "2023": [
+   [
+    91,
+    "Telefone de lata: amplitude",
+    [
+     10
+    ],
+    0
+   ],
+   [
+    92,
+    "Laser de CD/DVD e difração",
+    [
+     6,
+     7
+    ],
+    0
+   ],
+   [
+    93,
+    "Intensidade do bluetooth",
+    [
+     9
+    ],
+    1
+   ],
+   [
+    95,
+    "Doce de leite: calor latente",
+    [
+     11
+    ],
+    0
+   ],
+   [
+    96,
+    "Aerossol na incineração: PV = nRT",
+    [
+     14
+    ],
+    1
+   ],
+   [
+    97,
+    "Lâmpada queimada em circuito misto",
+    [
+     3
+    ],
+    0
+   ],
+   [
+    101,
+    "Fogão por indução",
+    [
+     5
+    ],
+    0
+   ],
+   [
+    102,
+    "Polias na academia",
+    [
+     17
+    ],
+    1
+   ],
+   [
+    106,
+    "Altura máxima: velocidade e aceleração",
+    [
+     15
+    ],
+    0
+   ],
+   [
+    114,
+    "Eco no subsolo: velocidade no líquido",
+    [
+     9
+    ],
+    1
+   ],
+   [
+    115,
+    "Celular no avião: mesma frequência",
+    [
+     9
+    ],
+    0
+   ],
+   [
+    117,
+    "Copo de casca de café: isolante",
+    [
+     11
+    ],
+    0
+   ],
+   [
+    119,
+    "Pneu esfriando: gráfico P × T",
+    [
+     14
+    ],
+    0
+   ],
+   [
+    125,
+    "Vantagem da energia nuclear",
+    [
+     4
+    ],
+    0
+   ],
+   [
+    130,
+    "Tensão nas cordas do caminhão",
+    [
+     17
+    ],
+    1
+   ],
+   [
+    133,
+    "Radiação cósmica em voos",
+    [
+     19,
+     6
+    ],
+    1
+   ],
+   [
+    135,
+    "Pedágio: carro × caminhão",
+    [
+     15
+    ],
+    1
+   ]
+  ],
+  "2024": [
+   [
+    91,
+    "Crumple zone em colisões",
+    [
+     16,
+     13
+    ],
+    0
+   ],
+   [
+    96,
+    "Balanceamento da roda: centro de massa",
+    [
+     19
+    ],
+    0
+   ],
+   [
+    99,
+    "Sirene e radar: efeito Doppler",
+    [
+     10
+    ],
+    0
+   ],
+   [
+    100,
+    "Mirascópio: espelhos côncavos",
+    [
+     8
+    ],
+    1
+   ],
+   [
+    101,
+    "Nível sonoro na sala de aula",
+    [
+     10
+    ],
+    1
+   ],
+   [
+    103,
+    "Aquecedor solar: convecção",
+    [
+     11
+    ],
+    0
+   ],
+   [
+    106,
+    "Raios X e notebook no aeroporto",
+    [
+     6
+    ],
+    0
+   ],
+   [
+    119,
+    "Nadador contra a corrente marinha",
+    [
+     15
+    ],
+    1
+   ],
+   [
+    121,
+    "Calvin cai do balanço: força do chão",
+    [
+     17
+    ],
+    0
+   ],
+   [
+    122,
+    "Iglu: por que precisa de geladeira",
+    [
+     11
+    ],
+    0
+   ],
+   [
+    125,
+    "Placa que brilha no escuro",
+    [
+     6
+    ],
+    0
+   ],
+   [
+    127,
+    "Linhas de campo e cilindro oco",
+    [
+     4
+    ],
+    0
+   ],
+   [
+    129,
+    "Eficiência da cafeteira",
+    [
+     11,
+     13
+    ],
+    1
+   ],
+   [
+    130,
+    "Ciclo Otto",
+    [
+     13
+    ],
+    0
+   ],
+   [
+    131,
+    "Circuito com dois LEDs",
+    [
+     3
+    ],
+    1
+   ],
+   [
+    132,
+    "Fio resistivo e amperímetro",
+    [
+     3
+    ],
+    1
+   ]
+  ],
+  "2025": [
+   [
+    96,
+    "Olhos vermelhos nas fotos",
+    [
+     8
+    ],
+    0
+   ],
+   [
+    99,
+    "Mariposas e lâmpadas: irradiação",
+    [
+     11
+    ],
+    0
+   ],
+   [
+    102,
+    "Atrito no plano inclinado",
+    [
+     17
+    ],
+    0
+   ],
+   [
+    109,
+    "Tubo de imagem: campo elétrico",
+    [
+     4
+    ],
+    0
+   ],
+   [
+    110,
+    "Voz que quebra taças: ressonância",
+    [
+     9,
+     10
+    ],
+    0
+   ],
+   [
+    112,
+    "Alarme: tempo de resposta",
+    [
+     15
+    ],
+    1
+   ],
+   [
+    114,
+    "Fogão por indução",
+    [
+     5
+    ],
+    0
+   ],
+   [
+    116,
+    "Resistor de proteção",
+    [
+     3
+    ],
+    1
+   ],
+   [
+    118,
+    "Decibéis de 10 mil torcedores",
+    [
+     10
+    ],
+    1
+   ],
+   [
+    121,
+    "Avião contra o vento",
+    [
+     15
+    ],
+    1
+   ],
+   [
+    124,
+    "Laje: altura máxima da pilha",
+    [
+     20
+    ],
+    1
+   ],
+   [
+    125,
+    "Placas fotovoltaicas em série",
+    [
+     3,
+     1
+    ],
+    1
+   ],
+   [
+    126,
+    "Sensor de fotoluminescência",
+    [
+     6
+    ],
+    0
+   ],
+   [
+    132,
+    "Régua elétrica e fusível",
+    [
+     2
+    ],
+    1
+   ],
+   [
+    134,
+    "Sensor de platina: R × T",
+    [
+     3,
+     12
+    ],
+    0
+   ]
+  ]
+ },
+ "cad": {
+  "2020": "Caderno 5 · Amarelo",
+  "2021": "Caderno 5 · Amarelo",
+  "2022": "Caderno 6 · Cinza",
+  "2023": "Caderno 5 · Amarelo",
+  "2024": "Caderno 7 · Azul",
+  "2025": "Caderno 6 · Cinza"
+ }
+}

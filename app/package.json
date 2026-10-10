@@ -1,0 +1,19 @@
+{
+  "name": "reinos-enem",
+  "private": true,
+  "version": "3.6.0",
+  "description": "Plataforma Reinos — ENEM 2026 (fonte + build)",
+  "scripts": {
+    "dados": "python3 ../padroes-enem/scripts/build_data.py",
+    "build": "esbuild src/main.jsx --bundle --minify --format=iife --target=es2019 --loader:.jsx=jsx --jsx=transform --define:process.env.NODE_ENV=\\\"production\\\" --outfile=dist/app.js"
+  },
+  "dependencies": {
+    "lucide-react": "0.383.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "recharts": "2.12.7"
+  },
+  "devDependencies": {
+    "esbuild": "0.23.1"
+  }
+}

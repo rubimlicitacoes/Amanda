@@ -1,0 +1,861 @@
+{
+ "weeks": [
+  {
+   "t": "Semana 1",
+   "r": "07 a 09/10",
+   "end": "<b>Sáb 10 e Dom 11</b> · sábado: simulado do cursinho; à tarde, reserva opcional de até 2h para o que atrasou · domingo: redação e refazer os padrões errados",
+   "days": [
+    {
+     "id": "d1007",
+     "date": "2026-10-07",
+     "dia": "Qua 07/10",
+     "n": 40,
+     "mins": null,
+     "items": [
+      [
+       "FIS",
+       "15",
+       "Cinemática",
+       "1–24",
+       "C",
+       24
+      ],
+      [
+       "BIO",
+       "10+15",
+       "Parasitoses e microrganismos",
+       "1–16",
+       "C",
+       16
+      ]
+     ]
+    },
+    {
+     "id": "d1008",
+     "date": "2026-10-08",
+     "dia": "Qui 08/10",
+     "n": 24,
+     "mins": 148,
+     "items": [
+      [
+       "FIS",
+       "15",
+       "Cinemática",
+       "25–32",
+       "C",
+       8
+      ],
+      [
+       "BIO",
+       "10+15",
+       "Parasitoses e microrganismos",
+       "17–32",
+       "C",
+       16
+      ]
+     ]
+    },
+    {
+     "id": "d1009",
+     "date": "2026-10-09",
+     "dia": "Sex 09/10",
+     "n": 34,
+     "mins": 223,
+     "items": [
+      [
+       "FIS",
+       "15",
+       "Cinemática",
+       "33–42",
+       "C",
+       10
+      ],
+      [
+       "QUI",
+       "9+10",
+       "Ácido-base",
+       "1–8",
+       "C",
+       8
+      ],
+      [
+       "BIO",
+       "10+15",
+       "Parasitoses e microrganismos",
+       "33–48",
+       "C",
+       16
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "t": "Semana 2",
+   "r": "12 a 16/10",
+   "end": "<b>Sáb 17 e Dom 18</b> · sábado: simulado do cursinho; à tarde, reserva opcional de até 2h · domingo: redação e refazer os padrões errados",
+   "days": [
+    {
+     "id": "d1012",
+     "date": "2026-10-12",
+     "dia": "Seg 12/10 · feriado",
+     "n": 31,
+     "mins": 210,
+     "items": [
+      [
+       "FIS",
+       "15",
+       "Cinemática",
+       "43–48",
+       "C",
+       6
+      ],
+      [
+       "FIS",
+       "10+9",
+       "Acústica e ondas",
+       "1–4",
+       "C",
+       4
+      ],
+      [
+       "QUI",
+       "9+10",
+       "Ácido-base",
+       "9–18",
+       "C",
+       10
+      ],
+      [
+       "BIO",
+       "25+26+22+23",
+       "Imunidade, câncer e genética",
+       "1–11",
+       "C",
+       11
+      ]
+     ]
+    },
+    {
+     "id": "d1013",
+     "date": "2026-10-13",
+     "dia": "Ter 13/10",
+     "n": 42,
+     "mins": 219,
+     "items": [
+      [
+       "FIS",
+       "8+7+6",
+       "Espectro e óptica",
+       "1–12",
+       "C",
+       12
+      ],
+      [
+       "QUI",
+       "14",
+       "Equilíbrio químico",
+       "1–10",
+       "C",
+       10
+      ],
+      [
+       "BIO",
+       "5+8",
+       "Enzimas e energia celular",
+       "1–20",
+       "C",
+       20
+      ]
+     ]
+    },
+    {
+     "id": "d1014",
+     "date": "2026-10-14",
+     "dia": "Qua 14/10",
+     "n": 33,
+     "mins": 212,
+     "items": [
+      [
+       "FIS",
+       "3+2",
+       "Circuitos e potência",
+       "1–9",
+       "C",
+       9
+      ],
+      [
+       "QUI",
+       "12+15+16",
+       "Eletroquímica e estequiometria",
+       "1–11",
+       "C",
+       11
+      ],
+      [
+       "BIO",
+       "24+21",
+       "Biotecnologia e DNA",
+       "1–13",
+       "C",
+       13
+      ]
+     ]
+    },
+    {
+     "id": "d1015",
+     "date": "2026-10-15",
+     "dia": "Qui 15/10",
+     "n": 47,
+     "mins": 220,
+     "items": [
+      [
+       "FIS",
+       "10+9",
+       "Acústica e ondas",
+       "5–15",
+       "C",
+       11
+      ],
+      [
+       "QUI",
+       "5+6",
+       "Polaridade e misturas",
+       "1–12",
+       "C",
+       12
+      ],
+      [
+       "BIO",
+       "4+11+12",
+       "Impacto ambiental (BIO 4)",
+       "20 para ler",
+       "L",
+       20
+      ],
+      [
+       "BIO",
+       "3",
+       "Evolução",
+       "1–4",
+       "C",
+       4
+      ]
+     ]
+    },
+    {
+     "id": "d1016",
+     "date": "2026-10-16",
+     "dia": "Sex 16/10",
+     "n": 35,
+     "mins": 206,
+     "items": [
+      [
+       "FIS",
+       "11",
+       "Termologia",
+       "14 padrões",
+       "O",
+       14
+      ],
+      [
+       "QUI",
+       "17+20",
+       "Funções e reações orgânicas",
+       "1–10",
+       "C",
+       10
+      ],
+      [
+       "BIO",
+       "25+26+22+23",
+       "Imunidade, câncer e genética",
+       "12–22",
+       "C",
+       11
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "t": "Semana 3",
+   "r": "19 a 23/10",
+   "end": "<b>Sáb 24 e Dom 25</b> · sábado: simulado do cursinho; à tarde, reserva opcional de até 2h · domingo: redação e refazer os padrões errados",
+   "days": [
+    {
+     "id": "d1019",
+     "date": "2026-10-19",
+     "dia": "Seg 19/10",
+     "n": 36,
+     "mins": 222,
+     "items": [
+      [
+       "FIS",
+       "17",
+       "Dinâmica",
+       "12 padrões",
+       "C",
+       12
+      ],
+      [
+       "QUI",
+       "23 + GEO",
+       "Impactos ambientais",
+       "1–13",
+       "C",
+       13
+      ],
+      [
+       "BIO",
+       "3",
+       "Evolução",
+       "5–15",
+       "C",
+       11
+      ]
+     ]
+    },
+    {
+     "id": "d1020",
+     "date": "2026-10-20",
+     "dia": "Ter 20/10",
+     "n": 38,
+     "mins": 221,
+     "items": [
+      [
+       "FIS",
+       "10+9",
+       "Acústica e ondas",
+       "16–26",
+       "C",
+       11
+      ],
+      [
+       "QUI",
+       "17+20",
+       "Funções e reações orgânicas",
+       "11–20",
+       "C",
+       10
+      ],
+      [
+       "BIO",
+       "5+8",
+       "Enzimas e energia celular",
+       "21–37",
+       "C",
+       17
+      ]
+     ]
+    },
+    {
+     "id": "d1021",
+     "date": "2026-10-21",
+     "dia": "Qua 21/10",
+     "n": 34,
+     "mins": 219,
+     "items": [
+      [
+       "FIS",
+       "3+2",
+       "Circuitos e potência",
+       "10–18",
+       "C",
+       9
+      ],
+      [
+       "QUI",
+       "12+15+16",
+       "Eletroquímica e estequiometria",
+       "12–23",
+       "C",
+       12
+      ],
+      [
+       "BIO",
+       "24+21",
+       "Biotecnologia e DNA",
+       "14–26",
+       "C",
+       13
+      ]
+     ]
+    },
+    {
+     "id": "d1022",
+     "date": "2026-10-22",
+     "dia": "Qui 22/10",
+     "n": 35,
+     "mins": 204,
+     "items": [
+      [
+       "FIS",
+       "8+7+6",
+       "Espectro e óptica",
+       "13–24",
+       "C",
+       12
+      ],
+      [
+       "QUI",
+       "5+6",
+       "Polaridade e misturas",
+       "13–24",
+       "C",
+       12
+      ],
+      [
+       "BIO",
+       "17+20",
+       "Hormônios, digestão, nervos",
+       "11 padrões",
+       "C",
+       11
+      ]
+     ]
+    },
+    {
+     "id": "d1023",
+     "date": "2026-10-23",
+     "dia": "Sex 23/10",
+     "n": 55,
+     "mins": 220,
+     "items": [
+      [
+       "FIS",
+       "10+9",
+       "Acústica e ondas",
+       "27–38",
+       "C",
+       12
+      ],
+      [
+       "QUI",
+       "9+10",
+       "Ácido-base",
+       "19–26",
+       "C",
+       8
+      ],
+      [
+       "BIO",
+       "4+11+12",
+       "Botânica (BIO 11 e 12)",
+       "35 para ler",
+       "L",
+       35
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "t": "Semana 4",
+   "r": "26 a 30/10",
+   "end": "<b>31/10 a 08/11</b> · sábado 31: simulado do cursinho · 02 a 07/11: semana do Dia 1 (Linguagens, Humanas e redação), sem padrões de CN · domingo 08/11: ENEM Dia 1",
+   "days": [
+    {
+     "id": "d1026",
+     "date": "2026-10-26",
+     "dia": "Seg 26/10",
+     "n": 30,
+     "mins": 203,
+     "items": [
+      [
+       "FIS",
+       "3+2",
+       "Circuitos e potência",
+       "19–27",
+       "C",
+       9
+      ],
+      [
+       "QUI",
+       "14",
+       "Equilíbrio químico",
+       "11–17",
+       "C",
+       7
+      ],
+      [
+       "QUI",
+       "17+20",
+       "Funções e reações orgânicas",
+       "21–23",
+       "C",
+       3
+      ],
+      [
+       "BIO",
+       "25+26+22+23",
+       "Imunidade, câncer e genética",
+       "23–33",
+       "C",
+       11
+      ]
+     ]
+    },
+    {
+     "id": "d1027",
+     "date": "2026-10-27",
+     "dia": "Ter 27/10",
+     "n": 38,
+     "mins": 221,
+     "items": [
+      [
+       "FIS",
+       "10+9",
+       "Acústica e ondas",
+       "39–49",
+       "C",
+       11
+      ],
+      [
+       "QUI",
+       "12+15+16",
+       "Eletroquímica e estequiometria",
+       "24–33",
+       "C",
+       10
+      ],
+      [
+       "BIO",
+       "5+8",
+       "Enzimas e energia celular",
+       "38–54",
+       "C",
+       17
+      ]
+     ]
+    },
+    {
+     "id": "d1028",
+     "date": "2026-10-28",
+     "dia": "Qua 28/10",
+     "n": 42,
+     "mins": 208,
+     "items": [
+      [
+       "FIS",
+       "11",
+       "Termologia",
+       "15 para ler",
+       "L",
+       15
+      ],
+      [
+       "FIS",
+       "5+4",
+       "Indução e campo elétrico",
+       "5 padrões",
+       "N",
+       5
+      ],
+      [
+       "QUI",
+       "17+20",
+       "Funções e reações orgânicas",
+       "24–33",
+       "C",
+       10
+      ],
+      [
+       "BIO",
+       "25+26+22+23",
+       "Imunidade, câncer e genética",
+       "34–45",
+       "C",
+       12
+      ]
+     ]
+    },
+    {
+     "id": "d1029",
+     "date": "2026-10-29",
+     "dia": "Qui 29/10",
+     "n": 80,
+     "mins": 222,
+     "items": [
+      [
+       "FIS",
+       "17",
+       "Dinâmica",
+       "41 para ler",
+       "L",
+       41
+      ],
+      [
+       "QUI",
+       "5+6",
+       "Polaridade e misturas",
+       "25–36",
+       "C",
+       12
+      ],
+      [
+       "BIO",
+       "17+20",
+       "Hormônios, digestão, nervos",
+       "23 para ler",
+       "L",
+       23
+      ],
+      [
+       "BIO",
+       "24+21",
+       "Biotecnologia e DNA",
+       "27–30",
+       "C",
+       4
+      ]
+     ]
+    },
+    {
+     "id": "d1030",
+     "date": "2026-10-30",
+     "dia": "Sex 30/10",
+     "n": 35,
+     "mins": 196,
+     "items": [
+      [
+       "FIS",
+       "8+7+6",
+       "Espectro e óptica",
+       "25–37",
+       "C",
+       13
+      ],
+      [
+       "QUI",
+       "23 + GEO",
+       "Impactos ambientais",
+       "14–24",
+       "C",
+       11
+      ],
+      [
+       "BIO",
+       "3",
+       "Evolução",
+       "16–26",
+       "C",
+       11
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "t": "Semana 5",
+   "r": "09 a 13/11",
+   "end": "<b>Sáb 14 e Dom 15</b> · sábado: revisão leve dos erros · domingo 15/11: ENEM Dia 2 (Natureza e Matemática)",
+   "days": [
+    {
+     "id": "d1109",
+     "date": "2026-11-09",
+     "dia": "Seg 09/11",
+     "n": 33,
+     "mins": 222,
+     "items": [
+      [
+       "FIS",
+       "17",
+       "Dinâmica",
+       "10 padrões",
+       "C",
+       10
+      ],
+      [
+       "QUI",
+       "12+15+16",
+       "Eletroquímica e estequiometria",
+       "34–43",
+       "C",
+       10
+      ],
+      [
+       "BIO",
+       "17+20",
+       "Hormônios, digestão, nervos",
+       "13 padrões",
+       "C",
+       13
+      ]
+     ]
+    },
+    {
+     "id": "d1110",
+     "date": "2026-11-10",
+     "dia": "Ter 10/11",
+     "n": 40,
+     "mins": 221,
+     "items": [
+      [
+       "FIS",
+       "13",
+       "Energia e rendimento",
+       "8 padrões",
+       "NO",
+       8
+      ],
+      [
+       "FIS",
+       "11",
+       "Termologia",
+       "6 padrões",
+       "O",
+       6
+      ],
+      [
+       "QUI",
+       "17+20",
+       "Funções e reações orgânicas",
+       "34–43",
+       "C",
+       10
+      ],
+      [
+       "BIO",
+       "1",
+       "Ecologia básica",
+       "8 padrões",
+       "NO",
+       8
+      ],
+      [
+       "BIO",
+       "16",
+       "Vertebrados",
+       "8 padrões",
+       "N",
+       8
+      ]
+     ]
+    },
+    {
+     "id": "d1111",
+     "date": "2026-11-11",
+     "dia": "Qua 11/11",
+     "n": 35,
+     "mins": 217,
+     "items": [
+      [
+       "FIS",
+       "5+4",
+       "Indução e campo elétrico",
+       "7 padrões",
+       "N",
+       7
+      ],
+      [
+       "QUI",
+       "5+6",
+       "Polaridade e misturas",
+       "37–50",
+       "C",
+       14
+      ],
+      [
+       "BIO",
+       "25+26+22+23",
+       "Imunidade, câncer e genética",
+       "46–59",
+       "C",
+       14
+      ]
+     ]
+    },
+    {
+     "id": "d1112",
+     "date": "2026-11-12",
+     "dia": "Qui 12/11",
+     "n": 36,
+     "mins": 221,
+     "items": [
+      [
+       "FIS",
+       "11",
+       "Termologia",
+       "10 padrões",
+       "O",
+       10
+      ],
+      [
+       "FIS",
+       "10+9",
+       "Acústica e ondas",
+       "50–53",
+       "C",
+       4
+      ],
+      [
+       "QUI",
+       "12+15+16",
+       "Eletroquímica e estequiometria",
+       "44–53",
+       "C",
+       10
+      ],
+      [
+       "BIO",
+       "3",
+       "Evolução",
+       "27–38",
+       "C",
+       12
+      ]
+     ]
+    },
+    {
+     "id": "d1113",
+     "date": "2026-11-13",
+     "dia": "Sex 13/11",
+     "n": 34,
+     "mins": 209,
+     "items": [
+      [
+       "FIS",
+       "3+2",
+       "Circuitos e potência",
+       "28–35",
+       "C",
+       8
+      ],
+      [
+       "QUI",
+       "17+20",
+       "Funções e reações orgânicas",
+       "44–54",
+       "C",
+       11
+      ],
+      [
+       "BIO",
+       "24+21",
+       "Biotecnologia e DNA",
+       "31–40",
+       "C",
+       10
+      ],
+      [
+       "BIO",
+       "5+8",
+       "Enzimas e energia celular",
+       "55–59",
+       "C",
+       5
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "modes": {
+  "C": "completo",
+  "O": "só a oficial",
+  "L": "leitura",
+  "N": "lista a criar",
+  "NO": "lista a criar · só a oficial"
+ }
+}

@@ -1,0 +1,1340 @@
+{
+ "prefix": "BIO",
+ "key": "biologia-enem-estudo",
+ "h1": "O que o ENEM cobrou de Biologia de 2020 a 2025",
+ "intro": "Cada questão de Biologia das 6 provas foi classificada nos módulos BIO 1–26 do seu ranking. Uma questão pode contar em dois módulos.",
+ "stats": [
+  [
+   "103",
+   "questões de Biologia em 6 provas"
+  ],
+  [
+   "~17",
+   "questões de Biologia por prova"
+  ],
+  [
+   "4–5",
+   "por prova pedem ler gráfico, tabela ou esquema",
+   1
+  ],
+  [
+   "0",
+   "questões de Origem da Vida (BIO 9)"
+  ]
+ ],
+ "heatNote": "A questão dos carotenos (2021/115) ficou no mapa de Física. Como uma questão pode contar em dois módulos, a soma da coluna Total passa de 103.",
+ "mods": {
+  "1": "Ecologia Básica",
+  "2": "Ecologia Avançada",
+  "3": "Evolução",
+  "4": "Impacto Ambiental",
+  "5": "Moléculas Orgânicas",
+  "6": "Transporte de Moléculas",
+  "7": "Citologia",
+  "8": "Energia Celular",
+  "9": "Origem da Vida",
+  "10": "Bactérias, Algas e Fungos",
+  "11": "Filogenia e Botânica",
+  "12": "Morfologia e Reprodução de Plantas",
+  "13": "Transporte de Seiva e Sementes",
+  "14": "Invertebrados",
+  "15": "Parasitoses e Doenças Endêmicas",
+  "16": "Vertebrados e Conquista Terrestre",
+  "17": "Digestório, Endócrino e Excretor",
+  "18": "Sistema Reprodutor",
+  "19": "Cardiorrespiratório e Sangue",
+  "20": "Nervoso e Musculoesquelético",
+  "21": "DNA e Dogma Central",
+  "22": "Genética",
+  "23": "Hereditariedade",
+  "24": "Genética Avançada",
+  "25": "Vírus e Imunidade",
+  "26": "Neoplasia e Farmacologia"
+ },
+ "up": [
+  [
+   "BIO 10 Bactérias, Algas e Fungos",
+   "de 1 para 5 questões: biorremediação (aguapé), fitorremediação, decompositores e bactérias aeróbias × anaeróbias."
+  ],
+  [
+   "BIO 1 Ecologia Básica",
+   "de 3 para 5. Ciclo do nitrogênio em 2022, 2023 e 2024 e poluentes apolares acumulando em gordura e leite."
+  ],
+  [
+   "BIO 5 Moléculas Orgânicas",
+   "de 1 para 3, com 2 em 2025. Quase sempre enzima e temperatura ou vitamina."
+  ],
+  [
+   "Novos depois de 2022",
+   "Reprodução humana (BIO 18, 2 questões em 2023), Filogenia (BIO 11, como apoio) e Mendel puro (BIO 22, 2025)."
+  ]
+ ],
+ "down": [
+  [
+   "BIO 3 Evolução",
+   "de 6 para 3, mas voltou com 2 questões em 2025."
+  ],
+  [
+   "BIO 19 Cardiorrespiratório e Sangue",
+   "de 4 para 1. Nada em 2024 e 2025."
+  ],
+  [
+   "BIO 24 Genética Avançada",
+   "de 5 para 3. Não caiu em 2023."
+  ],
+  [
+   "BIO 21 DNA e Dogma Central",
+   "3 questões só em 2023 e nenhuma em 2024 e 2025."
+  ],
+  [
+   "Botânica (BIO 12 e 13)",
+   "7 questões, todas em 2021 e 2023. Nada em 2024 e 2025."
+  ]
+ ],
+ "ctx": [
+  [
+   "Vacinas",
+   "em 4 anos seguidos: antígeno tumoral (2022), RNAm (2023), spike (2024), vacina tradicional (2025)."
+  ],
+  [
+   "Aedes e arboviroses",
+   "em 2021, 2022 e 2024: larvicida, Wolbachia, urbanização."
+  ],
+  [
+   "Poluente apolar que acumula na gordura",
+   "em 2021, 2023 e 2024: Mariana, Aldrin no leite, microplástico."
+  ],
+  [
+   "Espécie invasora",
+   "em 2022, 2024 e 2025: jaqueira, pererecas do Caribe, capim-gordura."
+  ],
+  [
+   "Enzima e temperatura",
+   "em 2022, 2024 e 2025."
+  ],
+  [
+   "Aves e penas impermeáveis",
+   "em 2020 e 2025, praticamente a mesma questão."
+  ]
+ ],
+ "rank": [
+  [
+   1,
+   4,
+   1,
+   "17 aparições, todo ano, 5 só em 2025."
+  ],
+  [
+   2,
+   1,
+   17,
+   "Todo ano e subindo: ciclos do N e do C, bioacumulação.",
+   1
+  ],
+  [
+   3,
+   25,
+   8,
+   "Todo ano. Vacinas em 4 anos seguidos."
+  ],
+  [
+   4,
+   15,
+   18,
+   "Todo ano: Aedes, leishmaniose, esquistossomose.",
+   1
+  ],
+  [
+   5,
+   8,
+   2,
+   "Todo ano, 1 a 2 questões."
+  ],
+  [
+   6,
+   3,
+   6,
+   "9 aparições em 5 dos 6 anos; 2 em 2025."
+  ],
+  [
+   7,
+   24,
+   14,
+   "5 de 6 anos: PCR, transgenia, terapia gênica."
+  ],
+  [
+   8,
+   26,
+   11,
+   "7 aparições, quase sempre junto de imunidade ou digestão."
+  ],
+  [
+   9,
+   10,
+   20,
+   "O que mais cresceu: de 1 para 5.",
+   1
+  ],
+  [
+   10,
+   16,
+   5,
+   "5 de 6 anos; penas das aves caíram 2 vezes."
+  ],
+  [
+   11,
+   17,
+   7,
+   "5 de 6 anos, como contexto de saúde."
+  ],
+  [
+   12,
+   23,
+   4,
+   "Heredograma em 5 de 6 anos, mas é 1 questão por prova.",
+   1
+  ],
+  [
+   13,
+   5,
+   25,
+   "Subindo: enzimas em 2022, 2024 e 2025.",
+   1
+  ],
+  [
+   14,
+   21,
+   9,
+   "6 aparições, mas nenhuma em 2024 e 2025."
+  ],
+  [
+   15,
+   20,
+   12,
+   "4 anos seguidos (2021 a 2024)."
+  ],
+  [
+   16,
+   19,
+   16,
+   "Forte em 2021 e 2022, sumiu depois."
+  ],
+  [
+   17,
+   13,
+   13,
+   "4 questões, só em 2021 e 2023."
+  ],
+  [
+   18,
+   7,
+   21,
+   "3 de 6 anos: organelas e citoesqueleto."
+  ],
+  [
+   19,
+   2,
+   10,
+   "Sucessão em 2020 e 2024."
+  ],
+  [
+   20,
+   14,
+   22,
+   "3 aparições: exoesqueleto e muda."
+  ],
+  [
+   21,
+   12,
+   3,
+   "Só 3 questões; estava no seu top 3.",
+   1
+  ],
+  [
+   22,
+   18,
+   24,
+   "Só 2023, com 2 questões."
+  ],
+  [
+   23,
+   11,
+   23,
+   "Só como apoio (tubo polínico, cladograma)."
+  ],
+  [
+   24,
+   22,
+   15,
+   "Só a proporção em F2, em 2025."
+  ],
+  [
+   25,
+   6,
+   19,
+   "Só osmose, em 2022."
+  ],
+  [
+   26,
+   9,
+   26,
+   "Nenhuma questão em 6 anos."
+  ]
+ ],
+ "steps": [
+  [
+   "b1",
+   "BIO 15 · Parasitoses e doenças endêmicas",
+   "Caiu nos 6 anos e está como não visto no app."
+  ],
+  [
+   "b2",
+   "BIO 25 + BIO 26 · Imunidade, vacinas e câncer",
+   "Vacinas em 4 anos seguidos. Seus 100% em BIO 25 vêm de só 2 questões, e BIO 26 nunca foi visto."
+  ],
+  [
+   "b3",
+   "BIO 5 · Enzimas e vitaminas",
+   "Subindo, com 2 questões em 2025, e nunca visto."
+  ],
+  [
+   "b4",
+   "BIO 10 · Bactérias, fungos e biorremediação",
+   "O que mais cresceu: 5 aparições em 2023–2025. Seus 100% vêm de 2 questões."
+  ],
+  [
+   "b5",
+   "BIO 24 + BIO 21 · Biotecnologia e DNA",
+   "14 aparições juntas: PCR, transgenia, terapia gênica, meiose."
+  ],
+  [
+   "b6",
+   "BIO 3 · Evolução",
+   "9 aparições: mimetismo e convergência. Seus 100% vêm de 4 questões."
+  ],
+  [
+   "b7",
+   "BIO 23 + BIO 22 · Heredograma e Mendel",
+   "Caiu em 2021, 2022, 2024 e 2025. Probabilidade rápida."
+  ],
+  [
+   "b8",
+   "BIO 17 + BIO 20 · Hormônios, digestão, nervos e músculos",
+   "Contexto de saúde em quase todo ano."
+  ],
+  [
+   "b9",
+   "Manutenção · BIO 4, BIO 8 e BIO 1",
+   "Já dominados (95%, 90% e 92%). Basta revisar de tempos em tempos.",
+   1
+  ]
+ ],
+ "prevIntro": "Espere cerca de 17 questões de Biologia, sendo 4 a 5 de ler gráfico, tabela ou esquema.",
+ "odds": [
+  [
+   3,
+   "Chance alta",
+   "Caíram em 5 ou 6 dos 6 anos.",
+   [
+    [
+     "Impacto ambiental, 2 a 4 questões",
+     "invasoras, eutrofização, poluição térmica, CO₂ e clima"
+    ],
+    [
+     "Ciclos biogeoquímicos e bioacumulação",
+     "ciclo do N, poluente apolar no tecido gorduroso"
+    ],
+    [
+     "Vacinas e imunidade",
+     "antígeno, anticorpo, vacina de RNAm e tradicional"
+    ],
+    [
+     "Parasitoses e arboviroses",
+     "Aedes, leishmaniose, esquistossomose, vetores"
+    ],
+    [
+     "Respiração celular e fotossíntese",
+     "cadeia respiratória, ATP, fermentação"
+    ],
+    [
+     "Biotecnologia",
+     "PCR, transgenia, terapia gênica"
+    ],
+    [
+     "Evolução",
+     "mimetismo, convergência, seleção natural"
+    ]
+   ]
+  ],
+  [
+   2,
+   "Chance média",
+   "Caíram em 3 a 5 dos 6 anos, ou estão subindo.",
+   [
+    [
+     "Microrganismos e biorremediação",
+     "metabolismo aeróbio e anaeróbio, fitorremediação"
+    ],
+    [
+     "Enzimas e vitaminas",
+     "temperatura, desnaturação, carências"
+    ],
+    [
+     "Câncer e fármacos",
+     "quimioterapia, toxinas"
+    ],
+    [
+     "Adaptações de vertebrados",
+     "aves, anfíbios, mamíferos"
+    ],
+    [
+     "Heredograma",
+     "herança recessiva e ligada ao X"
+    ],
+    [
+     "Hormônios e digestão",
+     ""
+    ],
+    [
+     "Sistema nervoso e músculos",
+     "visão, reflexo, fibras musculares"
+    ]
+   ]
+  ],
+  [
+   1,
+   "Chance baixa",
+   "Caíram poucas vezes ou esfriaram desde 2023.",
+   [
+    [
+     "DNA, mitose e meiose",
+     "nada em 2024 e 2025"
+    ],
+    [
+     "Sangue e circulação",
+     ""
+    ],
+    [
+     "Botânica: hormônios vegetais e seiva",
+     ""
+    ],
+    [
+     "Organelas e citoesqueleto",
+     ""
+    ],
+    [
+     "Invertebrados",
+     ""
+    ],
+    [
+     "Reprodução humana",
+     ""
+    ],
+    [
+     "Sucessão ecológica",
+     ""
+    ]
+   ]
+  ],
+  [
+   0,
+   "Muito improvável",
+   "Nenhuma questão direta em 6 anos.",
+   [
+    [
+     "Origem da vida",
+     "Redi, Pasteur, Oparin"
+    ],
+    [
+     "Taxonomia e nomenclatura pura",
+     ""
+    ],
+    [
+     "Classificação decorada dos filos",
+     ""
+    ]
+   ]
+  ]
+ ],
+ "tagName": "dados",
+ "tagShort": "dados",
+ "tagLabel": "Só questões com gráfico, tabela ou esquema",
+ "limits": "<b>Limites desta análise.</b> Usei uma prova por ano, da 1ª aplicação, e a classificação das questões foi feita por mim. Questões interdisciplinares contam no módulo principal e, quando faz sentido, também num segundo módulo. Ficaram de fora as que são mais de Química ou Física mesmo tocando em Biologia. Com só 6 provas, a previsão indica onde vale investir o estudo, não garante o que vai cair.",
+ "years": {
+  "2020": [
+   [
+    91,
+    "Cápsula gastrorresistente e pH do estômago",
+    [
+     17,
+     26
+    ],
+    0
+   ],
+   [
+    97,
+    "Fotoimunoterapia contra tumores",
+    [
+     26,
+     25
+    ],
+    0
+   ],
+   [
+    98,
+    "Aracnídeos: exoesqueleto de quitina",
+    [
+     14
+    ],
+    0
+   ],
+   [
+    100,
+    "Plantas pioneiras na restauração",
+    [
+     2
+    ],
+    0
+   ],
+   [
+    102,
+    "Quimioterápicos: células tumorais × normais",
+    [
+     26
+    ],
+    1
+   ],
+   [
+    104,
+    "CO₂ dissolvido reduz o pH dos oceanos",
+    [
+     4
+    ],
+    0
+   ],
+   [
+    105,
+    "Aves no petróleo: cera das penas",
+    [
+     16,
+     4
+    ],
+    0
+   ],
+   [
+    110,
+    "Soja transgênica contra o HIV",
+    [
+     24
+    ],
+    0
+   ],
+   [
+    114,
+    "Café tetraploide: não disjunção",
+    [
+     21,
+     3
+    ],
+    0
+   ],
+   [
+    115,
+    "OD e DBO ao longo do rio",
+    [
+     4
+    ],
+    1
+   ],
+   [
+    117,
+    "Experimento de Engelmann",
+    [
+     8
+    ],
+    1
+   ],
+   [
+    118,
+    "Densidade dos ovos de parasitas",
+    [
+     15
+    ],
+    1
+   ],
+   [
+    120,
+    "Petróleo no mar e trocas gasosas",
+    [
+     4
+    ],
+    0
+   ],
+   [
+    121,
+    "Sistema ABO e Hardy-Weinberg",
+    [
+     24,
+     23
+    ],
+    0
+   ],
+   [
+    124,
+    "Isolamento geográfico e especiação",
+    [
+     2,
+     3
+    ],
+    1
+   ],
+   [
+    127,
+    "Corredores ecológicos",
+    [
+     4
+    ],
+    0
+   ],
+   [
+    129,
+    "Pré-sal e ciclo do carbono",
+    [
+     1
+    ],
+    0
+   ]
+  ],
+  "2021": [
+   [
+    91,
+    "Deficiência de lipase: herança recessiva",
+    [
+     23
+    ],
+    0
+   ],
+   [
+    95,
+    "Preguiças-gigantes e dispersão de sementes",
+    [
+     13
+    ],
+    0
+   ],
+   [
+    97,
+    "Dupla fecundação e endosperma",
+    [
+     12
+    ],
+    0
+   ],
+   [
+    99,
+    "Eletrocardiograma: batimentos por minuto",
+    [
+     19
+    ],
+    1
+   ],
+   [
+    100,
+    "Ebola × dengue: coevolução",
+    [
+     3,
+     25
+    ],
+    0
+   ],
+   [
+    101,
+    "Tanque séptico: decantação do lodo",
+    [
+     4
+    ],
+    1
+   ],
+   [
+    102,
+    "Estaquia e auxinas",
+    [
+     12
+    ],
+    0
+   ],
+   [
+    110,
+    "Curcumina contra larvas do Aedes",
+    [
+     15
+    ],
+    0
+   ],
+   [
+    114,
+    "Madeira: xilema, cerne e alburno",
+    [
+     13
+    ],
+    1
+   ],
+   [
+    118,
+    "Fermentação e combustíveis ambientais",
+    [
+     8
+    ],
+    0
+   ],
+   [
+    120,
+    "Mariana: bioacumulação em golfinhos",
+    [
+     1,
+     4
+    ],
+    0
+   ],
+   [
+    122,
+    "Coleta seletiva na escola",
+    [
+     4
+    ],
+    0
+   ],
+   [
+    123,
+    "Búfalos: mapeamento genético",
+    [
+     24
+    ],
+    0
+   ],
+   [
+    125,
+    "Reflexo patelar e medula",
+    [
+     20
+    ],
+    0
+   ],
+   [
+    130,
+    "Mutação em códons e proteína menor",
+    [
+     21
+    ],
+    1
+   ],
+   [
+    132,
+    "Forame oval e circulação fetal",
+    [
+     16,
+     19
+    ],
+    0
+   ],
+   [
+    135,
+    "Polvo mimético e seleção natural",
+    [
+     3
+    ],
+    0
+   ]
+  ],
+  "2022": [
+   [
+    91,
+    "T. cruzi e antígeno tumoral",
+    [
+     25,
+     26
+    ],
+    0
+   ],
+   [
+    95,
+    "Wolbachia: vírus × bactéria",
+    [
+     15,
+     3
+    ],
+    0
+   ],
+   [
+    97,
+    "Termogenina e fosforilação oxidativa",
+    [
+     8
+    ],
+    0
+   ],
+   [
+    99,
+    "Ciclo do nitrogênio em solo ácido",
+    [
+     1
+    ],
+    1
+   ],
+   [
+    100,
+    "Cones e bastonetes",
+    [
+     20
+    ],
+    0
+   ],
+   [
+    101,
+    "Veneno de cascavel e coagulação",
+    [
+     19
+    ],
+    0
+   ],
+   [
+    104,
+    "Inativação do X em heterozigotas",
+    [
+     23,
+     21
+    ],
+    1
+   ],
+   [
+    106,
+    "Catalase e temperatura",
+    [
+     5
+    ],
+    1
+   ],
+   [
+    107,
+    "Antimicrobiano só contra fungos",
+    [
+     10,
+     7
+    ],
+    1
+   ],
+   [
+    110,
+    "Atrazina e testosterona",
+    [
+     17
+    ],
+    1
+   ],
+   [
+    113,
+    "Osmose na trapoeraba-roxa",
+    [
+     6
+    ],
+    0
+   ],
+   [
+    116,
+    "Estratégias reprodutivas de anuros",
+    [
+     3,
+     16
+    ],
+    0
+   ],
+   [
+    120,
+    "EPO e doping sanguíneo",
+    [
+     19
+    ],
+    0
+   ],
+   [
+    124,
+    "Jaqueira invasora",
+    [
+     4
+    ],
+    0
+   ],
+   [
+    127,
+    "PCR do SARS-CoV-2: transcrição reversa",
+    [
+     24,
+     25
+    ],
+    0
+   ],
+   [
+    130,
+    "Terapia gênica para distrofia da retina",
+    [
+     24
+    ],
+    0
+   ],
+   [
+    133,
+    "Filariose e leishmaniose: vetores",
+    [
+     15
+    ],
+    0
+   ]
+  ],
+  "2023": [
+   [
+    99,
+    "Vacina de RNAm",
+    [
+     25,
+     21
+    ],
+    0
+   ],
+   [
+    100,
+    "Fertilização in vitro: acrossomo",
+    [
+     18
+    ],
+    0
+   ],
+   [
+    103,
+    "Etileno amadurece abacates",
+    [
+     13
+    ],
+    0
+   ],
+   [
+    104,
+    "Lesmas-do-mar com cloroplastos",
+    [
+     8
+    ],
+    0
+   ],
+   [
+    105,
+    "Leishmaniose: sangue do cão",
+    [
+     15
+    ],
+    0
+   ],
+   [
+    107,
+    "TPM e regressão do corpo lúteo",
+    [
+     18,
+     17
+    ],
+    0
+   ],
+   [
+    109,
+    "Tubo polínico e conquista da terra",
+    [
+     12,
+     11
+    ],
+    0
+   ],
+   [
+    111,
+    "Anelamento do floema (barbatimão)",
+    [
+     13
+    ],
+    0
+   ],
+   [
+    113,
+    "Micronúcleos e cromossomos",
+    [
+     21
+    ],
+    0
+   ],
+   [
+    116,
+    "Aldrin acumulado no leite",
+    [
+     1
+    ],
+    0
+   ],
+   [
+    120,
+    "Pais com Down: zigotos possíveis",
+    [
+     21,
+     23
+    ],
+    0
+   ],
+   [
+    122,
+    "Cianeto e cadeia respiratória",
+    [
+     8
+    ],
+    1
+   ],
+   [
+    123,
+    "Bombas de sementes e abelhas",
+    [
+     4
+    ],
+    0
+   ],
+   [
+    124,
+    "Ferro e anemia",
+    [
+     19
+    ],
+    0
+   ],
+   [
+    127,
+    "Músculos vermelhos de aves migratórias",
+    [
+     20
+    ],
+    0
+   ],
+   [
+    131,
+    "Aguapé na biorremediação",
+    [
+     10
+    ],
+    0
+   ],
+   [
+    132,
+    "Decompositores no ciclo do N",
+    [
+     1,
+     10
+    ],
+    1
+   ]
+  ],
+  "2024": [
+   [
+    95,
+    "RT-PCR detecta genes expressos",
+    [
+     24
+    ],
+    0
+   ],
+   [
+    98,
+    "Cladograma: vitelo × lactação",
+    [
+     16,
+     11
+    ],
+    1
+   ],
+   [
+    102,
+    "Milho: desnaturação enzimática",
+    [
+     5
+    ],
+    0
+   ],
+   [
+    104,
+    "Urbanização e arboviroses",
+    [
+     15
+    ],
+    1
+   ],
+   [
+    105,
+    "Microplástico no tecido adiposo",
+    [
+     1
+    ],
+    0
+   ],
+   [
+    107,
+    "Nitrosaminas formadas no estômago",
+    [
+     17,
+     26
+    ],
+    0
+   ],
+   [
+    108,
+    "Agroflorestas e sucessão ecológica",
+    [
+     2
+    ],
+    0
+   ],
+   [
+    109,
+    "Fibras brancas × vermelhas",
+    [
+     20
+    ],
+    0
+   ],
+   [
+    110,
+    "Coral-verdadeira × falsa-coral",
+    [
+     3
+    ],
+    0
+   ],
+   [
+    111,
+    "Muda dos crustáceos",
+    [
+     14
+    ],
+    0
+   ],
+   [
+    112,
+    "Heredograma do daltonismo",
+    [
+     23
+    ],
+    1
+   ],
+   [
+    113,
+    "Procariontes nos ciclos do N e do C",
+    [
+     1,
+     10
+    ],
+    1
+   ],
+   [
+    115,
+    "Citocalasina e microfilamentos",
+    [
+     7
+    ],
+    1
+   ],
+   [
+    117,
+    "Pererecas do Caribe em São Paulo",
+    [
+     16,
+     4
+    ],
+    0
+   ],
+   [
+    120,
+    "HTLV-1 e câncer",
+    [
+     25,
+     26
+    ],
+    0
+   ],
+   [
+    124,
+    "Bactérias aeróbias e anaeróbias em tubos",
+    [
+     8,
+     10
+    ],
+    1
+   ],
+   [
+    126,
+    "Proteína spike nas vacinas",
+    [
+     25
+    ],
+    0
+   ],
+   [
+    134,
+    "Fitorremediação de mercúrio",
+    [
+     10,
+     4
+    ],
+    1
+   ]
+  ],
+  "2025": [
+   [
+    91,
+    "Monstro-de-gila: lagarto na Caatinga",
+    [
+     3,
+     17
+    ],
+    0
+   ],
+   [
+    93,
+    "Ação que retira CO₂ da atmosfera",
+    [
+     4
+    ],
+    0
+   ],
+   [
+    94,
+    "Baiacu e tetrodotoxina",
+    [
+     26
+    ],
+    0
+   ],
+   [
+    95,
+    "Lipase ácida e lisossomos",
+    [
+     7
+    ],
+    0
+   ],
+   [
+    97,
+    "Vacina tradicional e anticorpos",
+    [
+     25
+    ],
+    1
+   ],
+   [
+    98,
+    "Sapinhos tóxicos só na natureza",
+    [
+     1
+    ],
+    0
+   ],
+   [
+    100,
+    "Capim-gordura no Cerrado",
+    [
+     4
+    ],
+    0
+   ],
+   [
+    101,
+    "Proporção fenotípica em F2",
+    [
+     22
+    ],
+    1
+   ],
+   [
+    105,
+    "Biodigestão evita eutrofização",
+    [
+     4
+    ],
+    1
+   ],
+   [
+    106,
+    "Arroz dourado e vitamina A",
+    [
+     5,
+     24
+    ],
+    0
+   ],
+   [
+    107,
+    "Poluição térmica e oxigênio",
+    [
+     4
+    ],
+    0
+   ],
+   [
+    115,
+    "Fotossíntese anoxigênica com H₂S",
+    [
+     8
+    ],
+    0
+   ],
+   [
+    122,
+    "Cangas: espécies endêmicas",
+    [
+     3,
+     4
+    ],
+    0
+   ],
+   [
+    130,
+    "Relógio circadiano em E. coli",
+    [
+     24
+    ],
+    0
+   ],
+   [
+    131,
+    "Glândula uropigial das aves",
+    [
+     16
+    ],
+    0
+   ],
+   [
+    133,
+    "Enzima e energia de ativação",
+    [
+     5
+    ],
+    1
+   ],
+   [
+    135,
+    "Ácido úsnico contra moluscos",
+    [
+     15,
+     14
+    ],
+    1
+   ]
+  ]
+ },
+ "cad": {
+  "2020": "Caderno 5 · Amarelo",
+  "2021": "Caderno 5 · Amarelo",
+  "2022": "Caderno 6 · Cinza",
+  "2023": "Caderno 5 · Amarelo",
+  "2024": "Caderno 7 · Azul",
+  "2025": "Caderno 6 · Cinza"
+ }
+}

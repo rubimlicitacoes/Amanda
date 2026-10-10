@@ -1,0 +1,14 @@
+{
+  "name": "Reinos — ENEM 2026",
+  "short_name": "Reinos",
+  "description": "Plataforma de estudos gamificada para o ENEM 2026",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#F6F7FB",
+  "theme_color": "#141A2E",
+  "lang": "pt-BR",
+  "icons": [
+    { "src": "icone.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

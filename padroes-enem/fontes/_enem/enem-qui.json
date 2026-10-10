@@ -1,0 +1,1053 @@
+{
+ "prefix": "QUI",
+ "mods": {
+  "1": "Modelos Atômicos",
+  "2": "Camadas Eletrônicas",
+  "3": "Tabela Periódica",
+  "4": "Ligações Químicas",
+  "5": "Forças Intermoleculares",
+  "6": "Sistemas e Misturas",
+  "7": "Fórmulas Químicas",
+  "8": "Reações/Cinética",
+  "9": "Ácido e Base",
+  "10": "Reações com Ácido",
+  "11": "Sais e Óxidos",
+  "12": "Estequiometria",
+  "13": "Termoquímica",
+  "14": "Equilíbrio Químico",
+  "15": "Oxirredução",
+  "16": "Pilha",
+  "17": "Funções Orgânicas",
+  "18": "Cadeias Orgânicas",
+  "19": "Isomeria",
+  "20": "Reações Orgânicas",
+  "21": "Ciclos da Matéria",
+  "22": "Derivados do Petróleo",
+  "23": "Descarte/Ambiental",
+  "24": "Reações Nucleares"
+ },
+ "rank": [
+  [
+   1,
+   12,
+   2,
+   "O que mais cai, todo ano. Incluir gases ideais.",
+   0
+  ],
+  [
+   2,
+   9,
+   5,
+   "Cai todo ano e é a base das questões de reação.",
+   0
+  ],
+  [
+   3,
+   23,
+   11,
+   "Cai todo ano e está crescendo.",
+   1
+  ],
+  [
+   4,
+   6,
+   1,
+   "Continua todo ano, mas com menos questões.",
+   0
+  ],
+  [
+   5,
+   17,
+   12,
+   "Subindo, puxada pelos fármacos.",
+   0
+  ],
+  [
+   6,
+   5,
+   7,
+   "O que mais cresceu; teve 3 questões em 2025.",
+   0
+  ],
+  [
+   7,
+   15,
+   8,
+   "8 no total, somando corrosão e redox.",
+   0
+  ],
+  [
+   8,
+   14,
+   21,
+   "Caiu em 5 de 6 anos e estava quase no fim.",
+   1
+  ],
+  [
+   9,
+   24,
+   9,
+   "Caiu em 5 de 6 anos; meia-vida é cálculo rápido.",
+   0
+  ],
+  [
+   10,
+   16,
+   6,
+   "Aparece em ondas (2021, 2024, 2025).",
+   0
+  ],
+  [
+   11,
+   20,
+   10,
+   "Subindo: oxidação, saponificação, descarboxilação.",
+   0
+  ],
+  [
+   12,
+   8,
+   4,
+   "Foi forte em 2020–2022 e caiu depois.",
+   0
+  ],
+  [
+   13,
+   11,
+   13,
+   "Precipitação e dureza da água em alta.",
+   0
+  ],
+  [
+   14,
+   10,
+   19,
+   "Estudar junto com QUI 9.",
+   0
+  ],
+  [
+   15,
+   18,
+   3,
+   "Zero questões em 2024 e 2025.",
+   1
+  ],
+  [
+   16,
+   22,
+   16,
+   "Emissões de motor e combustíveis.",
+   0
+  ],
+  [
+   17,
+   21,
+   14,
+   "Costuma ser cobrado mais como Biologia.",
+   0
+  ],
+  [
+   18,
+   4,
+   18,
+   "Voltou em 2023 e é base para entender polaridade.",
+   0
+  ],
+  [
+   19,
+   19,
+   20,
+   "Óptica (2023) e geométrica (2021).",
+   0
+  ],
+  [
+   20,
+   7,
+   24,
+   "Caiu em 2025 e é base para montar produtos.",
+   0
+  ],
+  [
+   21,
+   2,
+   15,
+   "Só fosforescência (2024).",
+   0
+  ],
+  [
+   22,
+   3,
+   17,
+   "Só eletronegatividade (2023).",
+   0
+  ],
+  [
+   23,
+   13,
+   22,
+   "Só o ΔH dentro de equilíbrio.",
+   0
+  ],
+  [
+   24,
+   1,
+   23,
+   "Nenhuma questão em 6 anos.",
+   0
+  ]
+ ],
+ "steps": [
+  [
+   "s1",
+   "QUI 9 + QUI 10 · Ácido-base e reações com ácido",
+   "15 questões em 6 anos. É a sua dificuldade, e você está com 76% em QUI 10."
+  ],
+  [
+   "s2",
+   "QUI 14 · Equilíbrio Químico",
+   "Cai quase todo ano e você nunca mediu seu acerto."
+  ],
+  [
+   "s3",
+   "QUI 5 · Polaridade",
+   "A tendência de alta mais forte. Você está com 79%."
+  ],
+  [
+   "s4",
+   "QUI 17 + QUI 20 · Funções e reações orgânicas",
+   "Reconhecer o grupo funcional e saber o produto."
+  ],
+  [
+   "s5",
+   "QUI 15 + QUI 16 · Eletroquímica",
+   "14 questões juntas. Seus 100% vêm de só 1 e 4 questões."
+  ],
+  [
+   "s6",
+   "QUI 23 · Ambiental",
+   "Cai todo ano. Seus 100% vêm de só 4 questões."
+  ],
+  [
+   "s7",
+   "QUI 7 · Fórmulas Químicas (1 a 2 horas)",
+   "Base para montar produtos. Nunca vista."
+  ],
+  [
+   "s8",
+   "Gases ideais (PV = nRT)",
+   "Novo dentro de Estequiometria e fora da sua lista de módulos."
+  ],
+  [
+   "s9",
+   "Manutenção · QUI 12, QUI 6 e QUI 24",
+   "Já dominados ou com bom acerto. Basta revisar de tempos em tempos.",
+   true
+  ]
+ ],
+ "years": {
+  "2020": [
+   [
+    93,
+    "Nanocatalisador e superfície de contato",
+    [
+     8
+    ],
+    0
+   ],
+   [
+    95,
+    "Sal de cobalto azul/rosa (Le Chatelier)",
+    [
+     14
+    ],
+    0
+   ],
+   [
+    99,
+    "Bomba atômica: fissão do urânio",
+    [
+     24
+    ],
+    0
+   ],
+   [
+    103,
+    "Extração de óleo com hexano",
+    [
+     5
+    ],
+    0
+   ],
+   [
+    104,
+    "CO₂ dissolvido reduz o pH da água",
+    [
+     10
+    ],
+    0
+   ],
+   [
+    107,
+    "Óleo de rosas: cadeia e hidroxila",
+    [
+     18,
+     17
+    ],
+    0
+   ],
+   [
+    111,
+    "Fogos de artifício e poluentes",
+    [
+     23
+    ],
+    0
+   ],
+   [
+    113,
+    "Densidade de moedas de cobre",
+    [
+     6
+    ],
+    0
+   ],
+   [
+    116,
+    "CO₂: carro a etanol × elétrico",
+    [
+     12
+    ],
+    0
+   ],
+   [
+    118,
+    "Densidade de ovos de parasitas",
+    [
+     6
+    ],
+    0
+   ],
+   [
+    119,
+    "Acetato de etila + água: decantação",
+    [
+     6
+    ],
+    0
+   ],
+   [
+    120,
+    "Petróleo: hidrofóbico e pouco denso",
+    [
+     5,
+     22
+    ],
+    0
+   ],
+   [
+    123,
+    "PVC aquecido libera HCl",
+    [
+     18,
+     9
+    ],
+    1
+   ],
+   [
+    126,
+    "Polímeros biodegradáveis",
+    [
+     23
+    ],
+    0
+   ],
+   [
+    128,
+    "Hidrólise da sacarose e meia-vida",
+    [
+     8,
+     12
+    ],
+    0
+   ],
+   [
+    129,
+    "Pré-sal e ciclo do carbono",
+    [
+     21
+    ],
+    0
+   ],
+   [
+    132,
+    "Química verde",
+    [
+     8
+    ],
+    0
+   ]
+  ],
+  "2021": [
+   [
+    92,
+    "Bateria lítio-iodo em série",
+    [
+     16
+    ],
+    0
+   ],
+   [
+    94,
+    "Polímero condutor",
+    [
+     18
+    ],
+    0
+   ],
+   [
+    98,
+    "Éster derivado do ácido etanoico",
+    [
+     17
+    ],
+    0
+   ],
+   [
+    101,
+    "Tanque séptico: decantação",
+    [
+     6
+    ],
+    0
+   ],
+   [
+    103,
+    "Bilirrubina: isomeria geométrica",
+    [
+     19
+    ],
+    0
+   ],
+   [
+    106,
+    "Células a combustível",
+    [
+     16
+    ],
+    0
+   ],
+   [
+    108,
+    "Pesticida que reage com NaOH (fenol)",
+    [
+     9,
+     17
+    ],
+    1
+   ],
+   [
+    109,
+    "Dejetos suínos: biogás",
+    [
+     20,
+     23
+    ],
+    0
+   ],
+   [
+    113,
+    "Fermentação e rendimento",
+    [
+     12
+    ],
+    0
+   ],
+   [
+    119,
+    "AAS: titulação com NaOH",
+    [
+     9
+    ],
+    1
+   ],
+   [
+    124,
+    "Ciclo do cobre: etapa de redução",
+    [
+     15
+    ],
+    1
+   ],
+   [
+    127,
+    "Pilhas Cu/Zn em série",
+    [
+     16
+    ],
+    0
+   ],
+   [
+    129,
+    "Meia-vida de pesticida",
+    [
+     24
+    ],
+    0
+   ],
+   [
+    131,
+    "Sabão a partir de óleo",
+    [
+     20
+    ],
+    1
+   ],
+   [
+    133,
+    "Hidroponia: correção de pH",
+    [
+     9,
+     11
+    ],
+    1
+   ]
+  ],
+  "2022": [
+   [
+    94,
+    "Aromáticos: anel benzênico",
+    [
+     18
+    ],
+    0
+   ],
+   [
+    96,
+    "Estação de tratamento: decantação",
+    [
+     23,
+     6
+    ],
+    0
+   ],
+   [
+    99,
+    "Ciclo do nitrogênio em solo ácido",
+    [
+     21,
+     14
+    ],
+    0
+   ],
+   [
+    103,
+    "Ozônio como oxidante",
+    [
+     15
+    ],
+    0
+   ],
+   [
+    106,
+    "Catalase e temperatura",
+    [
+     8
+    ],
+    0
+   ],
+   [
+    109,
+    "Mármore + HCl",
+    [
+     10
+    ],
+    1
+   ],
+   [
+    112,
+    "Corrosão: efeito barreira",
+    [
+     15
+    ],
+    0
+   ],
+   [
+    115,
+    "Meia-vida do iodo-131",
+    [
+     24
+    ],
+    0
+   ],
+   [
+    118,
+    "H⁺ como catalisador",
+    [
+     8
+    ],
+    0
+   ],
+   [
+    119,
+    "Titulação do ácido tartárico",
+    [
+     12,
+     9
+    ],
+    1
+   ],
+   [
+    122,
+    "Penicilamina: forma ionizada (pKa)",
+    [
+     9
+    ],
+    1
+   ],
+   [
+    126,
+    "Deterioração da sacarose",
+    [
+     12
+    ],
+    0
+   ],
+   [
+    129,
+    "Centrifugação de UF₆",
+    [
+     6
+    ],
+    0
+   ],
+   [
+    132,
+    "Persulfato degrada TCE",
+    [
+     15
+    ],
+    0
+   ],
+   [
+    135,
+    "Incompatibilidade de substâncias",
+    [
+     10,
+     15
+    ],
+    1
+   ]
+  ],
+  "2023": [
+   [
+    94,
+    "Eletronegatividade e caráter iônico",
+    [
+     3,
+     4
+    ],
+    0
+   ],
+   [
+    96,
+    "Aerossol: PV = nRT",
+    [
+     12
+    ],
+    0
+   ],
+   [
+    97,
+    "Gasolina: cadeia ramificada",
+    [
+     18,
+     17,
+     22
+    ],
+    0
+   ],
+   [
+    108,
+    "Hexan-3-ol → hexan-3-ona",
+    [
+     20
+    ],
+    1
+   ],
+   [
+    110,
+    "Alumínio no vidro: equilíbrio",
+    [
+     14
+    ],
+    0
+   ],
+   [
+    112,
+    "Tensoativo biodegradável",
+    [
+     5,
+     23
+    ],
+    0
+   ],
+   [
+    116,
+    "Aldrin apolar acumula no leite",
+    [
+     5
+    ],
+    0
+   ],
+   [
+    118,
+    "Densidade do refrigerante",
+    [
+     6
+    ],
+    0
+   ],
+   [
+    121,
+    "Amina → cloridrato",
+    [
+     9,
+     4
+    ],
+    1
+   ],
+   [
+    123,
+    "Dureza da água",
+    [
+     11,
+     23
+    ],
+    0
+   ],
+   [
+    125,
+    "Energia nuclear",
+    [
+     24
+    ],
+    0
+   ],
+   [
+    128,
+    "CaCl₂ hidratado: ganho de massa",
+    [
+     12
+    ],
+    0
+   ],
+   [
+    129,
+    "Precipitação de Hg₂Cl₂",
+    [
+     12,
+     11
+    ],
+    1
+   ],
+   [
+    134,
+    "Isomeria óptica em analgésicos",
+    [
+     19
+    ],
+    0
+   ]
+  ],
+  "2024": [
+   [
+    92,
+    "Célula microbiana: reação global",
+    [
+     16,
+     15
+    ],
+    1
+   ],
+   [
+    93,
+    "Conceito de composto orgânico",
+    [
+     17
+    ],
+    0
+   ],
+   [
+    94,
+    "Nimesulida + base de Brönsted",
+    [
+     9,
+     17
+    ],
+    1
+   ],
+   [
+    97,
+    "Soro caseiro: concentração",
+    [
+     12
+    ],
+    0
+   ],
+   [
+    107,
+    "Nitrito + HCl no estômago",
+    [
+     10,
+     9
+    ],
+    1
+   ],
+   [
+    113,
+    "Ciclos do N e do C: redox",
+    [
+     15,
+     21
+    ],
+    0
+   ],
+   [
+    114,
+    "Emissões do motor",
+    [
+     22
+    ],
+    0
+   ],
+   [
+    116,
+    "Separar Mg(OH)₂: filtração",
+    [
+     6
+    ],
+    0
+   ],
+   [
+    118,
+    "Hidroxiapatita: equilíbrio e pH",
+    [
+     14,
+     9
+    ],
+    0
+   ],
+   [
+    123,
+    "Função orgânica comum",
+    [
+     17
+    ],
+    0
+   ],
+   [
+    125,
+    "Fosforescência",
+    [
+     2
+    ],
+    0
+   ],
+   [
+    128,
+    "Grafeno e água da chuva",
+    [
+     16
+    ],
+    0
+   ],
+   [
+    133,
+    "Biogás × etanol",
+    [
+     12
+    ],
+    0
+   ],
+   [
+    135,
+    "Reciclagem de alumínio",
+    [
+     12,
+     23
+    ],
+    0
+   ]
+  ],
+  "2025": [
+   [
+    92,
+    "Água destilada",
+    [
+     6
+    ],
+    0
+   ],
+   [
+    103,
+    "Ácido anacárdico → cardanol",
+    [
+     20
+    ],
+    1
+   ],
+   [
+    104,
+    "Meia-vida do cobalto-60",
+    [
+     24
+    ],
+    0
+   ],
+   [
+    105,
+    "Biodigestão e eutrofização",
+    [
+     23
+    ],
+    0
+   ],
+   [
+    107,
+    "Poluição térmica e O₂ dissolvido",
+    [
+     5,
+     23
+    ],
+    0
+   ],
+   [
+    108,
+    "Fórmulas antigas (azoto)",
+    [
+     7,
+     11
+    ],
+    0
+   ],
+   [
+    111,
+    "Borneol → cânfora",
+    [
+     20,
+     17
+    ],
+    1
+   ],
+   [
+    113,
+    "Dimetilamina + vinagre",
+    [
+     9
+    ],
+    1
+   ],
+   [
+    117,
+    "Nióbio com excesso de alumínio",
+    [
+     12
+    ],
+    0
+   ],
+   [
+    119,
+    "Prata escurecida: potenciais",
+    [
+     16,
+     15
+    ],
+    1
+   ],
+   [
+    120,
+    "Fermento químico: PV = nRT",
+    [
+     12
+    ],
+    0
+   ],
+   [
+    123,
+    "Cloração do TiO₂: equilíbrio",
+    [
+     14,
+     13
+    ],
+    0
+   ],
+   [
+    127,
+    "Filtro óleo-água",
+    [
+     5
+    ],
+    0
+   ],
+   [
+    128,
+    "Solubilidade de hormônios",
+    [
+     5
+    ],
+    0
+   ],
+   [
+    129,
+    "Carvão ativado",
+    [
+     23
+    ],
+    0
+   ],
+   [
+    133,
+    "Enzima e energia de ativação",
+    [
+     8
+    ],
+    0
+   ]
+  ]
+ },
+ "cad": {
+  "2020": "Caderno 5 · Amarelo",
+  "2021": "Caderno 5 · Amarelo",
+  "2022": "Caderno 6 · Cinza",
+  "2023": "Caderno 5 · Amarelo",
+  "2024": "Caderno 7 · Azul",
+  "2025": "Caderno 6 · Cinza"
+ },
+ "tagName": "reação",
+ "freqTrend": {
+  "1": "flat",
+  "2": "new",
+  "3": "new",
+  "4": "new",
+  "5": "up2",
+  "6": "down",
+  "7": "new",
+  "8": "down",
+  "9": "flat",
+  "10": "down",
+  "11": "up",
+  "12": "up",
+  "13": "flat",
+  "14": "flat",
+  "15": "down",
+  "16": "flat",
+  "17": "up",
+  "18": "down2",
+  "19": "flat",
+  "20": "up",
+  "21": "flat",
+  "22": "flat",
+  "23": "up",
+  "24": "flat"
+ }
+}
