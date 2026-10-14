@@ -5661,6 +5661,8 @@ const escHtml = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").re
 function mdInline(s) {
   let t = escHtml(s);
   t = t.replace(/&lt;(\/?)(sub|sup|br)\s*\/?&gt;/g, "<$1$2>");
+  // fórmulas convertidas do LaTeX dos chats: <fb> bloco, <fr><nu>…</nu><de>…</de></fr> fração, <vc> vetor
+  t = t.replace(/&lt;(fb|fr|nu|de|vc)&gt;/g, (_, k) => `<span class="pe-${k}">`).replace(/&lt;\/(fb|fr|nu|de|vc)&gt;/g, "</span>");
   t = t.replace(/`([^`]+)`/g, "<code>$1</code>");
   t = t.replace(/\*\*([^*]+?)\*\*/g, "<strong>$1</strong>");
   t = t.replace(/(^|[^*\w])\*([^*\s][^*]*?)\*(?![\w*])/g, "$1<em>$2</em>");
@@ -5764,6 +5766,14 @@ const PadroesCSS = () => (
 .pe-md th, .pe-md td { border: 1px solid ${T.line}; padding: 6px 9px; text-align: left; vertical-align: top; }
 .pe-md th { background: ${T.paper}; font-weight: 600; color: ${T.ink}; }
 .pe-enun.pe-md { font-size: 15.5px; color: ${T.ink}; line-height: 1.6; }
+.pe-md .pe-fb { display: block; text-align: center; margin: 10px 0; padding: 10px 12px; background: ${T.paper}; border-radius: 10px;
+  font-family: 'Cambria Math', 'STIX Two Math', 'Times New Roman', serif; font-size: 1.12em; color: ${T.ink}; line-height: 2.1; }
+.pe-md .pe-fr { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; margin: 0 3px; line-height: 1.25; }
+.pe-md .pe-nu { border-bottom: 1.2px solid currentColor; padding: 0 4px 1px; }
+.pe-md .pe-de { padding: 1px 4px 0; }
+.pe-md .pe-fr, .pe-md .pe-vc { white-space: nowrap; }
+.pe-md .pe-vc { position: relative; display: inline-block; }
+.pe-md .pe-vc::before { content: "→"; position: absolute; left: 50%; top: -0.62em; transform: translateX(-50%); font-size: .72em; line-height: 1; }
 .pe-alt { display: flex; align-items: stretch; border: 1px solid ${T.line}; border-radius: 8px; background: ${T.surface}; transition: border-color .15s ease, background .15s ease; }
 .pe-alt:hover { border-color: ${T.ink30}; }
 .pe-alt-txt { flex: 1; min-width: 0; display: flex; gap: 8px; text-align: left; background: none; border: none; padding: 12px 14px; font-size: 15px; color: ${T.ink}; line-height: 1.5; }
@@ -5834,15 +5844,11 @@ function tendencia(v) {
   if (d <= -2) return { t: "▼ caindo", cor: T.amber };
   return { t: "● estável", cor: T.ink50 };
 }
-/* "4, 7, 20" vira "Q4, Q7, Q20"; referências com prefixo (A10, Est 2, L1: 6) ficam como estão. */
-function refsOficiais(refs) {
-  const r = String(refs || "").replace(/\*\*/g, "").trim();
-  if (/^[\d\s,e()=]+$/.test(r)) return r.replace(/(\d+)/g, "Q$1");
-  return r;
-}
+/* Texto sem marcação, para títulos e campos de formulário */
+const textoPuro = (s) => String(s || "").replace(/<\/nu><de>/g, "/").replace(/<\/?(fb|fr|nu|de|vc|sub|sup)>/g, "").replace(/\*\*/g, "");
 function origemDaQuestao(q, mapa) {
   if (q.origem) return q.origem;
-  const partes = q.padroes.map((c) => mapa[c]).filter(Boolean).map((p) => refsOficiais(p.refs)).filter(Boolean);
+  const partes = q.padroes.map((c) => mapa[c]).filter(Boolean).map((p) => p.oficial).filter(Boolean);
   if (!partes.length) return q.titulo === "Simulado misto" ? "Simulado misto · padrão não identificado" : "Questão ensinada";
   return "Lista oficial · " + [...new Set(partes)].join(" · ");
 }
@@ -5865,6 +5871,24 @@ function TelaPadroes({ ctx }) {
     carregarPadroes().then((d) => vivo && setDados(d)).catch((e) => vivo && setErro(e.message || String(e)));
     return () => { vivo = false; };
   }, [tentativa]);
+
+  /* Listas repetidas saíram do banco (aliases: id antigo → questão igual que ficou).
+     O que foi respondido nelas passa para a questão que ficou, uma vez só. */
+  useEffect(() => {
+    if (!dados) return;
+    const alias = Object.assign({}, ...dados.topicos.map((t) => t.aliases || {}));
+    if (!Object.keys(ctx.estado.padroesEnem || {}).some((k) => alias[k])) return;
+    ctx.aplicar((e) => {
+      const r = { ...(e.padroesEnem || {}) };
+      Object.entries(alias).forEach(([de, para]) => {
+        if (r[de] == null) return;
+        const velho = lerRegistro(r[de]), atual = lerRegistro(r[para]);
+        if (velho && (!atual || (velho.r && !atual.r))) r[para] = r[de];
+        delete r[de];
+      });
+      return { ...e, padroesEnem: r };
+    });
+  }, [dados]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const setVista = useCallback((v) => {
     setVistaBruta(v);
@@ -6114,7 +6138,7 @@ function PadroesTopico({ dados, t, ctx, setVista }) {
               <ChevronRight className="pe-seta" size={14} /> Faltam {faltam.length} padrões
             </summary>
             <div className="flex flex-wrap gap-1.5 mt-2">
-              {faltam.map((pd) => <span key={pd.cod} className="mono" title={pd.nome.replace(/\*\*/g, "")} style={{ fontSize: 11, padding: "3px 8px", borderRadius: 7, background: T.lineSoft, color: T.ink70 }}>{pd.cod}</span>)}
+              {faltam.map((pd) => <span key={pd.cod} className="mono" title={textoPuro(pd.nome)} style={{ fontSize: 11, padding: "3px 8px", borderRadius: 7, background: T.lineSoft, color: T.ink70 }}>{pd.cod}</span>)}
             </div>
           </details>
         )}
@@ -6207,6 +6231,12 @@ function PadroesTopico({ dados, t, ctx, setVista }) {
 
       <Secao aberta={false} titulo={`Mapa de padrões (${t.padroes.length})`} sub="O padrão, a lógica de resolução e as questões da lista oficial em que ele aparece. Toque num padrão para ir à questão ensinada.">
         <div style={{ display: "grid", gap: 16 }}>
+          {Object.keys(t.siglas || {}).length > 0 && (
+            <div style={{ fontSize: 12.5, color: T.ink70, background: T.paper, borderRadius: 10, padding: "9px 12px", lineHeight: 1.6 }}>
+              <b>Listas oficiais deste chat:</b>{" "}
+              {Object.entries(t.siglas).map(([sg, nome]) => `${sg} = ${nome}`).join(" · ")}
+            </div>
+          )}
           {blocos.map((b) => (
             <div key={b.chave}>
               <Eyebrow>{b.chave}</Eyebrow>
@@ -6220,7 +6250,7 @@ function PadroesTopico({ dados, t, ctx, setVista }) {
                       <span style={{ minWidth: 0 }}>
                         <span style={{ fontWeight: 650, fontSize: 13.5, color: T.ink }}><Md inline src={pd.nome} /></span>
                         {pd.logica && <span style={{ display: "block", fontSize: 12.5, color: T.ink50, marginTop: 3, lineHeight: 1.5 }}><Md inline src={pd.logica} /></span>}
-                        <span className="mono" style={{ display: "block", fontSize: 11, color: T.ink30, marginTop: 4 }}>Lista oficial: {refsOficiais(pd.refs)} · {st.txt}</span>
+                        <span className="mono" style={{ display: "block", fontSize: 11, color: T.ink30, marginTop: 4 }}>Lista oficial: {pd.oficial} · {st.txt}</span>
                       </span>
                     </button>
                   );
@@ -6461,7 +6491,7 @@ function CartaoQuestao({ q, t, mapa, reg, ctx, cor, gabAberto, onResponder, onVe
   const chips = padroesQ.length > 0 && (
     <div className="flex flex-wrap gap-1.5 mb-3">
       {padroesQ.map((pd) => (
-        <span key={pd.cod} title={pd.logica} style={{ fontSize: 11.5, color: cor, background: softMateria(t.materia), borderRadius: 99, padding: "3px 9px", fontWeight: 600 }}>
+        <span key={pd.cod} title={textoPuro(pd.logica)} style={{ fontSize: 11.5, color: cor, background: softMateria(t.materia), borderRadius: 99, padding: "3px 9px", fontWeight: 600 }}>
           <span className="mono">{pd.cod}</span> · <Md inline src={pd.nome} />
         </span>
       ))}
@@ -6580,9 +6610,9 @@ function ModalErroPadrao({ aberto, onClose, q, t, padroesQ, ctx }) {
     setF({
       blocoId: blocos[0] || "",
       tipo: TIPOS_ERRO[0],
-      gatilho: pd ? `${pd.cod} · ${pd.nome.replace(/\*\*/g, "")}` : "",
+      gatilho: pd ? `${pd.cod} · ${textoPuro(pd.nome)}` : "",
       motivo: "",
-      evitar: pd && pd.logica ? pd.logica.replace(/\*\*/g, "") : "",
+      evitar: pd && pd.logica ? textoPuro(pd.logica) : "",
     });
   }, [aberto]); // eslint-disable-line react-hooks/exhaustive-deps
   if (!aberto || !f) return null;

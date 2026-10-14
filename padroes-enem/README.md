@@ -5,10 +5,10 @@ Banco de questões da aba **Padrões do ENEM** do app Reinos. Ele reúne os chat
 ## Pastas
 
 - `fontes/<tópico>/`: mapas e listas em markdown, como saíram de cada chat (das branches do repositório ou do histórico da conversa).
-- `fontes/fis-15/06-write-conteudo.py`: listas extras A e B de Cinemática.
+- `fontes/fis-15/06-write-conteudo.py`: listas A e B de Cinemática (versão em PDF). Elas repetem as Listas 3 a 5, então o gerador as reconhece como repetidas e não as põe no banco.
 - `fontes/_enem/`: dados dos artifacts Mapa de Física, Mapa de Química, Mapa de Biologia e Plano de Padrões CN.
 - `scripts/build_data.py`: gera `app/dist/padroes-enem.js`, o arquivo que o app baixa quando a aba abre.
-- `relatorio.txt`: contagem por tópico e avisos de conferência da última geração.
+- `relatorio.txt`: contagem por tópico e avisos de conferência da última geração, incluindo as listas repetidas que foram retiradas.
 
 ## Como acrescentar um chat novo
 

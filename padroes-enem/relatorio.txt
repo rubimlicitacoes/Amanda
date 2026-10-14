@@ -1,8 +1,8 @@
-fis-15             padrões= 48  listas= 7  questões= 68  agenda=4
+fis-15             padrões= 48  listas= 5  questões= 48  agenda=4
 fis-10-9           padrões= 53  listas= 4  questões= 53  agenda=6
 fis-8-7-6          padrões= 37  listas= 4  questões= 37  agenda=3
 fis-3-2            padrões= 35  listas= 4  questões= 35  agenda=4
-fis-17             padrões= 63  listas= 8  questões= 68  agenda=3
+fis-17             padrões= 63  listas= 7  questões= 63  agenda=3
 fis-11             padrões= 45  listas= 5  questões= 50  agenda=4
 qui-9-10           padrões= 26  listas= 7  questões= 34  agenda=3
 qui-14             padrões= 17  listas= 2  questões= 20  agenda=2
@@ -18,4 +18,7 @@ bio-3              padrões= 38  listas= 3  questões= 45  agenda=4
 bio-17-20          padrões= 47  listas= 4  questões= 60  agenda=3
 bio-4-11-12        padrões= 55  listas= 5  questões= 62  agenda=2
 
-AVISOS (0):
+AVISOS (3):
+fis-15: Lista A repete questões de outras listas e foi removida
+fis-15: Lista B repete questões de outras listas e foi removida
+fis-17: Lista 2 repete questões de outras listas e foi removida

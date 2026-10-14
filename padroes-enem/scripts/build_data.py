@@ -9,6 +9,7 @@ Saída:    app/dist/padroes-enem.js                (carregado pelo app sob deman
 
 Uso: python3 padroes-enem/scripts/build_data.py
 """
+import difflib
 import json
 import os
 import re
@@ -25,22 +26,23 @@ RELATORIO = os.path.join(RAIZ, "padroes-enem", "relatorio.txt")
 # grupos: pastas de fontes (um chat pode ter gerado duas pastas, como BIO 4 + BIO 11 + BIO 12).
 # plano: código usado no Plano de Padrões CN; mods: módulos do ranking (Mapas de Física/Química/Biologia).
 # k: chave curta do tópico no progresso salvo do app. Nunca mude a k de um tópico existente.
+# siglas: nome das listas oficiais quando o chat usou prefixos nas questões (L1: 6 · A10 · Est 2).
 TOPICOS = [
     dict(id="fis-15", k="f15", mat="FIS", titulo="FIS 15 · Cinemática", mods=[15], plano=["15"], grupos=[("fis-15", None)]),
     dict(id="fis-10-9", k="f109", mat="FIS", titulo="FIS 10 + FIS 9 · Acústica e ondas", mods=[10, 9], plano=["10+9"], grupos=[("fis-10-9", None)]),
     dict(id="fis-8-7-6", k="f876", mat="FIS", titulo="FIS 8 + FIS 7 + FIS 6 · Espectro e física moderna e Óptica geométrica", mods=[8, 7, 6], plano=["8+7+6"], grupos=[("fis-8-7-6", None)]),
     dict(id="fis-3-2", k="f32", mat="FIS", titulo="FIS 3 + FIS 2 · Circuitos e potência elétrica", mods=[3, 2], plano=["3+2"], grupos=[("fis-3-2", None)]),
-    dict(id="fis-17", k="f17", mat="FIS", titulo="FIS 17 · Dinâmica", mods=[17], plano=["17"], grupos=[("fis-17", None)]),
+    dict(id="fis-17", k="f17", siglas={"L1": "Dinâmica", "L2": "Gravitação, Impulso, Energia e MHS", "L3": "Estática e Hidrostática"}, mat="FIS", titulo="FIS 17 · Dinâmica", mods=[17], plano=["17"], grupos=[("fis-17", None)]),
     dict(id="fis-11", k="f11", mat="FIS", titulo="FIS 11 · Termologia", mods=[11], plano=["11"], grupos=[("fis-11", None)]),
     dict(id="qui-9-10", k="q910", mat="QUI", titulo="QUI 9 + QUI 10 · Ácido-base e reações com ácido", mods=[9, 10], plano=["9+10"], grupos=[("qui-9-10", None)]),
     dict(id="qui-14", k="q14", mat="QUI", titulo="QUI 14 · Equilíbrio Químico", mods=[14], plano=["14"], grupos=[("qui-14", None)]),
     dict(id="qui-5-6", k="q56", mat="QUI", titulo="QUI 5 + QUI 6 · Polaridade e Sistemas e misturas", mods=[5, 6], plano=["5+6"], grupos=[("qui-5-6", None)]),
     dict(id="qui-17-20", k="q1720", mat="QUI", titulo="QUI 17 + QUI 20 · Funções e reações orgânicas", mods=[17, 20], plano=["17+20"], grupos=[("qui-17-20", None)]),
-    dict(id="qui-12-15-16", k="q121516", mat="QUI", titulo="QUÍM 12 + 15 + 16 · Eletroquímica e Estequiometria", mods=[12, 15, 16], plano=["12+15+16"], grupos=[("qui-12-15-16", None)]),
-    dict(id="qui-23-geo", k="q23g", mat="QUI", titulo="QUÍM 23 + GEO · Impactos Ambientais", mods=[23], plano=["23 + GEO"], grupos=[("qui-23-geo", None)]),
-    dict(id="bio-25-26-22-23", k="b25", mat="BIO", titulo="BIO 25 + BIO 26 + BIO 22 + BIO 23 · Genética", mods=[25, 26, 22, 23], plano=["25+26+22+23"], grupos=[("bio-25-26-22-23", None)]),
+    dict(id="qui-12-15-16", k="q121516", siglas={"Est": "Estequiometria", "Ele": "Eletroquímica"}, mat="QUI", titulo="QUÍM 12 + 15 + 16 · Eletroquímica e Estequiometria", mods=[12, 15, 16], plano=["12+15+16"], grupos=[("qui-12-15-16", None)]),
+    dict(id="qui-23-geo", k="q23g", siglas={"B": "Biologia", "G": "Geografia", "Q": "Química"}, mat="QUI", titulo="QUÍM 23 + GEO · Impactos Ambientais", mods=[23], plano=["23 + GEO"], grupos=[("qui-23-geo", None)]),
+    dict(id="bio-25-26-22-23", k="b25", siglas={"G": "Genética", "I": "Imunidade, vacinas e câncer"}, mat="BIO", titulo="BIO 25 + BIO 26 + BIO 22 + BIO 23 · Genética", mods=[25, 26, 22, 23], plano=["25+26+22+23"], grupos=[("bio-25-26-22-23", None)]),
     dict(id="bio-5-8", k="b58", mat="BIO", titulo="BIO 5 + BIO 8 · Energia Celular, Enzimas e vitaminas e Citologia", mods=[5, 8], plano=["5+8"], grupos=[("bio-5-8", None)]),
-    dict(id="bio-10-15", k="b1015", mat="BIO", titulo="BIO 10 e BIO 15 · Parasitoses e doenças endêmicas e Bactérias, fungos e biorremediação", mods=[10, 15], plano=["10+15"], grupos=[("bio-10-15", None)]),
+    dict(id="bio-10-15", k="b1015", siglas={"A": "BIO 15", "B": "BIO 10"}, mat="BIO", titulo="BIO 10 e BIO 15 · Parasitoses e doenças endêmicas e Bactérias, fungos e biorremediação", mods=[10, 15], plano=["10+15"], grupos=[("bio-10-15", None)]),
     dict(id="bio-24-21", k="b2421", mat="BIO", titulo="BIO 24 + BIO 21 · Biotecnologia e DNA", mods=[24, 21], plano=["24+21"], grupos=[("bio-24-21", None)]),
     dict(id="bio-3", k="b3", mat="BIO", titulo="BIO 3 · Evolução", mods=[3], plano=["3"], grupos=[("bio-3", None)]),
     dict(id="bio-17-20", k="b1720", mat="BIO", titulo="BIO 17 + BIO 20 · Hormônios, digestão, nervos e músculos", mods=[17, 20], plano=["17+20"], grupos=[("bio-17-20", None)]),
@@ -157,8 +159,8 @@ def le_mapa(linhas, grupo):
     for _, bloco, cab, rows in tabelas(linhas):
         cab_l = [c.lower() for c in cab]
         i_nome = next((k for k, c in enumerate(cab_l) if "padr" in c and "estudado" not in c), None)
-        i_refs = next((k for k, c in enumerate(cab_l) if "quest" in c and "nº" not in c and "destas" not in c), None)
-        i_log = next((k for k, c in enumerate(cab_l) if any(x in c for x in ("lógica", "como se resolve", "passo a passo", "chave"))), None)
+        i_refs = next((k for k, c in enumerate(cab_l) if "quest" in c and k != i_nome and "nº" not in c and "destas" not in c), None)
+        i_log = next((k for k, c in enumerate(cab_l) if k != i_nome and any(x in c for x in ("lógica", "como se resolve", "passo a passo", "chave"))), None)
         if i_nome is None and layout and norm_codigo(cab[0]) and len(cab) == layout[3]:
             # tabela sem linha de cabeçalho: continua o layout da tabela anterior
             i_nome, i_refs, i_log, _n = layout
@@ -190,6 +192,28 @@ def le_mapa(linhas, grupo):
                 "grupo": grupo or "",
             }
     return padroes
+
+
+def refs_legiveis(refs, siglas):
+    """ "L1: 6, 11 · L2: 38" → "Dinâmica: Q6, Q11 · Gravitação…: Q38"; "4, 7" → "Q4, Q7"."""
+    r = limpa_md(refs)
+    nomes = []
+    if siglas:
+        alt = "|".join(sorted(map(re.escape, siglas), key=len, reverse=True))
+        atual = [None]
+
+        def marca(m):
+            nome = siglas[m.group(1)]
+            if atual[0] == nome:
+                return ""
+            atual[0] = nome
+            nomes.append(nome)
+            return f"\x00{chr(97 + len(nomes) - 1)}\x00"
+        r = re.sub(rf"\b({alt})\s*:?\s*(?=\d)", marca, r)
+    r = re.sub(r"(?<![\w.,])(\d+)\b", r"Q\1", r)
+    # troca de lista no meio da sequência vira " · "
+    r = re.sub(r",\s*(\x00[a-z]\x00)", r" · \1", r)
+    return re.sub(r"\x00([a-z])\x00", lambda m: nomes[ord(m.group(1)) - 97] + ": ", r)
 
 
 # ----------------------------------------------------------------------------- questões
@@ -597,6 +621,111 @@ def listas_extras_cinematica(caminho, validos):
     return res
 
 
+# ----------------------------------------------------------------------------- fórmulas LaTeX
+
+# Alguns chats escreveram fórmulas em LaTeX ($$v_m = \frac{\Delta s}{\Delta t}$$). O app não roda LaTeX,
+# então as fórmulas viram texto com <sub>/<sup> e frações empilhadas (<fr><nu>…</nu><de>…</de></fr>),
+# que o app desenha. "$" isolado é preço (R$) e não é tocado.
+SIMBOLOS = {
+    "Delta": "Δ", "omega": "ω", "theta": "θ", "pi": "π", "alpha": "α", "beta": "β", "lambda": "λ", "mu": "μ", "rho": "ρ",
+    "cdot": "·", "times": "×", "quad": "\u2003", "qquad": "\u2003\u2003", ",": "\u2009", ";": "\u2005", " ": " ",
+    "Rightarrow": "⇒", "Longrightarrow": "⟹", "Leftrightarrow": "⇔", "Longleftrightarrow": "⟺", "longleftrightarrow": "⟷",
+    "rightarrow": "→", "to": "→", "dots": "…", "ldots": "…", "approx": "≈", "neq": "≠", "leq": "≤", "geq": "≥",
+    "cos": "cos", "sin": "sen", "tan": "tg", "%": "%",
+}
+
+
+def latex_para_html(tex):
+    i = 0
+
+    def grupo():
+        nonlocal i
+        # lê um argumento: {…} ou um único caractere/comando
+        while i < len(tex) and tex[i] == " ":
+            i += 1
+        if i < len(tex) and tex[i] == "{":
+            i += 1
+            return bloco("}")
+        if i < len(tex) and tex[i] == "\\":
+            return comando()
+        c = tex[i] if i < len(tex) else ""
+        i += 1
+        return c
+
+    def comando():
+        nonlocal i
+        i += 1  # pula a barra
+        m = re.match(r"[A-Za-z]+|.", tex[i:])
+        nome = m.group(0) if m else ""
+        i += len(nome)
+        if nome.isalpha():
+            # como no LaTeX, o espaço depois de \Delta some ("\Delta s" = Δs), mas não antes de operador
+            j = i
+            while j < len(tex) and tex[j] == " ":
+                j += 1
+            if j < len(tex) and tex[j].isalnum():
+                i = j
+        if nome in ("cos", "sin", "tan"):
+            return "\u2009" + SIMBOLOS[nome]
+        if nome == "frac":
+            a = grupo()
+            b = grupo()
+            return f"<fr><nu>{a}</nu><de>{b}</de></fr>"
+        if nome in ("text", "mathrm", "textrm", "operatorname"):
+            return grupo()
+        if nome == "vec":
+            return "<vc>" + grupo() + "</vc>"
+        if nome == "sqrt":
+            return "√(" + grupo() + ")"
+        if nome in ("left", "right"):
+            return ""
+        return SIMBOLOS.get(nome, nome)
+
+    def bloco(fim):
+        nonlocal i
+        out = []
+        while i < len(tex):
+            c = tex[i]
+            if c == fim:
+                i += 1
+                break
+            if c == "\\":
+                out.append(comando())
+            elif c == "{":
+                i += 1
+                out.append(bloco("}"))
+            elif c in "_^":
+                i += 1
+                tag = "sub" if c == "_" else "sup"
+                out.append(f"<{tag}>{grupo()}</{tag}>")
+            else:
+                out.append("−" if c == "-" else c)
+                i += 1
+        return "".join(out)
+
+    res = bloco(None).strip()
+    return re.sub(r"\s*([·×])\s*", "\u2009\\1\u2009", res)
+
+
+def converte_formulas(texto):
+    if "$$" not in texto:
+        return texto
+    # só $$…$$ numa linha, sem "|" e com cara de fórmula: "$", "$$", "$$$" de tabela de preço não contam
+    return re.sub(r"\$\$([^$\n|]+?)\$\$",
+                  lambda m: "<fb>" + latex_para_html(m.group(1).strip()) + "</fb>" if re.search(r"[\\_^=]", m.group(1)) else m.group(0),
+                  texto)
+
+
+def converte_tudo(obj):
+    if isinstance(obj, str):
+        return converte_formulas(obj)
+    if isinstance(obj, list):
+        return [converte_tudo(x) for x in obj]
+    if isinstance(obj, dict):
+        return {k: converte_tudo(v) for k, v in obj.items()}
+    return obj
+
+
 # ----------------------------------------------------------------------------- tópicos
 
 
@@ -705,6 +834,33 @@ def monta_topico(cfg, enem, plano):
         L["padroes"] = cods
         if not L["subtitulo"]:
             L["subtitulo"] = f"{len(L['questoes'])} questões"
+    # Listas repetidas: o chat de Dinâmica reenviou a Rodada 1 e as Listas A e B de Cinemática
+    # repetem as Listas 3 a 5. A repetida sai; o progresso salvo nela passa para a questão igual
+    # (aliases), e os ids das outras listas não mudam.
+    norm = lambda x: re.sub(r"[\W_]+", " ", x.lower()).strip()[:600]
+    mantidas, aliases = [], {}
+    for L in listas:
+        pares = []
+        for q in L["questoes"]:
+            melhor = max(((difflib.SequenceMatcher(None, norm(q["enunciado"]), norm(r["enunciado"])).ratio(), r)
+                          for M in mantidas for r in M["questoes"]), key=lambda x: x[0], default=(0, None))
+            pares.append((q, melhor))
+        if pares and all(m[0] >= 0.55 for _, m in pares):
+            for q, (_, r) in pares:
+                aliases[q["id"]] = r["id"]
+            avisos.append(f"{cfg['id']}: {L['titulo']} repete questões de outras listas e foi removida")
+            total_q -= len(L["questoes"])
+            continue
+        mantidas.append(L)
+    listas = mantidas
+    for grupo in {L["grupo"] for L in listas}:
+        k = 0
+        for L in listas:
+            if L["grupo"] == grupo and re.match(r"Lista \d+$", L["titulo"]):
+                k += 1
+                L["titulo"] = f"Lista {k}"
+    for pd in padroes.values():
+        pd["oficial"] = refs_legiveis(pd["refs"], cfg.get("siglas"))
     cobertos = {c for L in listas for q in L["questoes"] for c in q["padroes"]}
     faltam = [c for c in padroes if c not in cobertos]
     if faltam:
@@ -747,6 +903,8 @@ def monta_topico(cfg, enem, plano):
         "materiais": materiais,
         "listas": listas,
         "totalQuestoes": total_q,
+        "siglas": cfg.get("siglas") or {},
+        "aliases": aliases,
     }
 
 
@@ -755,7 +913,7 @@ def main():
     for k in ("fis", "qui", "bio"):
         enem[k.upper()] = json.load(open(os.path.join(FONTES, "_enem", f"enem-{k}.json"), encoding="utf-8"))
     plano = json.load(open(os.path.join(FONTES, "_enem", "plano.json"), encoding="utf-8"))
-    topicos = [monta_topico(cfg, enem, plano) for cfg in TOPICOS]
+    topicos = [converte_tudo(monta_topico(cfg, enem, plano)) for cfg in TOPICOS]
     saida = {
         "versao": 1,
         "geradoEm": date.today().isoformat(),
