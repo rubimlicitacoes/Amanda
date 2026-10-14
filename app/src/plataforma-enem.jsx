@@ -296,7 +296,7 @@ const FASES = {
   4: { nome: "Revisão intensiva e simulados", cor: "#DB3B57", desc: "Sem conteúdo novo pesado. Treino de prova." },
 };
 
-const VERSAO_APP = "3.6.0";
+const VERSAO_APP = "3.6.1";
 const ENEM_D1 = "2026-11-08";
 const ENEM_D2 = "2026-11-15";
 const META_GERAL = 810;
