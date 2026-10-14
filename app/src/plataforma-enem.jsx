@@ -296,7 +296,7 @@ const FASES = {
   4: { nome: "Revisão intensiva e simulados", cor: "#DB3B57", desc: "Sem conteúdo novo pesado. Treino de prova." },
 };
 
-const VERSAO_APP = "3.6.1";
+const VERSAO_APP = "3.6.2";
 const ENEM_D1 = "2026-11-08";
 const ENEM_D2 = "2026-11-15";
 const META_GERAL = 810;
@@ -5664,7 +5664,9 @@ function mdInline(s) {
   // fórmulas convertidas do LaTeX dos chats: <fb> bloco, <fr><nu>…</nu><de>…</de></fr> fração, <vc> vetor
   t = t.replace(/&lt;(fb|fr|nu|de|vc)&gt;/g, (_, k) => `<span class="pe-${k}">`).replace(/&lt;\/(fb|fr|nu|de|vc)&gt;/g, "</span>");
   t = t.replace(/`([^`]+)`/g, "<code>$1</code>");
-  t = t.replace(/\*\*([^*]+?)\*\*/g, "<strong>$1</strong>");
+  // negrito pode ter itálico dentro: "**Ciclo do *Schistosoma***", "***n***"
+  t = t.replace(/\*\*\*([^*]+?)\*\*\*/g, "<strong><em>$1</em></strong>");
+  t = t.replace(/\*\*((?:[^*]|\*[^*\s][^*]*\*)+?)\*\*/g, "<strong>$1</strong>");
   t = t.replace(/(^|[^*\w])\*([^*\s][^*]*?)\*(?![\w*])/g, "$1<em>$2</em>");
   return t;
 }

@@ -27,12 +27,14 @@ RELATORIO = os.path.join(RAIZ, "padroes-enem", "relatorio.txt")
 # plano: código usado no Plano de Padrões CN; mods: módulos do ranking (Mapas de Física/Química/Biologia).
 # k: chave curta do tópico no progresso salvo do app. Nunca mude a k de um tópico existente.
 # siglas: nome das listas oficiais quando o chat usou prefixos nas questões (L1: 6 · A10 · Est 2).
+# mapa_antigo: arquivos cujo mapa foi refeito depois no mesmo chat (numeração mudou); o texto antigo não vai para o app.
 TOPICOS = [
     dict(id="fis-15", k="f15", mat="FIS", titulo="FIS 15 · Cinemática", mods=[15], plano=["15"], grupos=[("fis-15", None)]),
     dict(id="fis-10-9", k="f109", mat="FIS", titulo="FIS 10 + FIS 9 · Acústica e ondas", mods=[10, 9], plano=["10+9"], grupos=[("fis-10-9", None)]),
     dict(id="fis-8-7-6", k="f876", mat="FIS", titulo="FIS 8 + FIS 7 + FIS 6 · Espectro e física moderna e Óptica geométrica", mods=[8, 7, 6], plano=["8+7+6"], grupos=[("fis-8-7-6", None)]),
     dict(id="fis-3-2", k="f32", mat="FIS", titulo="FIS 3 + FIS 2 · Circuitos e potência elétrica", mods=[3, 2], plano=["3+2"], grupos=[("fis-3-2", None)]),
-    dict(id="fis-17", k="f17", siglas={"L1": "Dinâmica", "L2": "Gravitação, Impulso, Energia e MHS", "L3": "Estática e Hidrostática"}, mat="FIS", titulo="FIS 17 · Dinâmica", mods=[17], plano=["17"], grupos=[("fis-17", None)]),
+    dict(id="fis-17", k="f17", siglas={"L1": "Dinâmica", "L2": "Gravitação, Impulso, Energia e MHS", "L3": "Estática e Hidrostática"}, mat="FIS", titulo="FIS 17 · Dinâmica", mods=[17], plano=["17"], grupos=[("fis-17", None)],
+         mapa_antigo=["02-chat.md"]),
     dict(id="fis-11", k="f11", mat="FIS", titulo="FIS 11 · Termologia", mods=[11], plano=["11"], grupos=[("fis-11", None)]),
     dict(id="qui-9-10", k="q910", mat="QUI", titulo="QUI 9 + QUI 10 · Ácido-base e reações com ácido", mods=[9, 10], plano=["9+10"], grupos=[("qui-9-10", None)]),
     dict(id="qui-14", k="q14", mat="QUI", titulo="QUI 14 · Equilíbrio Químico", mods=[14], plano=["14"], grupos=[("qui-14", None)]),
@@ -47,7 +49,8 @@ TOPICOS = [
     dict(id="bio-3", k="b3", mat="BIO", titulo="BIO 3 · Evolução", mods=[3], plano=["3"], grupos=[("bio-3", None)]),
     dict(id="bio-17-20", k="b1720", mat="BIO", titulo="BIO 17 + BIO 20 · Hormônios, digestão, nervos e músculos", mods=[17, 20], plano=["17+20"], grupos=[("bio-17-20", None)]),
     dict(id="bio-4-11-12", k="b41112", mat="BIO", titulo="BIO 4 + BIO 11 + BIO 12 · Impacto Ambiental e Botânica", mods=[4, 11, 12], plano=["4+11+12"],
-         grupos=[("bio-4", "Impacto ambiental (BIO 4)"), ("bio-11-12", "Botânica (BIO 11 e 12)")], prefixos={"Impacto ambiental (BIO 4)": "i", "Botânica (BIO 11 e 12)": "b"}),
+         grupos=[("bio-4", "Impacto ambiental (BIO 4)"), ("bio-11-12", "Botânica (BIO 11 e 12)")], prefixos={"Impacto ambiental (BIO 4)": "i", "Botânica (BIO 11 e 12)": "b"},
+         listas_grupo={"Impacto ambiental (BIO 4)": "BIO 4", "Botânica (BIO 11 e 12)": "BIO 11 e 12"}),
 ]
 
 MATERIAS = {
@@ -166,6 +169,9 @@ def le_mapa(linhas, grupo):
             i_nome, i_refs, i_log, _n = layout
             rows = [cab] + rows
         if i_nome is None or i_refs is None or i_nome == 0 or i_refs == 0:
+            continue
+        # a 1ª coluna precisa ser o código do padrão; tabelas de placar ("Lista | Padrões | Questões") não são mapa
+        if cab_l[0].replace("*", "").strip() not in ("#", "nº", "n", "n.º", "cód", "código", "") and not norm_codigo(cab[0]):
             continue
         layout = (i_nome, i_refs, i_log, len(cab))
         for r in rows:
@@ -716,17 +722,50 @@ def converte_formulas(texto):
                   texto)
 
 
+# Fórmulas em texto simples, fora do LaTeX: "v_rel", "η_Carnot", "10^(pH − pKa)", "r^(3/2)".
+RE_SUB_TXT = re.compile(r"(?<![A-Za-z0-9_/.\\-])([A-Za-zΑ-ωΔΣΦ]{1,2})_(\{[^}\n]+\}|[A-Za-zÀ-ú0-9]+)")
+RE_SUP_TXT = re.compile(r"([A-Za-z0-9)\]Α-ω])\^(\([^()\n]*\)|[−\-]?[A-Za-z0-9,]+)")
+
+
+def indices_texto(texto):
+    if "_" not in texto and "^" not in texto:
+        return texto
+    tira = lambda g: g[1:-1] if g[:1] in "({" and g[-1:] in ")}" else g
+    out, cerca = [], False
+    for ln in texto.split("\n"):
+        if ln.strip().startswith("```"):
+            cerca = not cerca
+        if cerca or ln.strip().startswith("```"):
+            out.append(ln)
+            continue
+        # não mexe em código inline nem dentro de fórmula já convertida
+        partes = re.split(r"(`[^`]*`|<fb>.*?</fb>)", ln)
+        for k in range(0, len(partes), 2):
+            x = RE_SUB_TXT.sub(lambda m: f"{m.group(1)}<sub>{tira(m.group(2))}</sub>", partes[k])
+            partes[k] = RE_SUP_TXT.sub(lambda m: f"{m.group(1)}<sup>{tira(m.group(2))}</sup>", x)
+        out.append("".join(partes))
+    return "\n".join(out)
+
+
 def converte_tudo(obj):
     if isinstance(obj, str):
-        return converte_formulas(obj)
+        return indices_texto(converte_formulas(obj))
     if isinstance(obj, list):
         return [converte_tudo(x) for x in obj]
     if isinstance(obj, dict):
-        return {k: converte_tudo(v) for k, v in obj.items()}
+        return {k: (v if k in ("id", "codigo", "k") else converte_tudo(v)) for k, v in obj.items()}
     return obj
 
 
 # ----------------------------------------------------------------------------- tópicos
+
+
+def sem_traco_final(md):
+    """Tira do fim separadores "---" e títulos soltos (o título da lista que vinha logo depois)."""
+    linhas = (md or "").strip().split("\n")
+    while linhas and (not linhas[-1].strip() or re.match(r"^\s*(-{3,}|#{1,6}\s.*)$", linhas[-1])):
+        linhas.pop()
+    return "\n".join(linhas).strip()
 
 
 def primeiro_h1(linhas):
@@ -765,7 +804,9 @@ def monta_topico(cfg, enem, plano):
             continue
         tem_mapa = bool(le_mapa(pre.split("\n"), rotulo))
         intro = ""
-        if tem_mapa:
+        if tem_mapa and f in cfg.get("mapa_antigo", []):
+            pass
+        elif tem_mapa:
             mapa_md.append(("### " + rotulo + "\n\n" if rotulo else "") + pre)
         else:
             intro = pre
@@ -786,6 +827,7 @@ def monta_topico(cfg, enem, plano):
         sim_qs, resto = simulado_negrito(pos, validos)
         cont_grupo[rotulo] = cont_grupo.get(rotulo, 0) + (0 if simulado else 1)
         k = cont_grupo[rotulo]
+        intro, pos = sem_traco_final(intro), sem_traco_final(pos)
         listas.append({
             "titulo": "Simulado misto" if simulado else f"Lista {k}",
             "subtitulo": "",
@@ -861,6 +903,10 @@ def monta_topico(cfg, enem, plano):
                 L["titulo"] = f"Lista {k}"
     for pd in padroes.values():
         pd["oficial"] = refs_legiveis(pd["refs"], cfg.get("siglas"))
+        # duas listas oficiais com a mesma numeração (BIO 4 e BIO 11/12): diz de qual lista é
+        nome_lista = cfg.get("listas_grupo", {}).get(pd["grupo"])
+        if nome_lista:
+            pd["oficial"] = f"{nome_lista}: {pd['oficial']}"
     cobertos = {c for L in listas for q in L["questoes"] for c in q["padroes"]}
     faltam = [c for c in padroes if c not in cobertos]
     if faltam:
@@ -899,7 +945,7 @@ def monta_topico(cfg, enem, plano):
         "porque": passos,
         "agenda": agenda,
         "padroes": list(padroes.values()),
-        "mapa": "\n\n---\n\n".join(mapa_md),
+        "mapa": "\n\n---\n\n".join(sem_traco_final(m) for m in mapa_md),
         "materiais": materiais,
         "listas": listas,
         "totalQuestoes": total_q,
