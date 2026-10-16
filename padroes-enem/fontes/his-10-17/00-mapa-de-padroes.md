@@ -126,3 +126,7 @@ Quase toda questão desta lista é **texto-base + comando + 5 alternativas**. O 
 | Lista | Padrões cobertos | Restantes |
 |---|---|---|
 | Lista 1 (núcleo: escravidão) | P1, P5, P13, P14, P15, P16, P19, P20, P21, P22 | 37 |
+| Lista 2 (Colônia e indígenas) | P2, P3, P4, P6, P7, P8, P9, P10, P11, P12 | 27 |
+| Lista 3 (racismo, Lei de Terras e Império) | P17, P18, P23, P24, P25, P26, P27, P28, P29 | 18 |
+| Lista 4 (fim do Império e Primeira República) | P30, P31, P32, P33, P34, P35, P36, P37, P38 | 9 |
+| Lista 5 (Era Vargas, ditadura e redemocratização) | P39, P40, P41, P42, P43, P44, P45, P46, P47 | 0 |

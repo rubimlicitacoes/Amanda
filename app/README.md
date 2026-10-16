@@ -1,6 +1,6 @@
 # Reinos — ENEM 2026 (fonte e build)
 
-- `src/plataforma-enem.jsx`: fonte do app (v3.6.3, com a aba Padrões do ENEM).
+- `src/plataforma-enem.jsx`: fonte do app (v3.6.4, com a aba Padrões do ENEM).
 - `src/main.jsx`: ponto de entrada que monta o app em `#raiz`.
 - `dist/`: a pasta publicada (index.html, app.js, app.css, pdfjs.js, padroes-enem.js, manifest.json, icone.svg).
 
