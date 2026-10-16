@@ -296,7 +296,7 @@ const FASES = {
   4: { nome: "Revisão intensiva e simulados", cor: "#DB3B57", desc: "Sem conteúdo novo pesado. Treino de prova." },
 };
 
-const VERSAO_APP = "3.6.2";
+const VERSAO_APP = "3.6.3";
 const ENEM_D1 = "2026-11-08";
 const ENEM_D2 = "2026-11-15";
 const META_GERAL = 810;
@@ -5854,8 +5854,11 @@ function origemDaQuestao(q, mapa) {
   if (!partes.length) return q.titulo === "Simulado misto" ? "Simulado misto · padrão não identificado" : "Questão ensinada";
   return "Lista oficial · " + [...new Set(partes)].join(" · ");
 }
-const corMateria = (sig) => (REINOS[sig] ? REINOS[sig].cor : T.primary);
-const softMateria = (sig) => (REINOS[sig] ? REINOS[sig].soft : T.primarySoft);
+/* Filosofia não é um reino do app: ganha cor própria só nesta aba */
+const MATERIAS_EXTRA = { FIL: { cor: "#8A5A2B", soft: "#F4ECE3" } };
+const corMateria = (sig) => (REINOS[sig] || MATERIAS_EXTRA[sig] || { cor: T.primary }).cor;
+const softMateria = (sig) => (REINOS[sig] || MATERIAS_EXTRA[sig] || { soft: T.primarySoft }).soft;
+const AREAS_PADROES = [["CN", "Natureza"], ["MAT", "Matemática"], ["CH", "Humanas"], ["LC", "Linguagens"]];
 const fmtData = (iso) => { const [, m, d] = iso.split("-"); return `${d}/${m}`; };
 /* Faixa do Plano CN: "1–24" vira "padrões 1–24"; "14 padrões" e "20 para ler" ficam como estão. */
 const fmtFaixa = (f) => (/^\d+\s*[–-]\s*\d+$/.test(String(f).trim()) ? `padrões ${f}` : String(f));
@@ -5933,7 +5936,7 @@ function TelaPadroes({ ctx }) {
 function PadroesInicio({ dados, ctx, setVista }) {
   const { estado, hoje } = ctx;
   const reg = registros(estado);
-  const [mat, setMat] = useState("todas");
+  const [area, setArea] = useState("todas");
   const [busca, setBusca] = useState("");
 
   const comProg = dados.topicos.map((t) => ({ t, p: progressoTopico(t, reg) }));
@@ -5942,8 +5945,18 @@ function PadroesInicio({ dados, ctx, setVista }) {
   const deHoje = comProg.filter(({ t }) => t.agenda.some((a) => a.data === hoje));
   const norm = (s) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   const lista = comProg
-    .filter(({ t }) => mat === "todas" || t.materia === mat)
-    .filter(({ t }) => !busca.trim() || norm(t.titulo + " " + t.padroes.map((p) => p.nome).join(" ")).includes(norm(busca.trim())));
+    .filter(({ t }) => area === "todas" || t.area === area)
+    .filter(({ t }) => !busca.trim() || norm(t.titulo + " " + (dados.materias[t.materia] || {}).nome + " " + t.padroes.map((p) => p.nome).join(" ")).includes(norm(busca.trim())));
+  // seções: uma por área; dentro da área, os tópicos de um bloco (velocidade) ficam juntos no fim
+  const secoes = [];
+  AREAS_PADROES.forEach(([a]) => {
+    const daArea = lista.filter(({ t }) => t.area === a);
+    if (!daArea.length) return;
+    const semBloco = daArea.filter(({ t }) => !t.bloco);
+    secoes.push({ chave: a, titulo: dados.areas[a].nome, itens: semBloco });
+    [...new Set(daArea.filter(({ t }) => t.bloco).map(({ t }) => t.bloco))].forEach((b) =>
+      secoes.push({ chave: `${a}-${b}`, titulo: dados.areas[a].nome, bloco: dados.blocos[b], itens: daArea.filter(({ t }) => t.bloco === b) }));
+  });
 
   return (
     <div style={{ display: "grid", gap: 20 }}>
@@ -5980,8 +5993,8 @@ function PadroesInicio({ dados, ctx, setVista }) {
       )}
 
       <div className="flex flex-wrap items-center gap-2">
-        {[["todas", "Todas"], ["FIS", "Física"], ["QUI", "Química"], ["BIO", "Biologia"]].map(([k, l]) => (
-          <button key={k} className={`pe-chip ${mat === k ? "on" : ""}`} onClick={() => setMat(k)}>{l}</button>
+        {[["todas", "Todas"], ...AREAS_PADROES].map(([k, l]) => (
+          <button key={k} className={`pe-chip ${area === k ? "on" : ""}`} onClick={() => setArea(k)}>{l}</button>
         ))}
         <div className="flex items-center gap-2" style={{ marginLeft: "auto", background: T.surface, border: `1px solid ${T.line}`, borderRadius: 99, padding: "6px 12px", minWidth: 0, flex: "1 1 200px", maxWidth: 320 }}>
           <Search size={14} color={T.ink30} />
@@ -5990,8 +6003,21 @@ function PadroesInicio({ dados, ctx, setVista }) {
         </div>
       </div>
 
+      {secoes.map((sec) => (
+        <div key={sec.chave} style={{ display: "grid", gap: 12 }}>
+          <div className="flex flex-wrap items-baseline gap-2">
+            <h2 style={{ fontSize: 18 }}>{sec.bloco || sec.titulo}</h2>
+            <span className="mono" style={{ fontSize: 11, color: T.ink50 }}>
+              {sec.bloco ? `${sec.titulo} · bloco` : ""} {sec.itens.length} {sec.itens.length === 1 ? "tópico" : "tópicos"}
+            </span>
+          </div>
+          {sec.bloco && (
+            <p style={{ fontSize: 13, color: T.ink50, lineHeight: 1.6, maxWidth: 680, marginTop: -4 }}>
+              Cada padrão traz o gatilho (como reconhecer no enunciado) e o atalho de resolução. Nas questões, um cronômetro compara o seu tempo com a resolução rápida.
+            </p>
+          )}
       <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
-        {lista.map(({ t, p }, i) => {
+        {sec.itens.map(({ t, p }, i) => {
           const prox = proximo(t);
           const [codigo, nome] = t.titulo.split(" · ");
           return (
@@ -6018,7 +6044,9 @@ function PadroesInicio({ dados, ctx, setVista }) {
           );
         })}
       </div>
-      {!lista.length && <Card><Empty icon={Search} titulo="Nenhum tópico encontrado" txt="Tente outro termo ou limpe o filtro de matéria." /></Card>}
+        </div>
+      ))}
+      {!lista.length && <Card><Empty icon={Search} titulo="Nenhum tópico encontrado" txt="Tente outro termo ou limpe o filtro de área." /></Card>}
     </div>
   );
 }
@@ -6153,7 +6181,7 @@ function PadroesTopico({ dados, t, ctx, setVista }) {
         </Card>
       )}
 
-      <Secao titulo="No ENEM de 2020 a 2025" sub="Frequência, tendência e posição no ranking, dos Mapas de Física, Química e Biologia">
+      {t.modulos.length > 0 && <Secao titulo="No ENEM de 2020 a 2025" sub="Frequência, tendência e posição no ranking, dos Mapas de Física, Química e Biologia">
         <div style={{ display: "grid", gap: 18 }}>
           {t.modulos.map((m) => {
             const tot = m.freq.reduce((a, b) => a + b, 0);
@@ -6207,7 +6235,7 @@ function PadroesTopico({ dados, t, ctx, setVista }) {
             );
           })}
         </div>
-      </Secao>
+      </Secao>}
 
       {t.agenda.length > 0 && (
         <Secao titulo="No Plano de Padrões CN" sub="Dias em que este tópico entra no calendário de 07/10 a 13/11">
@@ -6245,14 +6273,22 @@ function PadroesTopico({ dados, t, ctx, setVista }) {
               <div className="mt-2" style={{ display: "grid", gap: 6 }}>
                 {b.itens.map((pd) => {
                   const st = statusPadrao(pd.cod);
+                  // padrão cuja questão ficou em outro tópico (repetida entre tópicos)
+                  const irVeja = !st.q && pd.veja ? () => {
+                    const T2 = dados.topicos.find((x) => x.id === pd.veja.topico);
+                    const L2 = T2 && T2.listas.find((x) => x.id === pd.veja.lista);
+                    if (L2) setVista({ tipo: "lista", topicoId: T2.id, listaId: L2.id, idx: L2.questoes.findIndex((x) => x.id === pd.veja.q) });
+                  } : null;
                   return (
-                    <button key={pd.cod} disabled={!st.q} onClick={() => st.q && abrirQuestao(st.q)} className="text-left"
+                    <button key={pd.cod} disabled={!st.q && !irVeja} onClick={() => (st.q ? abrirQuestao(st.q) : irVeja && irVeja())} className="text-left"
                       style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: 12, padding: "10px 12px", borderRadius: 10, border: `1px solid ${T.lineSoft}`, background: T.surface, opacity: st.q ? 1 : 0.7 }}>
                       <span className="mono" style={{ fontSize: 11.5, fontWeight: 700, color: st.cor === T.ink30 ? T.ink70 : "#fff", background: st.cor === T.ink30 ? T.lineSoft : st.cor, borderRadius: 7, padding: "3px 7px", height: "fit-content", minWidth: 38, textAlign: "center" }}>{pd.cod}</span>
                       <span style={{ minWidth: 0 }}>
                         <span style={{ fontWeight: 650, fontSize: 13.5, color: T.ink }}><Md inline src={pd.nome} /></span>
-                        {pd.logica && <span style={{ display: "block", fontSize: 12.5, color: T.ink50, marginTop: 3, lineHeight: 1.5 }}><Md inline src={pd.logica} /></span>}
-                        <span className="mono" style={{ display: "block", fontSize: 11, color: T.ink30, marginTop: 4 }}>Lista oficial: {pd.oficial} · {st.txt}</span>
+                        {pd.gatilho && <span style={{ display: "block", fontSize: 12.5, color: T.ink70, marginTop: 3, lineHeight: 1.5 }}><b>Gatilho:</b> <Md inline src={pd.gatilho} /></span>}
+                        {pd.logica && <span style={{ display: "block", fontSize: 12.5, color: T.ink50, marginTop: 3, lineHeight: 1.5 }}>{pd.gatilho && <b>Atalho: </b>}<Md inline src={pd.logica} /></span>}
+                        <span className="mono" style={{ display: "block", fontSize: 11, color: T.ink30, marginTop: 4 }}>Lista oficial: {pd.oficial} · {irVeja ? "" : st.txt}</span>
+                        {irVeja && <span style={{ display: "block", fontSize: 12, color: T.primary, fontWeight: 600, marginTop: 4 }}>Questão ensinada em {pd.veja.rotulo} →</span>}
                       </span>
                     </button>
                   );
@@ -6443,6 +6479,7 @@ function PadroesLista({ dados, t, ctx, vista, setVista }) {
   );
 }
 
+const fmtSeg = (s) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
 /* Cada questão começa pelo guia "O que você precisa saber"; o OK abre o enunciado.
    O gabarito pode ficar aberto desde o início ou aparecer ao clicar em "Ver gabarito". */
 function CartaoQuestao({ q, t, mapa, reg, ctx, cor, gabAberto, onResponder, onVerGabarito }) {
@@ -6457,6 +6494,20 @@ function CartaoQuestao({ q, t, mapa, reg, ctx, cor, gabAberto, onResponder, onVe
   const mostrarGab = respondida || ((revelado || gabAberto) && !refazendo) || (!q.gabarito && etapa === "questao");
   const nAlts = q.alternativas.length || 5;
   const padroesQ = q.padroes.map((c) => mapa[c]).filter(Boolean);
+  // bloco de velocidade (MAT Números, Álgebra e Grandezas): gatilho, atalho e cronômetro
+  const vel = t.bloco === "velocidade";
+  const metaSeg = vel ? (Number(((q.rapidaTitulo || "").match(/(\d+(?:[.,]\d+)?)\s*min/) || [])[1]?.replace(",", ".")) || 0) * 60 : 0;
+  const inicio = useRef(null);
+  const [tempo, setTempo] = useState(null);
+  const [agora, setAgora] = useState(0);
+  const cronometrando = vel && etapa === "questao" && !respondida;
+  useEffect(() => {
+    if (!cronometrando) return undefined;
+    inicio.current = Date.now();
+    setAgora(0);
+    const id = setInterval(() => setAgora(Math.round((Date.now() - inicio.current) / 1000)), 1000);
+    return () => clearInterval(id);
+  }, [cronometrando]);
 
   // no modo "gabarito aberto", abrir a questão já conta o padrão como visto
   useEffect(() => {
@@ -6466,6 +6517,7 @@ function CartaoQuestao({ q, t, mapa, reg, ctx, cor, gabAberto, onResponder, onVe
   const cortar = (i) => setCortadas((c) => (c.includes(i) ? c.filter((x) => x !== i) : [...c, i]));
   const confirmar = () => {
     if (sel == null) return;
+    if (vel && inicio.current) setTempo(Math.round((Date.now() - inicio.current) / 1000));
     onResponder(LETRAS[sel]);
     setRefazendo(false);
   };
@@ -6508,9 +6560,21 @@ function CartaoQuestao({ q, t, mapa, reg, ctx, cor, gabAberto, onResponder, onVe
           {chips}
           <div className="flex items-center gap-2 mb-3">
             <BookOpen size={17} color={T.gold} />
-            <h3 style={{ fontSize: 17 }}>O que você precisa saber antes de fazer essa questão</h3>
+            <h3 style={{ fontSize: 17 }}>{vel ? "Macetes antes de fazer essa questão" : "O que você precisa saber antes de fazer essa questão"}</h3>
           </div>
+          {vel && padroesQ.some((pd) => pd.gatilho) && (
+            <Card className="p-4 mb-3" style={{ background: T.surface, borderColor: "#F3D9AE" }}>
+              {padroesQ.filter((pd) => pd.gatilho).map((pd) => (
+                <div key={pd.cod} style={{ fontSize: 13.5, lineHeight: 1.55, marginBottom: 6 }}>
+                  <span className="mono" style={{ fontWeight: 700, color: cor }}>{pd.cod}</span>
+                  <div><b>Gatilho:</b> <Md inline src={pd.gatilho} /></div>
+                  {pd.logica && <div><b>Atalho:</b> <Md inline src={pd.logica} /></div>}
+                </div>
+              ))}
+            </Card>
+          )}
           <Md src={q.guia} />
+          {vel && metaSeg > 0 && <div style={{ fontSize: 12.5, color: T.ink50, marginTop: 10 }}>⏱ O cronômetro começa quando você clicar em OK. Meta: {fmtSeg(metaSeg)}.</div>}
           <div className="flex flex-wrap items-center gap-2 mt-5">
             <Btn size="lg" icon={Check} onClick={() => setEtapa("questao")}>OK, ir para a questão</Btn>
           </div>
@@ -6531,7 +6595,7 @@ function CartaoQuestao({ q, t, mapa, reg, ctx, cor, gabAberto, onResponder, onVe
               <button onClick={() => setVerGuia((v) => !v)} className="inline-flex items-center gap-1.5" style={{
                 background: "none", border: "none", padding: 0, color: T.gold, fontSize: 12.5, fontWeight: 650,
               }}>
-                <BookOpen size={14} /> {verGuia ? "Esconder o guia" : "Rever o guia do padrão"}
+                <BookOpen size={14} /> {verGuia ? "Esconder o guia" : vel ? "Rever os macetes" : "Rever o guia do padrão"}
               </button>
               {verGuia && <Card className="p-4 mt-2" style={{ background: T.goldSoft, borderColor: "#F3D9AE" }}><Md src={q.guia} /></Card>}
             </div>
@@ -6563,6 +6627,7 @@ function CartaoQuestao({ q, t, mapa, reg, ctx, cor, gabAberto, onResponder, onVe
               {mostrarGab && q.gabarito && <span style={{ fontSize: 12.5, color: T.jade, fontWeight: 650 }}>Gabarito: {q.gabarito}</span>}
               {!q.gabarito && <span style={{ fontSize: 12, color: T.ink50 }}>Esta questão veio sem gabarito no chat; confira na resolução.</span>}
               {refazendo && <Btn variant="ghost" onClick={() => setRefazendo(false)}>Cancelar</Btn>}
+              {cronometrando && <span className="mono" style={{ marginLeft: "auto", fontSize: 13, fontWeight: 650, color: metaSeg && agora > metaSeg ? T.rose : T.ink50 }}>⏱ {fmtSeg(agora)}{metaSeg ? ` / ${fmtSeg(metaSeg)}` : ""}</span>}
             </div>
           )}
         </div>
@@ -6590,6 +6655,19 @@ function CartaoQuestao({ q, t, mapa, reg, ctx, cor, gabAberto, onResponder, onVe
             <div className="flex items-center gap-2 mb-3">
               <CheckCircle2 size={18} color={T.jade} />
               <span style={{ fontWeight: 700, fontSize: 15, color: T.jade }}>Gabarito: {q.gabarito}</span>
+            </div>
+          )}
+          {vel && q.rapida && (
+            <div className="mb-4" style={{ padding: 14, borderRadius: 10, background: T.goldSoft, border: "1px solid #F3D9AE" }}>
+              <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                <span style={{ fontWeight: 700, fontSize: 14.5, color: T.ink70 }}>⚡ {q.rapidaTitulo || "Resolução rápida"}</span>
+                {respondida && tempo != null && (
+                  <span className="mono" style={{ fontSize: 12.5, fontWeight: 650, color: metaSeg && tempo > metaSeg ? T.rose : T.jade }}>
+                    Seu tempo: {fmtSeg(tempo)}{metaSeg ? (tempo > metaSeg ? ` · ${fmtSeg(tempo - metaSeg)} acima da meta` : " · dentro da meta") : ""}
+                  </span>
+                )}
+              </div>
+              <Md src={q.rapida} />
             </div>
           )}
           <Eyebrow>Resolução passo a passo</Eyebrow>

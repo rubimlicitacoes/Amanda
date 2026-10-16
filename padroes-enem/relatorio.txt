@@ -17,8 +17,23 @@ bio-24-21          padrões= 40  listas= 4  questões= 65  agenda=4
 bio-3              padrões= 38  listas= 3  questões= 45  agenda=4
 bio-17-20          padrões= 47  listas= 4  questões= 60  agenda=3
 bio-4-11-12        padrões= 55  listas= 5  questões= 62  agenda=2
+bio-1-14-16        padrões= 21  listas= 4  questões= 27  agenda=2
+fis-1-4-5          padrões= 16  listas= 4  questões= 25  agenda=2
+mat-probabilidade  padrões= 15  listas= 4  questões= 23  agenda=0
+mat-combinatoria   padrões= 16  listas= 4  questões= 32  agenda=0
+mat-numeros        padrões= 25  listas= 3  questões= 30  agenda=0
+mat-algebra        padrões= 26  listas= 3  questões= 30  agenda=0
+mat-grandezas      padrões= 25  listas= 3  questões= 30  agenda=0
+geo-8-9-20-24      padrões= 35  listas= 4  questões= 40  agenda=0
+his-10-17          padrões= 47  listas= 1  questões= 10  agenda=0
+his-contemporanea  padrões= 29  listas= 3  questões= 30  agenda=0
+fil-antiga         padrões= 19  listas= 3  questões= 30  agenda=0
+fil-moderna        padrões= 23  listas= 4  questões= 40  agenda=0
+port-artes         padrões= 28  listas= 3  questões= 28  agenda=0
 
-AVISOS (3):
+AVISOS (5):
 fis-15: Lista A repete questões de outras listas e foi removida
 fis-15: Lista B repete questões de outras listas e foi removida
 fis-17: Lista 2 repete questões de outras listas e foi removida
+his-10-17: padrões do mapa sem questão ensinada: P2, P3, P4, P6, P7, P8, P9, P10, P11, P12, P17, P18, P23, P24, P25, P26, P27, P28, P29, P30, P31, P32, P33, P34, P35, P36, P37, P38, P39, P40, P41, P42, P43, P44, P45, P46, P47
+bio-1-14-16: questão 28 (Lista 4) repete bio-25-26-22-23 Lista 1 Q8 e saiu

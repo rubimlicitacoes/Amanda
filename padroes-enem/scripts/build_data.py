@@ -51,12 +51,49 @@ TOPICOS = [
     dict(id="bio-4-11-12", k="b41112", mat="BIO", titulo="BIO 4 + BIO 11 + BIO 12 · Impacto Ambiental e Botânica", mods=[4, 11, 12], plano=["4+11+12"],
          grupos=[("bio-4", "Impacto ambiental (BIO 4)"), ("bio-11-12", "Botânica (BIO 11 e 12)")], prefixos={"Impacto ambiental (BIO 4)": "i", "Botânica (BIO 11 e 12)": "b"},
          listas_grupo={"Impacto ambiental (BIO 4)": "BIO 4", "Botânica (BIO 11 e 12)": "BIO 11 e 12"}),
+    dict(id="bio-1-14-16", k="b11416", siglas={"Eco": "Ecologia", "Zoo": "Zoologia"}, mat="BIO", titulo="BIO 1 + 14 + 16 · Ecologia básica e Animais", mods=[1, 14, 16], plano=["1", "16"], grupos=[("bio-1-14-16", None)]),
+    dict(id="fis-1-4-5", k="f145", siglas={"Eletro": "Eletrostática", "Ind": "Indução e campo elétrico"}, mat="FIS", titulo="FIS 1 + 4 + 5 · Indução, campo elétrico e eletrostática", mods=[1, 4, 5], plano=["5+4"], grupos=[("fis-1-4-5", None)]),
+    # Matemática
+    dict(id="mat-probabilidade", k="m-prob", mat="MAT", titulo="MAT · Probabilidade", grupos=[("mat-probabilidade", None)]),
+    dict(id="mat-combinatoria", k="m-comb", mat="MAT", titulo="MAT · Análise combinatória", grupos=[("mat-combinatoria", None)]),
+    # bloco de velocidade: gatilho, atalho e "Resolução em N minutos" só nestes três
+    dict(id="mat-numeros", k="m-num", mat="MAT", titulo="MAT · Números", grupos=[("mat-numeros", None)], velocidade=True),
+    dict(id="mat-algebra", k="m-alg", mat="MAT", titulo="MAT · Álgebra", grupos=[("mat-algebra", None)], velocidade=True),
+    dict(id="mat-grandezas", k="m-gra", mat="MAT", titulo="MAT · Grandezas e medidas", grupos=[("mat-grandezas", None)], velocidade=True),
+    # Ciências Humanas
+    dict(id="geo-8-9-20-24", k="g892024", mat="GEO", titulo="GEO 8 + GEO 9 + GEO 20 + GEO 24 · Globalização e Modelos de Produção e Demografia e Urbanização", grupos=[("geo-8-9-20-24", None)]),
+    dict(id="his-10-17", k="h1017", mat="HIS", titulo="HIS 10 + HIS 17 · Escravidão, Brasil Colônia e Império", grupos=[("his-10-17", None)]),
+    dict(id="his-contemporanea", k="h-cont", mat="HIS", titulo="HIS · Idade Contemporânea", grupos=[("his-contemporanea", None)]),
+    dict(id="fil-antiga", k="fil-ant", mat="FIL", titulo="FIL · Filosofia antiga", grupos=[("fil-antiga", None)]),
+    dict(id="fil-moderna", k="fil-mod", mat="FIL", titulo="FIL · Filosofia moderna e contemporânea", grupos=[("fil-moderna", None)]),
+    # Linguagens
+    dict(id="port-artes", k="l-port", siglas={"A": "Análise da linguagem", "B": "Artes e Gramática"}, mat="LIN", titulo="PORT · Português e Artes", grupos=[("port-artes", None)]),
 ]
+
+AREA_DA_MATERIA = {"FIS": "CN", "QUI": "CN", "BIO": "CN", "MAT": "MAT", "GEO": "CH", "HIS": "CH", "FIL": "CH", "LIN": "LC"}
+AREAS = {
+    "CN": {"nome": "Ciências da Natureza"},
+    "MAT": {"nome": "Matemática"},
+    "CH": {"nome": "Ciências Humanas"},
+    "LC": {"nome": "Linguagens"},
+}
+BLOCOS = {"velocidade": "Estratégia de velocidade de resolução"}
+
+# Questões repetidas entre tópicos: a cópia sai e o padrão aponta para a questão que ficou.
+# {id da cópia: id da questão que fica}
+REPETIDAS_ENTRE_TOPICOS = {
+    "b11416.4.28": "b25.1.8",  # gado ruão (codominância 1:2:1), igual à Genética, Lista 1, Q8
+}
 
 MATERIAS = {
     "FIS": {"nome": "Física"},
     "QUI": {"nome": "Química"},
     "BIO": {"nome": "Biologia"},
+    "MAT": {"nome": "Matemática"},
+    "GEO": {"nome": "Geografia"},
+    "HIS": {"nome": "História"},
+    "FIL": {"nome": "Filosofia"},
+    "LIN": {"nome": "Linguagens"},
 }
 
 avisos = []
@@ -93,7 +130,7 @@ def titulos(linhas):
     return res
 
 
-RE_INICIO_Q = re.compile(r"^[^\wÀ-ú]*(?:o que voc[eê] precisa saber antes da\s+)?quest[aã]o\s*(\d+)\b", re.I)
+RE_INICIO_Q = re.compile(r"^[^\wÀ-ú]*(?:o que voc[eê] precisa saber antes da\s+)?quest[aã]o\s*(?:in[eé]dita\s*)?(\d+)\b", re.I)
 
 
 def num_questao(texto):
@@ -156,14 +193,20 @@ def norm_codigo(c):
 # ----------------------------------------------------------------------------- mapa de padrões
 
 
-def le_mapa(linhas, grupo):
+def le_mapa(linhas, grupo, velocidade=False):
     padroes = {}
     layout = None
     for _, bloco, cab, rows in tabelas(linhas):
         cab_l = [c.lower() for c in cab]
         i_nome = next((k for k, c in enumerate(cab_l) if "padr" in c and "estudado" not in c), None)
         i_refs = next((k for k, c in enumerate(cab_l) if "quest" in c and k != i_nome and "nº" not in c and "destas" not in c), None)
-        i_log = next((k for k, c in enumerate(cab_l) if k != i_nome and any(x in c for x in ("lógica", "como se resolve", "passo a passo", "chave"))), None)
+        i_log = next((k for k, c in enumerate(cab_l) if k != i_nome and any(x in c for x in ("lógica", "como se resolve", "passo a passo", "chave", "atalho"))), None)
+        i_gat = next((k for k, c in enumerate(cab_l) if "gatilho" in c), None)
+        # 1ª coluna "Padrão" com o código (P1) e o nome numa coluna "Nome"
+        if i_nome == 0 and rows and norm_codigo(rows[0][0]):
+            i_nome = next((k for k, c in enumerate(cab_l) if k > 0 and "nome" in c), None)
+            if i_nome is not None:
+                cab_l = ["#"] + cab_l[1:]
         if i_nome is None and layout and norm_codigo(cab[0]) and len(cab) == layout[3]:
             # tabela sem linha de cabeçalho: continua o layout da tabela anterior
             i_nome, i_refs, i_log, _n = layout
@@ -189,10 +232,12 @@ def le_mapa(linhas, grupo):
                 logica = (resto + (" " + logica if logica else "")).strip()
             else:
                 nome = limpa_md(nome_bruto)
+            gatilho = r[i_gat] if velocidade and i_gat is not None and i_gat < len(r) else ""
             padroes[cod] = {
                 "cod": cod,
                 "nome": nome,
                 "logica": logica,
+                "gatilho": gatilho,
                 "refs": r[i_refs],
                 "bloco": bloco if bloco and "quest" not in bloco.lower() else "",
                 "grupo": grupo or "",
@@ -215,7 +260,7 @@ def refs_legiveis(refs, siglas):
             atual[0] = nome
             nomes.append(nome)
             return f"\x00{chr(97 + len(nomes) - 1)}\x00"
-        r = re.sub(rf"\b({alt})\s*:?\s*(?=\d)", marca, r)
+        r = re.sub(rf"\b({alt})\s*:?\s*Q?(?=\d)", marca, r)
     r = re.sub(r"(?<![\w.,])(\d+)\b", r"Q\1", r)
     # troca de lista no meio da sequência vira " · "
     r = re.sub(r",\s*(\x00[a-z]\x00)", r" · \1", r)
@@ -227,8 +272,10 @@ def refs_legiveis(refs, siglas):
 
 def classifica(texto):
     t = sem_emoji(texto).lower()
-    if "precisa saber" in t or t.startswith("aquecimento"):
+    if "precisa saber" in t or t.startswith("aquecimento") or t.startswith("macetes"):
         return "guia"
+    if re.match(r"resolu[cç][aã]o em \d+", t):
+        return "rapida"
     if "resolu" in t:
         return "resol"
     if t.startswith("gabarito"):
@@ -358,7 +405,8 @@ def le_questoes(linhas, codigos_validos):
                 cur["fim"] = i
                 blocos.append(cur)
             cur = {"n": n, "ini": i, "nivel": nivel, "fim": None}
-        elif cur and n is None and (nivel < cur["nivel"] or (nivel == cur["nivel"] and classifica(txt) is None)):
+        elif cur and n is None and (nivel < cur["nivel"] or (nivel == cur["nivel"] and classifica(txt) in (None, "gab"))):
+            # "## Gabarito da Lista 1" no nível da questão é o resumo da lista, não parte da última questão
             cur["fim"] = i
             blocos.append(cur)
             cur = None
@@ -390,7 +438,7 @@ def codigos_em(texto, validos):
 def monta_questao(linhas, b, validos):
     trecho = linhas[b["ini"]: b["fim"]]
     cab = limpa_md(re.sub(r"^#+\s*", "", trecho[0]))
-    secs = {"pre": [], "guia": [], "enun": [], "resol": [], "extra": [], "gab": []}
+    secs = {"pre": [], "guia": [], "enun": [], "resol": [], "rapida": [], "extra": [], "gab": []}
     atual = classifica(cab) or "pre"
     titulos_bloco = [cab]
     cerca = False
@@ -458,10 +506,12 @@ def monta_questao(linhas, b, validos):
         stem = "\n".join(re.sub(r"^\s*>\s?", "", l) for l in stem.split("\n"))
     stem = re.sub(r"^\s*>?\s*\*\*Quest[aã]o\s*\d+\.?\*\*\.?\s*", "", stem).strip()
     resol = junta("resol")
+    rapida = junta("rapida")
+    rapida_titulo = next((sem_emoji(t) for t in titulos_bloco if classifica(t) == "rapida"), "")
     extra = junta("extra")
     tudo = "\n".join(trecho)
     gab = None
-    for fonte in (" ".join(secs["gab"]), resol, extra, tudo):
+    for fonte in (" ".join(secs["gab"]), resol, rapida, extra, tudo):
         gab = acha_gab(fonte)
         if gab:
             break
@@ -485,6 +535,8 @@ def monta_questao(linhas, b, validos):
         "alternativas": alts or [],
         "gabarito": gab,
         "resolucao": corta(resol),
+        "rapida": corta(rapida),
+        "rapidaTitulo": rapida_titulo,
         "extra": corta(extra),
     }
 
@@ -787,7 +839,7 @@ def monta_topico(cfg, enem, plano):
             linhas = linhas_sem_html(md)
             docs.append((pasta, rotulo, f, linhas))
             if not f.startswith("referencia"):
-                padroes.update(le_mapa(linhas, rotulo))
+                padroes.update(le_mapa(linhas, rotulo, cfg.get("velocidade", False)))
     validos = set(padroes)
     mapa_md, materiais, listas = [], [], []
     cont_grupo = {}
@@ -874,6 +926,11 @@ def monta_topico(cfg, enem, plano):
             if not q["padroes"]:
                 avisos.append(f"{cfg['id']} {L['titulo']} Q{q['n']}: padrão não identificado ({q['titulo'][:60]})")
         L["padroes"] = cods
+        if not cfg.get("velocidade"):
+            for q in L["questoes"]:
+                if q.get("rapida"):
+                    q["resolucao"] = (f"**{q['rapidaTitulo'] or 'Resolução rápida'}**\n\n{q['rapida']}\n\n" + q["resolucao"]).strip()
+                q["rapida"], q["rapidaTitulo"] = "", ""
         if not L["subtitulo"]:
             L["subtitulo"] = f"{len(L['questoes'])} questões"
     # Listas repetidas: o chat de Dinâmica reenviou a Rodada 1 e as Listas A e B de Cinemática
@@ -913,10 +970,10 @@ def monta_topico(cfg, enem, plano):
         avisos.append(f"{cfg['id']}: padrões do mapa sem questão ensinada: {', '.join(faltam)}")
 
     # dados do ENEM 2020–2025 (Mapas) e do Plano de Padrões CN
-    E = enem[cfg["mat"]]
+    E = enem.get(cfg["mat"], {"years": {}, "rank": [], "steps": [], "mods": {}})
     anos = sorted(E["years"].keys())
     modulos = []
-    for m in cfg["mods"]:
+    for m in cfg.get("mods", []):
         freq = [sum(1 for q in E["years"][a] if m in q[2]) for a in anos]
         rank = next((r for r in E["rank"] if r[1] == m), None)
         questoes_enem = [{"ano": int(a), "n": q[0], "tema": q[1], "mods": q[2], "tag": q[3]}
@@ -928,18 +985,20 @@ def monta_topico(cfg, enem, plano):
             "rank": {"novo": rank[0], "antes": rank[2], "porque": rank[3]} if rank else None,
             "questoes": questoes_enem,
         })
-    passos = [f"{s[1]}: {s[2]}" for s in E["steps"] if any(re.search(rf"\b{cfg['mat'][:3]}\w* {m}\b", s[1]) for m in cfg["mods"])]
+    passos = [f"{s[1]}: {s[2]}" for s in E["steps"] if any(re.search(rf"\b{cfg['mat'][:3]}\w* {m}\b", s[1]) for m in cfg.get("mods", []))]
     agenda = []
     for w in plano["weeks"]:
         for d in w["days"]:
             for it in d["items"]:
                 mat_p = "QUI" if it[0] == "QUI" else it[0]
-                if mat_p == cfg["mat"] and it[1] in cfg["plano"]:
+                if mat_p == cfg["mat"] and it[1] in cfg.get("plano", []):
                     agenda.append({"data": d["date"], "dia": d["dia"], "nome": it[2], "faixa": it[3], "modo": it[4], "n": it[5]})
 
     return {
         "id": cfg["id"],
         "materia": cfg["mat"],
+        "area": AREA_DA_MATERIA[cfg["mat"]],
+        "bloco": "velocidade" if cfg.get("velocidade") else "",
         "titulo": cfg["titulo"],
         "modulos": modulos,
         "porque": passos,
@@ -954,16 +1013,41 @@ def monta_topico(cfg, enem, plano):
     }
 
 
+def remove_repetidas_entre_topicos(topicos):
+    onde = {q["id"]: (t, L, q) for t in topicos for L in t["listas"] for q in L["questoes"]}
+    for copia, alvo in REPETIDAS_ENTRE_TOPICOS.items():
+        if copia not in onde or alvo not in onde:
+            avisos.append(f"repetida entre tópicos não encontrada: {copia} → {alvo}")
+            continue
+        t, L, q = onde[copia]
+        ta, La, qa = onde[alvo]
+        L["questoes"].remove(q)
+        t["aliases"][copia] = alvo
+        t["totalQuestoes"] -= 1
+        L["subtitulo"] = f"{len(L['questoes'])} questões"
+        L["padroes"] = [c for c in L["padroes"] if any(c in x["padroes"] for x in L["questoes"])]
+        for pd in t["padroes"]:
+            if pd["cod"] in q["padroes"]:
+                pd["veja"] = {"topico": ta["id"], "lista": La["id"], "q": alvo,
+                              "rotulo": f"{ta['titulo'].split(' · ')[-1]} · {La['titulo']} · Questão {qa['n']}"}
+        avisos.append(f"{t['id']}: questão {q['n']} ({L['titulo']}) repete {ta['id']} {La['titulo']} Q{qa['n']} e saiu")
+        if not L["questoes"]:
+            t["listas"].remove(L)
+
+
 def main():
     enem = {}
     for k in ("fis", "qui", "bio"):
         enem[k.upper()] = json.load(open(os.path.join(FONTES, "_enem", f"enem-{k}.json"), encoding="utf-8"))
     plano = json.load(open(os.path.join(FONTES, "_enem", "plano.json"), encoding="utf-8"))
     topicos = [converte_tudo(monta_topico(cfg, enem, plano)) for cfg in TOPICOS]
+    remove_repetidas_entre_topicos(topicos)
     saida = {
         "versao": 1,
         "geradoEm": date.today().isoformat(),
         "materias": MATERIAS,
+        "areas": AREAS,
+        "blocos": BLOCOS,
         "anos": sorted(int(a) for a in enem["FIS"]["years"]),
         "cadernos": {k: enem[k].get("cad", {}) for k in enem},
         "modos": plano["modes"],
