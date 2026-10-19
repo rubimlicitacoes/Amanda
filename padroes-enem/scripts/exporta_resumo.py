@@ -48,7 +48,7 @@ w("""
 - Linha do tópico: [área·matéria] | P = nº de padrões | Q = nº de questões | L = nº de listas.
 - ENEM 20–25 (só CN): módulo, frequência por ano 2020→2025, total, tendência (↑ mais nos últimos 3 anos), rank novo (antes).
 - Plano CN: data · faixa de padrões · modo (C completo, O só a oficial, L leitura, N lista a criar) · nº de padrões.
-- Listas: Ln (nº de questões): códigos dos padrões cobertos.
+- Listas: Ln (nº de questões): códigos dos padrões cobertos. Algumas listas finais repetem padrões anteriores como revisão.
 - Padrões: código nome ·Ln (lista onde é ensinado) ·k (nº de questões oficiais com esse padrão; maior = mais cobrado na lista oficial). "sem questão" = só no mapa.
 """)
 
@@ -95,7 +95,7 @@ for area, info in d["areas"].items():
         for p in t["padroes"]:
             blocos.setdefault(limpa(p.get("bloco")) or "", []).append(p)
         for b, ps in blocos.items():
-            if b and b.lower() not in ("tabela de padrões", "mapa de padrões"):
+            if b and not re.search(r"(tabela|mapa|lista) de (todos os )?padr|padrões (da lista|encontrados|de cobrança)", b, re.I):
                 w(f"- {b}")
             for p in ps:
                 k = len([x for x in re.split(r"[,;]", p.get("oficial") or "") if x.strip()])

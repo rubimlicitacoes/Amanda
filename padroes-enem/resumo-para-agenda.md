@@ -19,7 +19,7 @@
 - Linha do tópico: [área·matéria] | P = nº de padrões | Q = nº de questões | L = nº de listas.
 - ENEM 20–25 (só CN): módulo, frequência por ano 2020→2025, total, tendência (↑ mais nos últimos 3 anos), rank novo (antes).
 - Plano CN: data · faixa de padrões · modo (C completo, O só a oficial, L leitura, N lista a criar) · nº de padrões.
-- Listas: Ln (nº de questões): códigos dos padrões cobertos.
+- Listas: Ln (nº de questões): códigos dos padrões cobertos. Algumas listas finais repetem padrões anteriores como revisão.
 - Padrões: código nome ·Ln (lista onde é ensinado) ·k (nº de questões oficiais com esse padrão; maior = mais cobrado na lista oficial). "sem questão" = só no mapa.
 
 
@@ -404,7 +404,6 @@ Temas ENEM: 20 PVC aquecido libera HCl · 21 Pesticida que reage com NaOH (fenol
 Prioridade: QUI 9 + QUI 10 · Ácido-base e reações com ácido: 15 questões em 6 anos. É a sua dificuldade, e você está com 76% em QUI 10.
 Plano CN: Sex 09/10 P1–8 C (8) ; Seg 12/10 · feriado P9–18 C (10) ; Sex 23/10 P19–26 C (8)
 Listas: L1 (5): P5,P1,P2,P13,P15 · L2 (5): P3,P4,P6,P12,P16 · L3 (5): P7,P8,P9,P10,P11 · L4 (5): P14,P17,P18,P19,P20 · L5 (5): P21,P22,P23,P24,P25 · L6 (1): P26 · L7 (8): P5,P4,P2,P13,P17,P21,P9,P11,P12,P16,P14,P3
-- Os 26 padrões da lista oficial
 P1 Neutralização no dia a dia ·L1 ·4
 P2 Hidrólise de sal básico (CO₃²⁻, HCO₃⁻, PO₄³⁻) ·L1 ·3
 P3 Hidrólise de sal ácido (NH₄⁺, Al³⁺) ·L2 ·1
@@ -439,7 +438,6 @@ Temas ENEM: 20 Sal de cobalto azul/rosa (Le Chatelier) · 22 Ciclo do nitrogêni
 Prioridade: QUI 14 · Equilíbrio Químico: Cai quase todo ano e você nunca mediu seu acerto.
 Plano CN: Ter 13/10 P1–10 C (10) ; Seg 26/10 P11–17 C (7)
 Listas: L1 (10): P1,P2,P3,P4,P5,P6,P7,P8,P10,P11 · L2 (10): P9,P12,P13,P14,P15,P16,P17,P1,P5,P8
-- Mapeamento geral: 17 padrões de cobrança/resolução
 P1 Le Chatelier com todos os fatores: equação com ΔH e alternativas sobre concentração, pressão, temperatura e sólido ·L1 ·3
 P2 Temperatura num indicador de cor (regenerar o material) ·L1 ·1
 P3 Pressão de gás dissolvido (abrir a garrafa) ·L1 ·1
@@ -935,7 +933,6 @@ Temas ENEM: 20 Soja transgênica contra o HIV · 20 Sistema ABO e Hardy-Weinberg
 Prioridade: BIO 24 + BIO 21 · Biotecnologia e DNA: 14 aparições juntas: PCR, transgenia, terapia gênica, meiose.
 Plano CN: Qua 14/10 P1–13 C (13) ; Qua 21/10 P14–26 C (13) ; Qui 29/10 P27–30 C (4) ; Sex 13/11 P31–40 C (10)
 Listas: L1 (15): P18,P14,P26,P27,P19,P34,P1,P2,P10,P28,P29,P15,P24,P13,P36 · L2 (15): P3,P4,P5,P6,P7,P8,P9,P11,P12,P16,P17,P21,P22,P23,P25 · L3 (15): P20,P30,P31,P32,P33,P35,P37,P38,P39,P40,P1,P2,P27,P10,P13,P14,P18,P24,P28,P22 · L4 (20): P26,P2,P31,P10,P22,P35,P13,P14,P15,P17,P1,P3,P9,P24,P8,P29,P23,P16,P39,P7,P25,P32,P40,P21,P30
-- Os 40 padrões encontrados
 P1 Regra de Chargaff ·L1 ·1
 P2 Pontes de hidrogênio ·L1 ·1
 P3 Replicação semiconservativa ·L2 ·1
@@ -1209,7 +1206,6 @@ Temas ENEM: 20 Amperímetro e corrente de fuga · 20 Eletrização do gato na ca
 Prioridade: FIS 5 + FIS 4 · Indução e campo elétrico: 10 aparições juntas; fogão por indução caiu 2 vezes.
 Plano CN: Qua 28/10 P5 padrões N (5) ; Qua 11/11 P7 padrões N (7)
 Listas: L1 (11): P1,P2,P3,P4,P5,P6,P7 · L2 (6): P8,P9,P10,P11,P12 · L3 (6): P13,P14,P15 · L4 (2): P16
-- 0.2 Lista de todos os padrões encontrados
 P1 Eletrização por atrito (transferência de elétrons) ·L1 ·1
 P2 Indução e polarização: corpo eletrizado atrai corpo neutro ·L1 ·2
 P3 Blindagem eletrostática (gaiola de Faraday) ·L1 ·4
@@ -1507,7 +1503,6 @@ P29 Cruzadas e ordens militares (medieval) ·L3 ·1
 ## FIL · Filosofia antiga [CH·FIL]
 P 19 | Q 30 | L 3
 Listas: L1 (10): P1,P2,P3,P4,P5,P6,P7,P8,P9,P10 · L2 (10): P11,P12,P13,P14,P15,P16,P17,P18,P19,P6 · L3 (10): P1,P2,P6,P7,P5,P8,P10,P12,P13,P14,P15,P18
-- 3. Tabela de padrões
 P1 Origem da filosofia: do mito ao logos ·L1 ·4
 P2 Arché específica (atomismo) ·L1 ·2
 P3 Heráclito × Parmênides ·L1 ·2
